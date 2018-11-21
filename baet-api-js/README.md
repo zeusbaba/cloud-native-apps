@@ -1,4 +1,4 @@
-# baet-api-js
+# BAET-API-Server-js-FeathersJS
 
 > BAET.no API Server using FeathersJS
 
@@ -10,22 +10,21 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
 
 Getting up and running is as easy as 1, 2, 3.
 
-1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
+1. Make sure you have [NodeJS](https://nodejs.org/), [npm](https://www.npmjs.com/), and [Yarn](https://yarnpkg.com) installed, _see [package.json](package.json) for the required versions._   
+
 2. Install your dependencies
 
     ```
-    cd path/to/baet-api-js; npm install
+    cd path/to/baet-api-js; yarn install
     ```
 
 3. Start your app
 
     ```
-    npm start
+    yarn start
     ```
 
-## Testing
 
-Simply run `npm test` and all your tests in the `test/` directory will be run.
 
 ## Scaffolding
 
