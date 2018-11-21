@@ -1,0 +1,83 @@
+{
+  "name": "baet-api-js",
+  "description": "BAET.no API Server using FeathersJS",
+  "version": "4.0.0",
+  "homepage": "https://baet.no",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zeusbaba/cloud-native-apps.git"
+  },
+  "main": "src",
+  "keywords": [
+    "baet.no",
+    "diz.link",
+    "link shortening",
+    "beerstorm"
+  ],
+  "author": {
+    "name": "Yilmaz Guleryuz",
+    "email": "397125+zeusbaba@users.noreply.github.com"
+  },
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/"
+  },
+  "engines": {
+    "node": ">= 8.x.x",
+    "yarn": ">= 1.x.x",
+    "npm": ">= 6.x.x"
+  },
+  "scripts": {
+    "test": "yarn run eslint && NODE_ENV= yarn run mocha",
+    "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "dev": "nodemon src/",
+    "start": "node src/",
+    "mocha": "mocha test/ --recursive --exit"
+  },
+  "dependencies": {
+    "@feathersjs/authentication": "^2.1.13",
+    "@feathersjs/authentication-jwt": "^2.0.7",
+    "@feathersjs/authentication-local": "^1.2.7",
+    "@feathersjs/configuration": "^2.0.4",
+    "@feathersjs/errors": "^3.3.4",
+    "@feathersjs/express": "^1.2.7",
+    "@feathersjs/feathers": "^3.2.3",
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "cors": "^2.8.4",
+    "feathers-authentication-hooks": "^0.3.1",
+    "feathers-batch": "^0.2.1",
+    "feathers-hooks-common": "^4.19.0",
+    "feathers-mongodb": "^3.4.0",
+    "feathers-mongodb-fuzzy-search": "^1.1.1",
+    "hashmap": "^2.3.0",
+    "helmet": "^3.15.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "mongodb": "^3.1.10",
+    "node-fetch": "^2.3.0",
+    "path": "^0.12.7",
+    "random-int": "^1.0.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "serve-favicon": "^2.5.0",
+    "shortid": "^2.2.14",
+    "string": "^3.3.3",
+    "ua-parser-js": "^0.7.19",
+    "unique-random": "^2.0.0",
+    "validator": "^10.9.0",
+    "winston": "^3.1.0",
+    "winston-daily-rotate-file": "^3.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.6",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
+}
