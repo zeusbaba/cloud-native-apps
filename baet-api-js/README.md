@@ -18,13 +18,14 @@ Getting up and running is easy
 1. Install your dependencies
 
     ```
-    cd path/to/baet-api-js; yarn install
+    $ cd path/to/baet-api-js; yarn install
     ```
 
 2. Start your app
 
     ```
-    yarn start
+    $ sh import-env-files.sh \  
+        yarn start
     ```
 For more information about FeathersJS visit [docs.feathersjs.com](http://docs.feathersjs.com).  
 
@@ -32,9 +33,7 @@ For more information about FeathersJS visit [docs.feathersjs.com](http://docs.fe
 You can either get yourself a free instance via [mLab](https://mlab.com)  
 or just follow the instructions in _docker-compose_ related section below.      
 
-
-### Containerization with Docker  
-Before you begin, you _must_ prepare env-vars which are required to run the app and related services.  
+NOTE! you _must_ prepare env-vars which are required to run the app and related services.    
 No worries, this [example-file](docker_vars_env-example) got you covered!            
 ```bash
 # copy the example template  
@@ -43,6 +42,9 @@ $ cp docker_vars_env-example docker_vars.env
 # open the file and set the values accordingly. it's self-explanatory  
 $ vim docker_vars.env    
 ```
+
+
+### Containerization with Docker  
 
 Building, publishing and running via _Docker_ and _Docker-Compose_:       
 ```bash

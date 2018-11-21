@@ -15,6 +15,7 @@
 /docker-data-*
 /data-*
 localtemp*
+arc-history*
 
 # Avoid ignoring Maven/Gradle wrapper jar file (.jar files are usually ignored)
 !gradle/wrapper/gradle-wrapper.jar
