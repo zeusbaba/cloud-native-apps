@@ -35,30 +35,37 @@ or just follow the instructions in _docker-compose_ related section below.
 
 ### Containerization with Docker  
 Before you begin, you _must_ prepare env-vars which are required to run the app and related services.  
-No worries, I've added an [example-file](docker_vars_env-example)          
+No worries, this [example-file](docker_vars_env-example) got you covered!            
 ```bash
 # copy the example template  
 $ cp docker_vars_env-example docker_vars.env  
 
-# open the file and set the values accordingly. it's self-explanatory      
+# open the file and set the values accordingly. it's self-explanatory  
+$ vim docker_vars.env    
 ```
 
 Building, publishing and running via _Docker_ and _Docker-Compose_:       
 ```bash
-## using Docker!!!  
-# NOTE! you must use your own DockerHub username, so just replace 'zeusbaba/' with yours     
+# set env vars for ease-of-use
+# NOTE! please just replace 'zeusbaba' with your user  
+$ export dockerhubUser=zeusbaba \
+  export appName=baet-api-js \
+  export appVersion=4.0.0
+$ export dockerImage=${dockerhubUser}/${appName}:${appVersion}
+
+## using Docker!!!       
 # build a docker image  
-$ docker build -t zeusbaba/baet-api-js:4.0.0 .    
+$ docker build -t ${dockerImage} .    
 $ docker images  	
 # (optional) publish the image to docker hub  
-$ docker push zeusbaba/baet-api-js:4.0.0  
+$ docker push ${dockerImage}  
 
 # (optional) run the docker image locally    
 $ docker run \
 	-p 4042:4042 \
 	--env-file ./docker_vars.env \
 	-e "NODE_ENV=production" \
-	zeusbaba/baet-api-js:4.0.0  
+	${dockerImage}  
 
 
 ## using Docker Compose!!! 
