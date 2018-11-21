@@ -1,7 +1,7 @@
 Cloud-Native Apps  
 ===================  
 
-Language-agnostic microservices applications developed for cloud-native world     
+Language-agnostic microservices developed as cloud-native apps     
 
 # How LEARN & MAKE  
 _TODO: add onboarding, etc_    
