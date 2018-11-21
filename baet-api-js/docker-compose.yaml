@@ -1,0 +1,43 @@
+version: '3'
+
+networks:
+  my-compose-network:
+    driver: bridge
+
+services:
+
+  ## my APP
+  baet-api-js:
+    build: .
+    image: baet-api-js:4.0.0
+    ports:
+      - "4042:4042"
+    env_file:
+      - docker_vars.env
+    environment:
+      # override ...URL for using local instance
+      - MONGODB_URL=mongodb://mongo-local:27017/baet
+      # about WAIT_... see https://github.com/ufoscout/docker-compose-wait
+      - WAIT_HOSTS=mongo-local:27017
+      - WAIT_BEFORE_HOSTS=4
+    networks:
+      - my-compose-network
+    links:
+      - mongo-local
+    depends_on:
+      - mongo-local
+
+  ## mongodb
+  mongo-local:
+    image: 'bitnami/mongodb:3.6'
+    ports:
+      - "27017:27017"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MONGODB_DATABASE=baet
+      #- MONGODB_USERNAME=my_user
+      #- MONGODB_PASSWORD=password123
+    networks:
+      - my-compose-network
+    volumes:
+      - ./docker-data-mongodb:/bitnami

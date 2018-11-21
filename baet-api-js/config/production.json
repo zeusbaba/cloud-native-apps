@@ -1,5 +1,5 @@
 {
-  "host": "baet.no",
+  "host": "HOST",
   "port": "PORT",
   "appconfig": {
     "isDev": false

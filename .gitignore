@@ -6,6 +6,15 @@
 !.eslintrc.json
 !.eslintrc.js
 !.npmignore
+!.dockerignore
+
+# ignore env files which might contain sensitive data
+*.env
+
+# exclude temporary folders created by docker services
+/docker-data-*
+/data-*
+localtemp*
 
 # Avoid ignoring Maven/Gradle wrapper jar file (.jar files are usually ignored)
 !gradle/wrapper/gradle-wrapper.jar
