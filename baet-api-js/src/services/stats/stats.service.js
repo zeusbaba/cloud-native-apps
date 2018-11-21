@@ -163,7 +163,7 @@ module.exports = function (app) {
               }
               else {
                 let appconfig = app.get('appconfig');
-                let ipinfodb = appconfig.ipinfodb.api_url + appconfig.ipinfodb.api_params;
+                let ipinfodb = appconfig.ipinfodb.api_url + appconfig.ipinfodb.api_params + appconfig.ipinfodb.api_key;
                 ipinfodb += '&ip='+data.req_meta_data['ip'];
                 //ipinfodb += '&ip=176.11.57.206'; // remove this!!!
                 fetch( ipinfodb )
