@@ -64,7 +64,8 @@ Building, publishing and running via _Docker_ and _Docker-Compose_:
 # NOTE! please just replace 'zeusbaba' with your user  
 $ export dockerhubUser=zeusbaba \
   export appName=baet-api-js \
-  export appVersion=4.0.0
+  export appSecrets=baet-api-js-secrets \
+  export appVersion=4.0.2
 $ export dockerImage=${dockerhubUser}/${appName}:${appVersion}
 
 ## using Docker!!!       
@@ -79,7 +80,7 @@ $ docker push ${dockerImage}
 # (optional) run the docker image locally    
 $ docker run \
 	-p 4042:4042 \
-	--env-file ./docker_vars.env \
+	--env-file ./${appSecrets}/docker_vars.env \
 	-e "NODE_ENV=production" \
 	${dockerImage}  
 
@@ -107,18 +108,18 @@ As you've seen `docker_vars.env` file contains sensitive data like `AUTH_SECRET`
 Thus, we must create _k8s-secrets_  to inject our env-vars from this file.    
 
 ```bash
-$ export APP_SECRETS=baet-api-js-secrets
+$ export appSecrets=baet-api-js-secrets
   
   # create using secrets   
 $ kubectl create secret \
-    generic ${APP_SECRETS} \
-    --from-file=docker_vars.env
+    generic ${appSecrets} \
+    --from-file=${appSecrets}/docker_vars.env
   
   # validate its creation
 $ kubectl get secrets     
-$ kubectl get secret ${APP_SECRETS} -o yaml  
+$ kubectl get secret ${appSecrets} -o yaml  
   # if you want to delete  
-$ kubectl delete secret ${APP_SECRETS}
+$ kubectl delete secret ${appSecrets}
 
 ```
 
@@ -142,20 +143,20 @@ $ docker build \
 #### k8s Pods 
 Now we can proceed with _k8s deployment_ using [k8s-pod.yaml](k8s-pod.yaml)        
 ```bash
-$ export APP_NAME=baet-api-js
+$ export appName=baet-api-js
 $ kubectl apply -f k8s-pod.yaml  
 $ kubectl get pods  
-$ kubectl describe pod ${APP_NAME}
-$ kubectl logs ${APP_NAME} --follow
+$ kubectl describe pod ${appName}
+$ kubectl logs ${appName} --follow
 
   # shell access to the pod
-$ kubectl exec -it ${APP_NAME} /bin/bash
+$ kubectl exec -it ${appName} /bin/bash
 
   # basic access via port-forward
-$ kubectl port-forward ${APP_NAME} 4042:4042 
+$ kubectl port-forward ${appName} 4042:4042 
 
  # if you want to delete 
-$ kubectl delete pod ${APP_NAME}
+$ kubectl delete pod ${appName}
 ```
 
 #### k8s Deployments and Services
@@ -174,7 +175,7 @@ $ kubectl get deployments,pods
   # k8s-service
 $ kubectl apply -f k8s-service.yaml
 $ kubectl get services
-$ kubectl describe service ${APP_NAME}
+$ kubectl describe service ${appName}
 
   # if you want to delete
 $ kubectl delete -f k8s-deployment.yaml

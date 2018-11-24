@@ -2,7 +2,7 @@
 
 ## Initialization logic...
 # source the file so that vars become available in the current shell
-source ./import-env-vars.sh
+. ./import-env-vars.sh
 
 ## Starting the App
 echo "Starting node.js app..."
