@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: baet-api-js
+  labels:
+    app: baet-api-js
+    lang: node-js
+    env: prod
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: api2.baet.no
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: baet-api-js
+          servicePort: 4042
+  - host: api3.baet.no
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: baet-api-js
+          servicePort: 4042

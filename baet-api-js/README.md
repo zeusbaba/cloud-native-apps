@@ -182,3 +182,19 @@ $ kubectl delete -f k8s-deployment.yaml
 $ kubectl delete -f k8s-service.yaml
 ```
 
+#### k8s Ingress
+Assuming that you already have configured [Traefik](https://docs.traefik.io) as Ingress Controller of your k8s-cluster.  
+here's how you can deploy  [k8s-ingress](k8s-ingress.yaml) for this App  
+
+```bash
+  # create ingress   
+$ kubectl apply -f k8s-ingress.yaml 
+
+  # validate
+$ kubectl get ingresses
+  NAME          HOSTS                       ADDRESS   PORTS   AGE
+  baet-api-js   api2.baet.no,api3.baet.no             80      10m
+
+  # if you want to delete 
+$ kubectl delete ingress baet-api-js
+```
