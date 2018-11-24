@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: baet-api-js
+  labels:
+    app: baet-api-js
+    lang: node-js
+    env: prod
+spec:
+  containers:
+    - name: baet-api-js
+      image: zeusbaba/baet-api-js:4.0.0
+      volumeMounts:
+        - name: baet-api-js-secrets
+          mountPath: /usr/src/app/baet-api-js-secrets
+  volumes:
+    - name: baet-api-js-secrets
+      secret:
+        secretName: baet-api-js-secrets

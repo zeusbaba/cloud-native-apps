@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: baet-api-js
+  labels:
+    app: baet-api-js
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: baet-api-js
+        lang: node-js
+        env: prod
+    spec:
+      containers:
+        - name: baet-api-js
+          image: "zeusbaba/baet-api-js:4.0.0"
+          volumeMounts:
+            - name: baet-api-js-secrets
+              mountPath: /usr/src/app/baet-api-js-secrets
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "125m"
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 4042
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 4042
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: 4042
+#            initialDelaySeconds: 5
+#            timeoutSeconds: 5
+      volumes:
+        - name: baet-api-js-secrets
+          secret:
+            secretName: baet-api-js-secrets

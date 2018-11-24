@@ -1,16 +1,25 @@
-FROM node:10-alpine
-MAINTAINER Yilmaz Guleryuz 397125+zeusbaba@users.noreply.github.com
+#FROM node:10-alpine
+FROM bitnami/node:10
+LABEL maintainer="Yilmaz Guleryuz 397125+zeusbaba@users.noreply.github.com"
 
-#USER node
-ENV HOME=/home/node
+ENV APP_HOME=/usr/src/app
 
 # optionally if you want to run npm global bin without specifying path
-ENV NPM_CONFIG_PREFIX=$HOME/.npm-global
-ENV PATH=$PATH:$HOME/.npm-global/bin
+ENV NPM_CONFIG_PREFIX=$APP_HOME/.npm-global
+ENV PATH=$PATH:$APP_HOME/.npm-global/bin
 
-RUN mkdir -p $HOME/app
-#RUN chown -R node.node $HOME/app
-WORKDIR $HOME/app
+RUN mkdir -p $APP_HOME
+#RUN chown -R node.node APP_HOME
+WORKDIR $APP_HOME
+
+ENV ENV_IMPORTER=import-env-vars.sh
+COPY $ENV_IMPORTER .
+RUN chmod +x ./$ENV_IMPORTER
+
+# use a unified script to run the app
+ENV DOCKER_STARTER=docker-starter.sh
+COPY $DOCKER_STARTER .
+RUN chmod +x ./$DOCKER_STARTER
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -23,13 +32,18 @@ RUN npm install
 # RUN npm install --only=production
 
 ## used to check if DB is up
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.4.0/wait /wait
-RUN chmod +x /wait
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.4.0/wait ./wait
+RUN chmod +x ./wait
 
 # Bundle app source
-COPY . .
+#COPY . .
+COPY src ./src
+COPY config ./config
+COPY public ./public
+COPY .* ./
 
 EXPOSE 4042
 
-#CMD [ "npm", "start" ]
-CMD /wait && npm start
+ENTRYPOINT exec ./${DOCKER_STARTER}
+## CMD /wait && npm start
+

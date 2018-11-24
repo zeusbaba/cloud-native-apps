@@ -13,28 +13,27 @@ In order to build and run this app you need to have a couple of things installed
 
 ### Building the App  
 
-Getting up and running is easy  
-   
-1. Install your dependencies
 
-    ```
-    $ cd path/to/baet-api-js; yarn install
-    ```
+#### Clone this repo and install deps    
 
-2. Start your app
+```bash
+  # clone this repo  
+$ git clone https://github.com/zeusbaba/cloud-native-apps  
+$ cd baet-api-js  
 
-    ```
-    $ sh import-env-files.sh \  
-        yarn start
-    ```
-For more information about FeathersJS visit [docs.feathersjs.com](http://docs.feathersjs.com).  
+  # install dependencies
+$ yarn
+
+```   
+
+#### Prepare env-vars  
 
 **WARNING** This APP requires a MongoDB instance to connect to!!!      
 You can either get yourself a free instance via [mLab](https://mlab.com)  
 or just follow the instructions in _docker-compose_ related section below.      
 
-NOTE! you _must_ prepare env-vars which are required to run the app and related services.    
-No worries, this [example-file](docker_vars_env-example) got you covered!            
+To be able to RUN this app, you _must_ prepare env-vars.    
+No worries, this [example-file](baet-api-js-secrets/docker_vars_env-example) got you covered!            
 ```bash
 # copy the example template  
 $ cp docker_vars_env-example docker_vars.env  
@@ -42,6 +41,20 @@ $ cp docker_vars_env-example docker_vars.env
 # open the file and set the values accordingly. it's self-explanatory  
 $ vim docker_vars.env    
 ```
+
+#### Run the App in localhost  
+
+```bash
+  # automatically import env-vars you've prepared in prev step    
+$ . import-env-vars.sh
+
+  # run the App  
+$ yarn start
+```
+
+Now you can access your API by using this [Postman collection](https://documenter.getpostman.com/view/2611563/RzfZPt3c)  
+
+_p.s. This app is developed using [FeathersJS](http://docs.feathersjs.com)._    
 
 
 ### Containerization with Docker  
@@ -57,7 +70,9 @@ $ export dockerImage=${dockerhubUser}/${appName}:${appVersion}
 
 ## using Docker!!!       
 # build a docker image  
-$ docker build -t ${dockerImage} .    
+$ docker build \
+  -t ${dockerImage} \
+  --rm --no-cache .    
 $ docker images  	
 # (optional) publish the image to docker hub  
 $ docker push ${dockerImage}  
@@ -70,16 +85,99 @@ $ docker run \
 	${dockerImage}  
 
 
-## using Docker Compose!!! 
+  ## using Docker Compose!!! 
 $ docker-compose up --build 
 
-# NOTE: in linux-env you might have permission problems with 'docker-data-*' folders      
-# to fix; stop docker-compose, set permissions as below, then run docker-compose again.    
+  # NOTE: in linux-env you might have permission problems with 'docker-data-*' folders      
+  # to fix; stop docker-compose, set permissions as below, then run docker-compose again.    
 $ sudo chown 1001:1001 -R docker-data-*  
 
-# shut it down 
+  # shut it down 
 $ docker-compose down   
 ```
 
-### Running in Kubernetes  
-TODO: coming soon... :)     
+### Deploying and Running in Kubernetes (k8s)    
+
+We already have created `docker_vars.env` file    
+which contains all env-vars which is required for our app to run!      
+
+To be able to inject this file into k8s cluster, we can either use `secrets` or `configmap`  
+As you've seen `docker_vars.env` file contains sensitive data like `AUTH_SECRET`, therefore it's recommended to use `secrets` in k8s.  
+
+### k8s secrets  
+Thus, we must create _k8s-secrets_  to inject our env-vars from this file.    
+
+```bash
+$ export APP_SECRETS=baet-api-js-secrets
+  
+  # create using secrets   
+$ kubectl create secret \
+    generic ${APP_SECRETS} \
+    --from-file=docker_vars.env
+  
+  # validate its creation
+$ kubectl get secrets     
+$ kubectl get secret ${APP_SECRETS} -o yaml  
+  # if you want to delete  
+$ kubectl delete secret ${APP_SECRETS}
+
+```
+
+#### minikube 
+Please make sure that you already have installed [minikube](https://github.com/kubernetes/minikube)    
+We'll use local k8s using `minikube`.
+
+After you've installed minikube, run the basic commands for preparation:  
+```bash
+# start minikube  
+$ minikube start  
+# using dockerd inside minikube
+$ eval $(minikube docker-env)  
+
+# you must rebuilt docker image so that minikube acquires it
+$ docker build \
+  -t ${dockerImage} \
+  --rm --no-cache .
+```
+
+#### k8s Pods 
+Now we can proceed with _k8s deployment_ using `k8s-pod.yaml`        
+```bash
+$ export APP_NAME=baet-api-js
+$ kubectl apply -f k8s-pod.yaml  
+$ kubectl get pods  
+$ kubectl describe pod ${APP_NAME}
+$ kubectl logs ${APP_NAME} --follow
+
+  # shell access to the pod
+$ kubectl exec -it ${APP_NAME} /bin/bash
+
+  # basic access via port-forward
+$ kubectl port-forward ${APP_NAME} 4042:4042 
+
+ # if you want to delete 
+$ kubectl delete pod ${APP_NAME}
+```
+
+#### k8s Depoloyments and Services
+More common and advanced version is using Deployments and Services.  
+
+
+```bash
+  # list existing 
+$ kubectl get services,deployments,pods
+
+  # k8s-deployment
+$ kubectl apply -f k8s-deployment.yml
+$ kubectl get deployments,pods
+
+  # k8s-service
+$ kubectl apply -f k8s-service.yml
+$ kubectl get services
+$ kubectl describe service ${APP_NAME}
+
+  # if you want to delete
+$ kubectl delete -f k8s-deployment.yml
+$ kubectl delete -f k8s-service.yml
+```
+
