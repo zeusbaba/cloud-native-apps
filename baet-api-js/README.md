@@ -6,7 +6,8 @@
 
 In order to build and run this app you need to have a couple of things installed:  
 
-- [Node.js](https://nodejs.org/), [npm](https://www.npmjs.com/), and [Yarn](https://yarnpkg.com) installed, _see [package.json](package.json) for the required versions._      
+- [Node.js](https://nodejs.org/), [npm](https://www.npmjs.com/), and [Yarn](https://yarnpkg.com) installed, _see [package.json](package.json) for the required versions._
+- Get familiar with [FeathersJS](http://docs.feathersjs.com)._            
 - An IDE for the development, like [Atom](https://atom.io) or IntelliJ/Webstorm      
 - The Docker Toolbox or native Docker, whatever you prefer. See [Docker](https://docs.docker.com) and [Docker-Compose](https://docs.docker.com/compose/)       
 
@@ -46,15 +47,13 @@ $ vim docker_vars.env
 
 ```bash
   # automatically import env-vars you've prepared in prev step    
-$ . import-env-vars.sh
+$ source import-env-vars.sh
 
   # run the App  
 $ yarn start
 ```
 
 Now you can access your API by using this [Postman collection](https://documenter.getpostman.com/view/2611563/RzfZPt3c)  
-
-_p.s. This app is developed using [FeathersJS](http://docs.feathersjs.com)._    
 
 
 ### Containerization with Docker  
@@ -104,7 +103,7 @@ which contains all env-vars which is required for our app to run!
 To be able to inject this file into k8s cluster, we can either use `secrets` or `configmap`  
 As you've seen `docker_vars.env` file contains sensitive data like `AUTH_SECRET`, therefore it's recommended to use `secrets` in k8s.  
 
-### k8s secrets  
+#### k8s secrets  
 Thus, we must create _k8s-secrets_  to inject our env-vars from this file.    
 
 ```bash
@@ -125,7 +124,7 @@ $ kubectl delete secret ${APP_SECRETS}
 
 #### minikube 
 Please make sure that you already have installed [minikube](https://github.com/kubernetes/minikube)    
-We'll use local k8s using `minikube`.
+We'll use local k8s-cluster with `minikube`.
 
 After you've installed minikube, run the basic commands for preparation:  
 ```bash
@@ -134,14 +133,14 @@ $ minikube start
 # using dockerd inside minikube
 $ eval $(minikube docker-env)  
 
-# you must rebuilt docker image so that minikube acquires it
+# you must rebuild app's docker image so that minikube acquires it
 $ docker build \
   -t ${dockerImage} \
   --rm --no-cache .
 ```
 
 #### k8s Pods 
-Now we can proceed with _k8s deployment_ using `k8s-pod.yaml`        
+Now we can proceed with _k8s deployment_ using [k8s-pod.yaml](k8s-pod.yaml)        
 ```bash
 $ export APP_NAME=baet-api-js
 $ kubectl apply -f k8s-pod.yaml  
@@ -159,8 +158,9 @@ $ kubectl port-forward ${APP_NAME} 4042:4042
 $ kubectl delete pod ${APP_NAME}
 ```
 
-#### k8s Depoloyments and Services
+#### k8s Deployments and Services
 More common and advanced version is using Deployments and Services.  
+See [k8s-deployment.yaml](k8s-deployment.yaml) and [k8s-service.yaml](k8s-service.yaml)  
 
 
 ```bash
@@ -168,16 +168,16 @@ More common and advanced version is using Deployments and Services.
 $ kubectl get services,deployments,pods
 
   # k8s-deployment
-$ kubectl apply -f k8s-deployment.yml
+$ kubectl apply -f k8s-deployment.yaml
 $ kubectl get deployments,pods
 
   # k8s-service
-$ kubectl apply -f k8s-service.yml
+$ kubectl apply -f k8s-service.yaml
 $ kubectl get services
 $ kubectl describe service ${APP_NAME}
 
   # if you want to delete
-$ kubectl delete -f k8s-deployment.yml
-$ kubectl delete -f k8s-service.yml
+$ kubectl delete -f k8s-deployment.yaml
+$ kubectl delete -f k8s-service.yaml
 ```
 
