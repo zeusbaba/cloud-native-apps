@@ -8,7 +8,6 @@ _Learning, Making, Sharing..!_
 Each app/codebase contains its own _README_ for easy onboarding.   
 
 I'll begin with re-implementing BAET.no's API Server by leveraging different programming languages, and make them as cloud-native apps! 
-Note: [BAET.no](https://baet.no) is full-functional link shortener service, and is running based on this codebase.  
 
 See list:  
 - [using Node.js/FeathersJS](https://github.com/zeusbaba/cloud-native-apps/tree/master/baet-api-js): crafted with FeathersJS, Docker, docker-compose, k8s  
@@ -16,5 +15,5 @@ See list:
 
 
 # How to SHOW & SHARE     
-_TODO: Link to a functional demo, etc_   
+[BAET.no](https://baet.no) is full-functional link shortener service, and is running based on this codebase.  
 
