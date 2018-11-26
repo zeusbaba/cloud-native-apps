@@ -24,3 +24,5 @@ spec:
         backend:
           serviceName: baet-api-js
           servicePort: 4042
+  tls:
+  - secretName: baet-ssl-cert

@@ -11,9 +11,9 @@ spec:
     - name: baet-api-js
       image: zeusbaba/baet-api-js:4.0.2
       volumeMounts:
-        - name: baet-api-js-secrets
-          mountPath: /usr/src/app/baet-api-js-secrets
+        - name: baet-api-secrets
+          mountPath: /usr/src/app/baet-api-secrets
   volumes:
-    - name: baet-api-js-secrets
+    - name: baet-api-secrets
       secret:
-        secretName: baet-api-js-secrets
+        secretName: baet-api-secrets

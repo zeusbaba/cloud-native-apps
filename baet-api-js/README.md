@@ -34,7 +34,7 @@ You can either get yourself a free instance via [mLab](https://mlab.com)
 or just follow the instructions in _docker-compose_ related section below.      
 
 To be able to RUN this app, you _must_ prepare env-vars.    
-No worries, this [example-file](baet-api-js-secrets/docker_vars_env-example) got you covered!            
+No worries, this [example-file](baet-api-secrets/docker_vars_env-example) got you covered!            
 ```bash
 # copy the example template  
 $ cp docker_vars_env-example docker_vars.env  
@@ -64,7 +64,7 @@ Building, publishing and running via _Docker_ and _Docker-Compose_:
 # NOTE! please just replace 'zeusbaba' with your user  
 $ export dockerhubUser=zeusbaba \
   export appName=baet-api-js \
-  export appSecrets=baet-api-js-secrets \
+  export appSecrets=baet-api-secrets \
   export appVersion=4.0.2
 $ export dockerImage=${dockerhubUser}/${appName}:${appVersion}
 
@@ -85,7 +85,7 @@ $ docker run \
 	${dockerImage}  
 
 
-  ## using Docker Compose!!! 
+## using Docker Compose!!! 
 $ docker-compose up --build 
 
   # NOTE: in linux-env you might have permission problems with 'docker-data-*' folders      
@@ -108,8 +108,7 @@ As you've seen `docker_vars.env` file contains sensitive data like `AUTH_SECRET`
 Thus, we must create _k8s-secrets_  to inject our env-vars from this file.    
 
 ```bash
-$ export appSecrets=baet-api-js-secrets
-  
+
   # create using secrets   
 $ kubectl create secret \
     generic ${appSecrets} \
