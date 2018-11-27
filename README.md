@@ -15,5 +15,5 @@ See list:
 
 
 # How to SHOW & SHARE     
-[BAET.no](https://baet.no) is full-functional link shortener service, and is running based on this codebase.  
-
+[BAET.no](https://baet.no) is full-functional link shortener service, and is running based on this codebase.   
+API is accessible using this [Postman collection](https://documenter.getpostman.com/view/2611563/RzfZPt3c)  
