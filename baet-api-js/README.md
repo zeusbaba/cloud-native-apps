@@ -1,6 +1,7 @@
-# BAET-API-Server-JS
+BAET-API-Server-JS
+==================
 
-> BAET.no API Server using FeathersJS
+## BAET.no API Server using node.js and FeathersJS
 
 ### Prerequisites
 
