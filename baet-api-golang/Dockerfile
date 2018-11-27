@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.8
 LABEL maintainer="Yilmaz Guleryuz 397125+zeusbaba@users.noreply.github.com"
 
 ENV APP_HOME=/usr/src/app
