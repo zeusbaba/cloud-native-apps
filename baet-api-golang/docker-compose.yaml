@@ -9,7 +9,7 @@ services:
   ## my APP
   baet-api-golang:
     build: .
-    image: baet-api-golang:1.0.0
+    image: ${dockerImage}
     ports:
       - "4042:4042"
     env_file:
@@ -35,8 +35,8 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MONGODB_DATABASE=baet
-      #- MONGODB_USERNAME=my_user
-      #- MONGODB_PASSWORD=password123
+      - MONGODB_USERNAME=dummy
+      - MONGODB_PASSWORD=password123
     networks:
       - my-compose-network
     volumes:

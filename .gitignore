@@ -13,6 +13,7 @@
 
 # exclude temporary folders created by docker services
 /docker-data-*
+docker-data-*
 /data-*
 localtemp*
 arc-history*

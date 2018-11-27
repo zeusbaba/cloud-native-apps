@@ -9,7 +9,7 @@ services:
   ## my APP
   baet-api-js:
     build: .
-    image: zeusbaba/baet-api-js:${appVersion}
+    image: ${dockerImage}
     ports:
       - "4042:4042"
     env_file:

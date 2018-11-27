@@ -68,7 +68,7 @@ Building, publishing and running via _Docker_ and _Docker-Compose_:
 $ export dockerhubUser=zeusbaba \
   export appName=baet-api-golang \
   export appSecrets=baet-api-secrets \
-  export appVersion=1.0.0
+  export appVersion=1.0.1
 $ export dockerImage=${dockerhubUser}/${appName}:${appVersion}
   
   # required for compatibility
