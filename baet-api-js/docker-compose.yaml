@@ -9,7 +9,7 @@ services:
   ## my APP
   baet-api-js:
     build: .
-    image: baet-api-js:4.0.2
+    image: zeusbaba/baet-api-js:${appVersion}
     ports:
       - "4042:4042"
     env_file:

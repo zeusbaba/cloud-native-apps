@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
     - name: baet-api-js
-      image: zeusbaba/baet-api-js:4.0.2
+      image: zeusbaba/baet-api-js:4.0.4
       volumeMounts:
         - name: baet-api-secrets
           mountPath: /usr/src/app/baet-api-secrets
