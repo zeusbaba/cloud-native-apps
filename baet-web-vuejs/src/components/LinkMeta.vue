@@ -8,6 +8,7 @@
           <v-flex>
             <v-btn
                 v-for="simple_link in linkData.simple_links"
+                :key="simple_link"
                 color="blue-grey"
                 class="white--text"
                 :href="simpleLinks[simple_link]"
