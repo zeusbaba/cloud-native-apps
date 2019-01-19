@@ -124,6 +124,7 @@
 </style>
 
 <script>
+  /* eslint-disable */
   import { myConfig, isDev } from '@/app-config'; // eslint-disable-line
   import LinkStats from '@/components/LinkStats';
   import LinkShare from '@/components/LinkShare';
@@ -202,7 +203,7 @@
               diz.snackbar.color = 'success';
               diz.snackbar.active = true;
             },
-            function(e) { // FAIL
+            function(e) { // FAIL // eslint-disable-line
               if (isDev) {
                 //-console.log('doCopy... ERROR!!!')
               }

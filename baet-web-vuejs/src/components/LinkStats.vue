@@ -58,7 +58,7 @@
 </template>
 
 <script>
-  import { isDev } from '@/app-config';
+  import { isDev } from '@/app-config'; // eslint-disable-line
   import { GChart } from 'vue-google-charts';
   export default {
     name: "LinkStats",
@@ -83,9 +83,9 @@
     }),
     watch: {
       linkStats: function () {
-        if (isDev) {
+        /*if (this.isDev) {
           console.log("watch- linkStats: " + JSON.stringify(this.linkStats))
-        }
+        }*/
         if (this.linkStats) {
           this.prepareChartData()
         }
@@ -96,9 +96,9 @@
     },
     methods: {
       updateChart: function() {
-        if (isDev) {
+        /*if (isDev) {
           console.log("updateChart: " + this.statsKey)
-        }
+        }*/
         this.chartOptions.title = this.$t('resources.links.buttons.stats.options.'+this.statsKey);
         this.statsData = this.linkStats['stats'][this.statsKey];
         this.chartData = [];
@@ -110,9 +110,9 @@
       },
       updateLinkStats: function(items) {
         items.forEach((item) => {
-          if (isDev) {
+          /*if (this.isDev) {
             console.log("item: " + JSON.stringify(item));
-          }
+          }*/
           this.linkStats = item;
         });
       },
