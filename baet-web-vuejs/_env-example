@@ -1,4 +1,6 @@
-# NB! VUE_APP_ prefix is required to make env vars available inside Vue.js app
+# define .env.NODE_ENV per your need, see https://cli.vuejs.org/guide/mode-and-env.html#modes
+
+## NB! VUE_APP_ prefix is required to make env vars available inside Vue.js app
 
 # BAET API endpoint to use
 VUE_APP_API_URL=https://api.baet.no
