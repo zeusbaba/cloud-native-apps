@@ -25,38 +25,32 @@ Vue.use(VueWarehouse, {
   ]
 });
 
-//import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import 'vuetify/dist/vuetify.min.css'
 // ...Vuetify https://vuetifyjs.com/en/getting-started/quick-start
 import Vuetify from 'vuetify'
+// Helpers
+import colors from 'vuetify/es5/util/colors'
 Vue.use(Vuetify, {
-  iconfont: 'fa'
+  iconfont: 'fa',
+  theme: {
+    primary: colors.orange.darken4,
+    secondary: colors.orange.darken1,
+    accent: colors.orange.accent3
+  }
 });
 
-/*
-import VueFeathers from 'vue-feathers-services'
-import feathersClient from '@/feathers-client';
-Vue.use(VueFeathers, feathersClient);
-*/
+import VueClipboard from 'vue-clipboard2'
+VueClipboard.config.autoSetContainer = true; // add this line
+Vue.use(VueClipboard);
 
-/*
-import Vuex from 'vuex'
-import feathersVuex from 'feathers-vuex'
-import feathersClient from '@/feathers-client'
-const { service, auth, FeathersVuex } = feathersVuex(feathersClient, { idField: '_id' });
-Vue.use(Vuex);
-Vue.use(FeathersVuex);
-export default new Vuex.Store({
-  plugins: [
-    service('links', {paginate: true}),
-    auth({ userService: 'users' })
-  ]
-})
-*/
+import { FeathersVuexFind, FeathersVuexGet } from 'feathers-vuex'
+Vue.component('feathers-vuex-find', FeathersVuexFind);
+Vue.component('feathers-vuex-get', FeathersVuexGet);
+
 import store from '@/store';
 router.beforeEach((to, from, next) => {
-  const currentUser = store.state.auth.user
+  const currentUser = store.state.auth.user;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
   if (requiresAuth && !currentUser) {
@@ -65,6 +59,8 @@ router.beforeEach((to, from, next) => {
     next()
   }
 });
+
+import i18n from '@/i18n'
 
 // Auth first before loading the app
 store.dispatch('auth/authenticate')
@@ -75,6 +71,7 @@ store.dispatch('auth/authenticate')
   new Vue({
     router,
     store,
+    i18n,
     render: h => h(App)
   }).$mount('#app');
 });
@@ -85,3 +82,4 @@ new Vue({
   render: h => h(App)
 }).$mount('#app');
 */
+

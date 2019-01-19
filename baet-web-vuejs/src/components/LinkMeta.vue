@@ -10,16 +10,17 @@
                 v-for="simple_link in linkData.simple_links"
                 color="blue-grey"
                 class="white--text"
-                :href=prepareUrl(simple_link)
+                :href="simpleLinks[simple_link]"
                 target="_blank"
               >
+              <!-- :href="prepareUrl(simple_link)" -->
               {{ simple_link }}
               <v-icon right dark>launch</v-icon>
             </v-btn>
             <v-btn
                 color="blue-grey"
                 class="white--text"
-                :href=prepareUrl()
+                :href="shortLink"
                 target="_blank"
             >
               {{ linkData['short_link'] }}
@@ -41,13 +42,6 @@
         </v-layout>
       </v-container>
     </v-card-text>
-    <!--
-    <v-card-text>
-      <span style="font-size: xx-small; font-style: italic">
-          {{ linkData.long_link }}
-      </span>
-    </v-card-text>
-    -->
 
     <v-card-text>
       <qrcode
@@ -56,121 +50,122 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn fab dark color="primary">
+
+      <!-- COPY -->
+      <v-btn fab dark color="primary"
+             v-clipboard:copy="prepareUrl()"
+             v-clipboard:success="onCopyOk(prepareUrl())"
+             v-clipboard:error="onCopyError(prepareUrl())">
         <v-icon dark>file_copy</v-icon>
       </v-btn>
-      <v-btn fab dark color="indigo">
+      <!--
+      <v-btn fab dark color="primary"
+             @click="doCopy(prepareUrl())">
+        <v-icon dark>file_copy</v-icon>
+      </v-btn>
+      -->
+
+      <!-- STATS -->
+      <v-btn v-if="!isSingleItem"
+          fab dark color="indigo"
+          :href="'/links/'+linkData['short_link']"
+      >
         <v-icon dark>timeline</v-icon>
       </v-btn>
+
+      <!-- SHARE -->
+      <!--
       <v-btn fab dark color="teal">
         <v-icon dark>share</v-icon>
       </v-btn>
+      -->
+      <LinkShare
+          :linkData="linkData"
+        />
+
     </v-card-actions>
+
+    <v-card-text>
+      <LinkStats v-if="isSingleItem"
+                 :linkId="linkData['_id']"
+      />
+    </v-card-text>
+
+    <v-snackbar
+        v-model="snackbar.active"
+        :timeout="snackbar.timeout"
+        :color="snackbar.color"
+        bottom multi-line
+    >
+      <h3>{{ snackbar.text }}</h3>
+      <v-btn
+          flat
+          @click="snackbar.active = false"
+      >
+        <v-icon medium>close</v-icon>
+      </v-btn>
+    </v-snackbar>
 
     <v-card-text v-if=isDev>
       linkData...<br/> {{ linkData }}
+      <br/> isSingleItem: {{isSingleItem}}
     </v-card-text>
   </v-card>
 </template>
-<!--
-<template>
-  <div>
-
-    <md-card class="md-card">
-
-      <md-card-content>
-        <div class="md-layout">
-          <div class="md-layout-item md-size-5">
-            <span>https://baet.no/...</span>
-          </div>
-          <div class="md-layout-item">
-            <md-button
-                v-for="simple_link in linkData.simple_links"
-                class="md-primary">
-                {{ simple_link }}
-              <md-icon>launch</md-icon>
-            </md-button>
-
-            <md-button class="md-primary">
-              {{ linkData.short_link }}
-              <md-icon>launch</md-icon>
-            </md-button>
-          </div>
-        </div>
-      </md-card-content>
-
-      <md-card-media-actions>
-        <md-card-media>
-          <qrcode
-              :value=prepareUrl()
-              :options="{ size: 128 }" />
-        </md-card-media>
-
-        <md-card-actions>
-          <md-button class="md-icon-button md-raised md-primary">
-            <md-icon>file_copy</md-icon>
-          </md-button>
-
-          <md-button class="md-icon-button md-raised md-primary">
-            <md-icon>timeline</md-icon>
-          </md-button>
-
-          <md-button class="md-icon-button md-raised md-primary">
-            <md-icon>share</md-icon>
-          </md-button>
-        </md-card-actions>
-      </md-card-media-actions>
-
-      <md-card-content>
-        <md-button class="md-icon-button">
-          <md-icon>link</md-icon>
-        </md-button>
-        <br/>
-        <span style="font-size: xx-small; font-style: italic">
-          {{ linkData.long_link }}
-        </span>
-      </md-card-content>
-
-      <md-card-content v-if=isDev>
-        linkData...<br/> {{ linkData }}
-      </md-card-content>
-
-
-    </md-card>
-  </div>
-</template>
--->
 
 <style lang="scss" scoped>
-  .md-card {
+  /* .md-card {
     width: 800px;
     margin: 4px;
     display: inline-block;
     vertical-align: top;
-  }
+  } */
 </style>
 
 <script>
-  import { isDev } from '@/app-config';
+  import { myConfig, isDev } from '@/app-config'; // eslint-disable-line
+  import LinkStats from '@/components/LinkStats';
+  import LinkShare from '@/components/LinkShare';
   import VueQrcode from '@xkeshi/vue-qrcode';
+  const diz = this;
 
   export default {
     name: "LinkMeta",
     data: () => ({
-      isDev: isDev
+      isDev: isDev,
+      snackbar: {
+        active: false,
+        timeout: 2000,
+        color: 'info',
+        text: ''
+      },
     }),
     components: {
-      qrcode: VueQrcode
+      qrcode: VueQrcode,
+      LinkStats,
+      LinkShare
     },
-    //props: ['linkData']
     props: {
       isSingleItem: Boolean,
       linkData: Object
     },
+    computed: {
+      shortLink() {
+        return myConfig.web.baseUrl + this.linkData['short_link'];
+      },
+      simpleLinks() {
+        let sLinks = {};
+        this.linkData['simple_links'].forEach((simple_link) => {
+          sLinks[simple_link] = myConfig.web.baseUrl+simple_link;
+        });
+        //console.log(JSON.stringify(sLinks));
+        return sLinks;
+      }
+    },
     methods: {
       prepareUrl: function(val) {
         let theUrl = '';
-        theUrl += 'https://baet.no/';
+        theUrl += myConfig.web.baseUrl; //'https://baet.no/';
         if (val) {
           theUrl += val;
         }
@@ -180,6 +175,38 @@
 
         //console.log(theUrl)
         return theUrl;
+      },
+      onCopyOk: function(inData) {
+        if (isDev) {
+          //-console.log('onCopyOk... copied OK!!! -> ' + inData)
+        }
+
+        this.snackbar.text = this.$t('resources.links.buttons.copy.confirm') + inData;
+        this.snackbar.color = 'success';
+        this.snackbar.active = true;
+      },
+      onCopyError: function(inData) {
+        if (isDev) {
+          //-console.log('onCopyError... ERROR!!! -> ' + inData)
+        }
+      },
+      doCopy: function(inData) {
+        this.$copyText(inData).then(
+            function(e) { // OK
+              if (isDev) {
+                //-console.log('doCopy... copied OK!!! -> ' + inData)
+              }
+
+              diz.snackbar.text = this.$t('resources.links.buttons.copy.confirm') + inData;
+              diz.snackbar.color = 'success';
+              diz.snackbar.active = true;
+            },
+            function(e) { // FAIL
+              if (isDev) {
+                //-console.log('doCopy... ERROR!!!')
+              }
+            }
+        );
       }
     }
   }

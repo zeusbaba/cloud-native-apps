@@ -1,4 +1,5 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const commonHooks = require('feathers-hooks-common');
 
 const {
   hashPassword, protect
@@ -54,14 +55,17 @@ module.exports = {
       },
       //-hashPassword({passwordField: passwordField}),
       hashPassword(),
+      commonHooks.setNow('createdAt', 'updatedAt'),
     ],
     update: [
       ...restrict,
-      hashPassword() // hashPassword({passwordField: passwordField})
+      hashPassword(), // hashPassword({passwordField: passwordField})
+      commonHooks.setNow('updatedAt')
     ],
     patch: [
       ...restrict,
-      hashPassword() // hashPassword({passwordField: passwordField})
+      hashPassword(), // hashPassword({passwordField: passwordField})
+      commonHooks.setNow('updatedAt')
     ],
     remove: [ ...restrict ]
   },

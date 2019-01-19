@@ -26,12 +26,15 @@ module.exports = {
               .id(); */
         }
       },
+      commonHooks.setNow('createdAt', 'updatedAt')
     ],
     update: [
-      commonHooks.discard('meta_data')
+      commonHooks.discard('meta_data'),
+      commonHooks.setNow('updatedAt')
     ],
     patch: [
-      commonHooks.discard('meta_data')
+      commonHooks.discard('meta_data'),
+      commonHooks.setNow('updatedAt')
     ],
     remove: []
   },

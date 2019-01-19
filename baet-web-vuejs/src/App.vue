@@ -17,7 +17,7 @@
         >
           <v-list-tile-action>
             <v-btn color="primary">
-              <v-icon>transform</v-icon>
+              <v-icon large>transform</v-icon>
             </v-btn>
           </v-list-tile-action>
           <v-list-tile-content>
@@ -31,7 +31,7 @@
         >
           <v-list-tile-action>
             <v-btn color="primary">
-              <v-icon>link</v-icon>
+              <v-icon large>list</v-icon>
             </v-btn>
           </v-list-tile-action>
           <v-list-tile-content>
@@ -53,13 +53,40 @@
           </v-list-tile-content>
         </v-list-tile>
 
+        <!--
+        <v-list-tile
+            key="locale"
+        >
+          <div>
+            <select v-model="$i18n.locale">
+              <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
+                {{ lang }}
+              </option>
+            </select>
+          </div>
+        </v-list-tile>
+        -->
+
       </v-list>
 
     </v-navigation-drawer>
 
-    <v-toolbar color="indigo" dark fixed app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>BAET :: Shorten & Simplify</v-toolbar-title>
+    <v-toolbar color="secondary" dark fixed app>
+      <v-toolbar-title>{{ $t('pos.header.title') }}</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon @click="changeLocale('nb')">
+        <country-flag country='no'
+                      :size="getLocale()==='nb'?'normal':'small'"
+        ></country-flag>
+      </v-btn>
+      <v-btn icon @click="changeLocale('en')">
+        <country-flag country='gb'
+                      :size="getLocale()==='en'?'normal':'small'"
+        ></country-flag>
+      </v-btn>
+
     </v-toolbar>
     <!--
     <v-toolbar clipped-left app absolute>
@@ -69,30 +96,16 @@
     -->
 
     <v-content>
-      <v-container fluid>
+      <v-container fluid text-xs-center>
         <router-view></router-view>
       </v-container>
     </v-content>
 
-    <v-footer class="justify-center" color="indigo" app>
+    <v-footer class="justify-center" color="secondary" app>
       <span class="white--text">&copy; 2018-2019 BAET.no</span>
     </v-footer>
   </v-app>
 </template>
-
-<!--
-  <div id="app">
-
-    <div id="nav">
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/link">Shorten</router-link> |
-      <router-link to="/links">My Links</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-
-  </div>
--->
 
 <style lang="scss" scoped>
   #app {
@@ -111,29 +124,55 @@
   const jwtHeaderName = myConfig.authentication.storageKey
       ? myConfig.authentication.storageKey
       : 'baet-jwt';
-
+  import CountryFlag from 'vue-country-flag'
   export default {
     name: 'app',
+    components: {
+      CountryFlag
+    },
     data: () => ({
       token: null,
       drawer: null,
       //menuVisible: false
+      langs: ['nb','en']
     }),
     watch: {
       token: function() {
         if (!this.token
             && ('login' !== this.$router.currentRoute.name)
         ) {
-          console.log('Token doesnt exists... go back to login!!!')
+          if (isDev) {
+            console.log('Token doesnt exists... go back to login!!!');
+          }
           this.$router.push('/login')
         }
       }
     },
     updated: function() {
-      console.log('current page...' + this.$router.currentRoute.name);
+      if (isDev) {
+        console.log('current page...' + this.$router.currentRoute.name);
+      }
       this.checkToken()
     },
+    mounted: function(){
+      this.checkLocale();
+    },
     methods: {
+      checkLocale: function() {
+        let locale = this.$warehouse.get('locale');
+        if (locale === undefined) {
+          locale = 'nb';
+          this.$warehouse.set('locale', locale);
+        } // default
+        this.$i18n.locale = locale;
+      },
+      changeLocale: function(locale) {
+        this.$i18n.locale = locale;
+        this.$warehouse.set('locale', locale);
+      },
+      getLocale: function() {
+        return this.$i18n.locale
+      },
       checkToken: function () {
 
         this.token = this.$warehouse.get(jwtHeaderName);

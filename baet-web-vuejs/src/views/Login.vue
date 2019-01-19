@@ -37,9 +37,18 @@
       }
     },
     mounted: function(){
-      this.checkToken()
+      this.checkToken();
+      this.checkLocale();
     },
     methods: {
+      checkLocale: function() {
+        let locale = this.$warehouse.get('locale');
+        if (locale === undefined) {
+          locale = 'nb';
+          this.$warehouse.set('locale', locale);
+        } // default
+        this.$i18n.locale = locale;
+      },
       checkToken: function() {
 
         if (isDev) {

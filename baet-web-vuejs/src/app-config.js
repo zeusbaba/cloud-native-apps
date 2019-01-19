@@ -13,7 +13,7 @@ export const isDev = process.env.NODE_ENV !== 'production'
     && isLocalHost(window.location.hostname);
 
 export const generateUUID = () => {
-  var datetime = new Date().getTime();
+  let datetime = new Date().getTime();
   return 'BAET-2019-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     var r = ((datetime + Math.random() * 16) % 16) | 0;
     datetime = Math.floor(datetime / 16);
@@ -44,15 +44,6 @@ export const myConfig = {
   web: {
     defaultLocale: 'en',
     baseUrl: 'https://baet.no/',
-    sharerText: 'Shorten & Simplify via BAET.no',
-    header: {
-      title: 'BAET.no :: Shorten & Simplify Links!',
-      description:
-          'URL shortener service that is fast, open, and easy to use. You can even assign multiple custom names for each link!',
-      author: 'BeerStorm.net',
-      keywords:
-          'URL shortener, url shortener custom, short link free, shorten web address, make short url, shorten url for twitter, shorten diz link, liverpool supporters link shortener',
-    },
     recaptcha: {
       sitekey: process.env['VUE_APP_RECAPTCHA_SITEKEY']
     },

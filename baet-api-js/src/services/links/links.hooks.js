@@ -300,9 +300,14 @@ module.exports = {
         }
       },
 
+      commonHooks.setNow('createdAt', 'updatedAt')
     ],
-    update: [],
-    patch: [],
+    update: [
+      commonHooks.setNow('updatedAt')
+    ],
+    patch: [
+      commonHooks.setNow('updatedAt')
+    ],
     remove: []
   },
 

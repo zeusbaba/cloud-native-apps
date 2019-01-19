@@ -4,11 +4,12 @@
       <v-card-text>
 
         <v-form>
+          <!-- @submit.prevent="validateForm" -->
 
           <v-text-field
               label="long_link"
-              placeholder="Paste long link (url to shorten)"
-              hint="e.g. https://www.youtube.com/user/MontyPython"
+              :placeholder=" $t('resources.links.form.long_link.placeholder') "
+              :hint=" $t('resources.links.form.long_link.hint') "
               persistent-hint
               v-model="form.long_link"
               :counter="long_link_len_max"
@@ -25,8 +26,8 @@
           <br/>
           <v-combobox
               label="simple_links"
-              placeholder="add simple_links"
-              hint="e.g. montypython"
+              :placeholder=" $t('resources.links.form.simple_link.chips.placeholder') "
+              :hint=" $t('resources.links.form.simple_link.chips.hint') "
               persistent-hint
               append-icon="transform"
 
@@ -36,7 +37,13 @@
               multiple chips deletable-chips dense
               :error-messages="simple_links_errors"
               @change.passive="validateSimpleLinks"
+              @keyup.188="$emit('change')"
             >
+            <!--
+              @keyup.tab="$emit('change')"
+              @keyup.space="$emit('change')"
+              @keyup.188="$emit('change')"
+            -->
             <template slot="label">
               <v-icon style="vertical-align: middle">transform</v-icon>
             </template>
@@ -52,31 +59,31 @@
           <v-btn
               dark large color="primary"
               class="white--text"
-
               @click="validateForm"
             >
-            <!-- :loading="sending"
+            <!--
+            :loading="sending"
               :disabled="sending" -->
-            Shorten
+            {{ $t('resources.links.form.submit ') }}
             <v-icon right dark>transform</v-icon>
           </v-btn>
           <v-btn @click="clearForm">reset</v-btn>
         </v-form>
+
       </v-card-text>
 
       <v-snackbar
-          v-model="snackbar"
-          bottom
-          :timeout="snackbar_timeout"
-          vertical
+          v-model="snackbar.active"
+          :timeout="snackbar.timeout"
+          :color="snackbar.color"
+          bottom multi-line
       >
-        {{ snackbar_text }}
+        <h3>{{ snackbar.text }}</h3>
         <v-btn
-            color="pink"
             flat
-            @click="snackbar = false"
+            @click="snackbar.active = false"
         >
-          Close
+          <v-icon medium>close</v-icon>
         </v-btn>
       </v-snackbar>
     </v-card>
@@ -120,7 +127,7 @@
   };
   const isValidUrl = (url) => Validator.isURL(url, myConfig.diz.long_link.validation);
 
-  import { mapActions, mapGetters } from 'vuex';
+  import { mapActions } from 'vuex';
 
   export default {
     name: 'LinkForm',
@@ -144,9 +151,12 @@
       sending: false,
       lastSavedLink: null,
 
-      snackbar: false,
-      snackbar_text: '',
-      snackbar_timeout: 2000
+      snackbar: {
+        active: false,
+        timeout: 2000,
+        color: 'error',
+        text: ''
+      },
     }),
     validations: {
       form: {
@@ -191,22 +201,27 @@
         if (!this.$v.form.long_link.$dirty) return errors;
 
         !this.$v.form.long_link.required
-          && errors.push('long_link is required.');
+          && errors.push(this.$t('resources.links.form.errors.long_link.required'));
 
         !this.$v.form.long_link.isValidUrl
-          && errors.push('long_link is NOT a proper url, e.g. it must begin with https://... but yours is: '+this.long_link);
+          && errors.push(this.$t('resources.links.form.errors.long_link.invalid', {long_link: this.form.long_link}));
 
         !this.$v.form.long_link.minLength
-          && errors.push('long_link must be min '+myConfig.diz.long_link.len.min+' characters long');
+          && errors.push(this.$t('resources.links.form.errors.long_link.len.min', {len_min: myConfig.diz.long_link.len.min}));
+          //&& errors.push('long_link must be min '+myConfig.diz.long_link.len.min+' characters long');
 
         !this.$v.form.long_link.maxLength
-          && errors.push('long_link must be max '+myConfig.diz.long_link.len.max+' characters long');
+          && errors.push(this.$t('resources.links.form.errors.long_link.len.max', {len_max: myConfig.diz.long_link.len.max}));
+          //&& errors.push('long_link can be max '+myConfig.diz.long_link.len.max+' characters long');
 
         return errors;
       },
     },
     methods: {
-      ...mapActions('links', ['create']),
+      //...mapActions('links', ['create']),
+      ...mapActions('links', {
+        createLink: 'create'
+      }),
       recaptchaVerify (response) {
         if (isDev) {
           console.log('recaptchaVerify: ' + response);
@@ -224,10 +239,11 @@
           }).catch(e => this.recaptcha_verified = false); // eslint-disable-line
       },
       recaptchaExpired () {
-        console.log('recaptchaExpired...')
+        //console.log('recaptchaExpired...');
+        this.recaptcha_verified = false;
       },
       recaptchaReset () {
-        console.log('recaptchaReset...');
+        //console.log('recaptchaReset...');
         this.$refs.recaptcha.reset(); // Direct call reset method
         this.recaptcha_verified = false;
       },
@@ -258,39 +274,46 @@
       clearForm () {
         this.$v.$reset();
         this.recaptchaReset();
-        this.form.long_link = null;
-        this.form.simple_links = []
+        this.form.long_link = '';
+        this.form.simple_links = [];
+        this.snackbar.active = false;
       },
       validateForm () {
         this.$v.$touch();
 
-        this.snackbar_text = null;
+        this.snackbar.text = null;
         if (!this.recaptcha_verified) {
-          this.snackbar_text = 'ReCAPTCHA must be validated!!!';
+          //this.snackbar.text = 'ReCAPTCHA must be validated!!!';
+          this.snackbar.text = this.$t('resources.links.form.errors.recaptcha');
         }
 
         if (!this.$v.$invalid && this.recaptcha_verified) {
           this.submitForm()
         }
         else {
-          this.snackbar_text = 'Some input is invalid!!!';
+          if (!this.snackbar.text) {
+            this.snackbar.text = this.$t('resources.links.form.error');
+          }
         }
 
-        if (this.snackbar_text) {
-          this.snackbar = true;
+        if (this.snackbar.text) {
+          this.snackbar.active = true;
         }
       },
       submitForm () {
         this.sending = true;
 
-        this.create(
-            this.form
+        this.createLink(
+          this.form
         )
         .then(resp => {
-          console.log(JSON.stringify(resp));
+          if (isDev) {
+            console.log(JSON.stringify(resp));
+          }
 
-          this.snackbar_text = 'Link is created OK! \n' + JSON.stringify(resp);
-          this.snackbar = true;
+          this.snackbar.text = 'Link is created OK! ' + isDev?'\n'+JSON.stringify(resp):'';
+          this.snackbar.color = 'success';
+          this.snackbar.active = true;
           this.redirectToLink(resp);
 
           this.linkSaved = true;
@@ -298,7 +321,13 @@
           this.clearForm();
         })
         .catch(error => {
-          console.log('Error... ' + JSON.stringify(error));
+          if (isDev) {
+            console.log('Error... ' + JSON.stringify(error));
+          }
+
+          this.snackbar.text = this.$t('form.errors.submit') + isDev?'\n'+JSON.stringify(error):'';
+          this.snackbar.color = 'error';
+          this.snackbar.active = true;
         });
         /*
         window.setTimeout(() => {

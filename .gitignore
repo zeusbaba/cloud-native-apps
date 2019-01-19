@@ -16,6 +16,7 @@
 docker-data-*
 /data-*
 localtemp*
+*/localtemp*
 arc-history*
 
 # Avoid ignoring Maven/Gradle wrapper jar file (.jar files are usually ignored)
