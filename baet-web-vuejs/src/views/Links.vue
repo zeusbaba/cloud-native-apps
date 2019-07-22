@@ -26,9 +26,10 @@
       >
         <!-- :query-when="shouldReload" -->
 
-        <div slot-scope="{ items, isFindPending }">
+        <div slot-scope="{ items }">
 
           <!--
+        <div slot-scope="{ items, isFindPending }">
           <span v-if="isDev">
             {{ isFindPending + ' | ' + items.length }}
           </span>
@@ -64,13 +65,13 @@
 <script>
   // @ is an alias to /src
   import { myConfig, isDev } from '@/app-config'; // eslint-disable-line
-  import LinkMeta from '@/components/LinkMeta';
+  //import LinkMeta from '@/components/LinkMeta';
   import LinkList from '@/components/LinkList';
 
   export default {
     name: "LinksAll",
     components: {
-      LinkMeta,
+      //LinkMeta,
       LinkList
     },
     data: () => ({
