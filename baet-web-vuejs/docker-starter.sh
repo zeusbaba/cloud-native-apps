@@ -7,6 +7,6 @@
 ## Starting the App
 echo "starting Node.js app..."
 # The $* allows me to pass command line arguments that were passed to the docker run command.
-./wait && npm start $*
+./wait && npm serve $*
 
 ## (optional) Cleanup logic can go here

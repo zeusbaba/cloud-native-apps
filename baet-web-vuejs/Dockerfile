@@ -31,6 +31,9 @@ RUN npm install
 # If you are building your code for production
 # RUN npm install --only=production
 
+# add @vue-cli for vue-cli-service
+RUN npm install -g @vue/cli
+
 ## used to check if DB is up
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.4.0/wait ./wait
 RUN chmod +x ./wait
@@ -45,5 +48,5 @@ COPY .* ./
 EXPOSE 4042
 
 ENTRYPOINT exec ./${DOCKER_STARTER}
-## CMD /wait && npm start
+## CMD /wait && npm serve
 
