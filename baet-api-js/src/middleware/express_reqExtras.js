@@ -21,9 +21,10 @@ module.exports = function () { //(options = {}) {
     }
     req.headers['reqExtras'].ip = ip;//-req.ip;//? req.ip:req.ips;
 
+
     req.headers['reqExtras'].uaParsed = uaparser(req.headers['reqExtras'].userAgent);
 
-    logger.info('>> reqExtras', JSON.stringify(req.headers['reqExtras']));
+    logger.info('>> reqExtras', req.headers['reqExtras']);
 
     /*
     if (req.cookies) {
