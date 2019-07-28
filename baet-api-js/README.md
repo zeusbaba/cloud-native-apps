@@ -66,7 +66,7 @@ Building, publishing and running via _Docker_ and _Docker-Compose_:
 $ export dockerhubUser=zeusbaba \
   export appName=baet-api-js \
   export appSecrets=baet-api-secrets \
-  export appVersion=4.0.8
+  export appVersion=4.0.10
 $ export dockerImage=${dockerhubUser}/${appName}:${appVersion}
 
 ## using Docker!!!       
@@ -196,5 +196,5 @@ $ kubectl get ingresses
   baet-api-js   api2.baet.no,api3.baet.no             80      10m
 
   # if you want to delete 
-$ kubectl delete ingress baet-api-js
+$ kubectl delete ingress ${appName}
 ```
