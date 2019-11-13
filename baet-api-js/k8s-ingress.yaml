@@ -10,6 +10,13 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
+  - host: api.baet.no
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: baet-api-js
+          servicePort: 4042
   - host: api2.baet.no
     http:
       paths:
@@ -24,5 +31,3 @@ spec:
         backend:
           serviceName: baet-api-js
           servicePort: 4042
-  tls:
-  - secretName: baet-ssl-cert

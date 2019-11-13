@@ -37,7 +37,7 @@ type ShortIdOptions struct {
 	EndWithHost   bool
 }
 
-func ShortIdGenerate(opt ShortIdOptions) string {
+func GenerateShortId(opt ShortIdOptions) string {
 	data, _ := generateRandomBytes(opt.Number)
 
 	var buffer bytes.Buffer

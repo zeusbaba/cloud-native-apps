@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"github.com/vjeantet/jodaTime"
 	"io/ioutil"
 	"net/http"
@@ -8,13 +9,27 @@ import (
 	"time"
 )
 
-func LinksHandleFunc(w http.ResponseWriter, r *http.Request) {
+func LinksHandler(w http.ResponseWriter, r *http.Request) {
+
+	var respStatus int
+	var respData []byte
+	var err error
 
 	switch method := r.Method; method {
 
 	case http.MethodGet:
 		links := AllLinks()
-		responseWriteJSON(w, links)
+		DbCountLinks() //remove this!
+		DbGetLinks() // remove this!
+		//responseWriteJSON(w, links)
+		respData, err = json.Marshal(links)
+		if err == nil {
+			respStatus = http.StatusOK
+		} else {
+			respStatus = http.StatusInternalServerError
+			respData = []byte(err.Error())
+		}
+		ResponseWithJSON(w, respData, respStatus)
 
 	case http.MethodPost:
 		body, err := ioutil.ReadAll(r.Body)
@@ -47,8 +62,9 @@ func LinksHandleFunc(w http.ResponseWriter, r *http.Request) {
 		}
 
 	default:
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Unsupported request method."))
+		respStatus = http.StatusBadRequest
+		respData = []byte("Unsupported request method.")
+		ResponseWithJSON(w, respData, respStatus)
 	}
 }
 
@@ -72,13 +88,13 @@ func CreateLink(link Link) (Link, bool) {
 		StartWithYear: false,
 		EndWithHost: false,
 	}
-	link.LinkId = strings.ToLower(ShortIdGenerate(shortIdOptions))
+	link.LinkId = strings.ToLower(GenerateShortId(shortIdOptions))
 
 	// FIXME: remove this after db integration! used only for local testing
 	if len(link.SimpleLinks) == 0 {
 		shortIdOptions.Number = 3
 		link.SimpleLinks = append(link.SimpleLinks,
-			"01"+strings.ToLower(ShortIdGenerate(shortIdOptions)))
+			"01"+strings.ToLower(GenerateShortId(shortIdOptions)))
 	}
 
 	//link.CreatedAt = time.Now().String()

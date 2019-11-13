@@ -1,59 +1,39 @@
 package main
 
 import (
-	"./api"
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/urfave/negroni"
+	"github.com/zeusbaba/cloud-native-apps/baet-api-golang/api"
 	"net/http"
 	"os"
 )
 
 func main() {
-	/*
-	// usign standard net/http
-	http.HandleFunc("/", index)
-	http.HandleFunc("/echo", api.EchoHandleFunc)
-	http.HandleFunc("/hello", api.HelloHandleFunc)
-
-	http.HandleFunc("/users", api.UsersHandleFunc)
-	http.HandleFunc("/links", api.LinksHandleFunc)
-
-	err := http.ListenAndServe(port(), nil)
-	checkError(err)
-	*/
 
 	// using Gorilla mux, http://www.gorillatoolkit.org/pkg/mux#overview
-	r := mux.NewRouter()
+	muxRouter := mux.NewRouter()
 
-	r.HandleFunc("/", index)
-	r.HandleFunc("/echo", api.EchoHandleFunc)
-	r.HandleFunc("/hello", api.HelloHandleFunc)
+	muxRouter.HandleFunc("/", index)
 
-	r.HandleFunc("/users", api.UsersHandleFunc)
-	r.HandleFunc("/links", api.LinksHandleFunc)
+	muxRouter.HandleFunc("/users", api.UsersHandler)
+	muxRouter.HandleFunc("/links", api.LinksHandler)
 
 	// TODO implement link related endpoints
-	r.HandleFunc("/{link_id}/stats", api.LinksHandleFunc)
-	r.HandleFunc("/{link_id}/clicks", api.LinksHandleFunc)
-	r.HandleFunc("/{link_id}.json", api.LinksHandleFunc)
-	r.HandleFunc("/{link_id}", api.LinksHandleFunc)
+	muxRouter.HandleFunc("/{link_id}/stats", api.LinksHandler)
+	muxRouter.HandleFunc("/{link_id}/clicks", api.LinksHandler)
+	muxRouter.HandleFunc("/{link_id}.json", api.LinksHandler)
+	muxRouter.HandleFunc("/{link_id}", api.LinksHandler)
 
-	// Negroni for middlware, see https://github.com/urfave/negroni
-	n := negroni.Classic() // include default middleware
-	/*
-	n := negroni.New()
-	logger := negroni.NewLogger()
-	logger.SetFormat("{{.StartTime}} | [{{.Status}} - {{.Duration}}] | {{.Hostname}} | {{.Method}} {{.Path}} | {{.Request.UserAgent}}")
-	n.Use(logger)
-	*/
+	// Negroni for middleware, see https://github.com/urfave/negroni
+	middlewareNegroni := negroni.Classic() // include default middleware
 
-	n.UseHandler(r)
+	middlewareNegroni.UseHandler(muxRouter)
 
-	err := http.ListenAndServe(port(), n)
-	checkError(err)
+	fmt.Println("API server starting at port", port())
+	err := http.ListenAndServe(port(), middlewareNegroni)
+	api.CheckError(err)
 }
-
 
 func port() string {
 	port := os.Getenv("PORT")
@@ -63,13 +43,8 @@ func port() string {
 	return ":" + port
 }
 
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
 
 func index(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "Welcome to BAET API with Golang.")
+	_, _ = fmt.Fprintf(w, "BAET.no API powered with Golang.")
 }

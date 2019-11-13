@@ -19,6 +19,8 @@ localtemp*
 */localtemp*
 arc-history*
 
+*/bin/*
+
 # Avoid ignoring Maven/Gradle wrapper jar file (.jar files are usually ignored)
 !gradle/wrapper/gradle-wrapper.jar
 !/.mvn/wrapper/maven-wrapper.*

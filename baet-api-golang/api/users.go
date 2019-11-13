@@ -1,19 +1,32 @@
 package api
 
 import (
+	"encoding/json"
 	"github.com/vjeantet/jodaTime"
 	"io/ioutil"
 	"net/http"
 	"time"
 )
 
-func UsersHandleFunc(w http.ResponseWriter, r *http.Request) {
+func UsersHandler(w http.ResponseWriter, r *http.Request) {
+
+	var respStatus int
+	var respData []byte
+	var err error
 
 	switch method := r.Method; method {
 
 	case http.MethodGet:
 		users := AllUsers()
-		responseWriteJSON(w, users)
+		//responseWriteJSON(w, users)
+		respData, err = json.Marshal(users)
+		if err == nil {
+			respStatus = http.StatusOK
+		} else {
+			respStatus = http.StatusInternalServerError
+			respData = []byte(err.Error())
+		}
+		ResponseWithJSON(w, respData, respStatus)
 
 	case http.MethodPost:
 		body, err := ioutil.ReadAll(r.Body)
@@ -48,8 +61,11 @@ func UsersHandleFunc(w http.ResponseWriter, r *http.Request) {
 		}
 
 	default:
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("Unsupported request method."))
+		//w.WriteHeader(http.StatusBadRequest)
+		//w.Write([]byte("Unsupported request method."))
+		respStatus = http.StatusBadRequest
+		respData = []byte("Unsupported request method.")
+		ResponseWithJSON(w, respData, respStatus)
 	}
 }
 
