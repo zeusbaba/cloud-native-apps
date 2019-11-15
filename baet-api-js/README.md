@@ -66,7 +66,7 @@ Building, publishing and running via _Docker_ and _Docker-Compose_:
 $ export dockerhubUser=zeusbaba \
   export appName=baet-api-js \
   export appSecrets=baet-api-secrets \
-  export appVersion=4.0.10
+  export appVersion=4.1.0
 $ export dockerImage=${dockerhubUser}/${appName}:${appVersion}
 
 ## using Docker!!!       

@@ -5,12 +5,24 @@ const {
   hashPassword, protect
 } = require('@feathersjs/authentication-local').hooks;
 
+// see https://github.com/feathersjs-ecosystem/feathers-authentication-hooks
+/* // before v1
 const { restrictToOwner } = require('feathers-authentication-hooks');
 const restrict = [
   authenticate('jwt'),
   restrictToOwner({
     idField: '_id',
     ownerField: 'userid'
+  })
+];
+*/
+// after v1
+const { setField } = require('feathers-authentication-hooks');
+const restrict = [
+  authenticate('jwt'),
+  setField({
+    from: 'params.user.id',
+    as: 'params.query.userId'
   })
 ];
 
@@ -53,18 +65,17 @@ module.exports = {
           context.data._id = context.data.userid;
         }
       },
-      //-hashPassword({passwordField: passwordField}),
-      hashPassword(),
+      hashPassword('password'),
       commonHooks.setNow('createdAt', 'updatedAt'),
     ],
     update: [
       ...restrict,
-      hashPassword(), // hashPassword({passwordField: passwordField})
+      hashPassword('password'),
       commonHooks.setNow('updatedAt')
     ],
     patch: [
       ...restrict,
-      hashPassword(), // hashPassword({passwordField: passwordField})
+      hashPassword('password'),
       commonHooks.setNow('updatedAt')
     ],
     remove: [ ...restrict ]

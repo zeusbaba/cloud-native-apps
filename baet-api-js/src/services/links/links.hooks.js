@@ -21,7 +21,11 @@ module.exports = {
       }
     ],
     find: [
-      authHooks.queryWithCurrentUser({ idField: 'userid', as: 'userid' }),
+      //authHooks.queryWithCurrentUser({ idField: 'userid', as: 'userid' }),
+      authHooks.setField({
+        from: 'params.user.userid',
+        as: 'params.query.userid'
+      }),
     ],
     get: [],
     create: [
@@ -78,7 +82,11 @@ module.exports = {
         }
       },
 
-      authHooks.associateCurrentUser({ idField: '_id', as: 'userid' }),
+      //authHooks.associateCurrentUser({ idField: '_id', as: 'userid' }),
+      authHooks.setField({
+        from: 'params.user._id',
+        as: 'data.userid'
+      }),
 
       hook => {
         commonHooks.debug('link content validation');

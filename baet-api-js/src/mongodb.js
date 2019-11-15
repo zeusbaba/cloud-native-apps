@@ -6,7 +6,7 @@ module.exports = function (app) {
   const dbConfig = app.get('mongodb');
   const dbName = url.parse(dbConfig).path.substring(1);
   const promise = MongoClient
-    .connect(dbConfig, {useNewUrlParser: true})
+    .connect(dbConfig, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(client => {
       // For mongodb <= 2.2
       if(client.collection) {
