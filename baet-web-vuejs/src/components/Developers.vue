@@ -109,11 +109,11 @@
             function(e) {
 
               if (isDev) {
-                console.log('doCopy... copied OK!!!')
+                console.log('doCopy... copied OK!!! | ' + e)
               }
         }, function(e) {
               if (isDev) {
-                console.log('doCopy... ERROR!!!')
+                console.log('doCopy... ERROR!!! | ' + e)
               }
             })
       }

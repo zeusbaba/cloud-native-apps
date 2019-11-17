@@ -25,20 +25,31 @@ Vue.use(VueWarehouse, {
   ]
 });
 
+/*
 import '@fortawesome/fontawesome-free/css/all.css'
 import 'vuetify/dist/vuetify.min.css'
 // ...Vuetify https://vuetifyjs.com/en/getting-started/quick-start
+
 import Vuetify from 'vuetify'
 // Helpers
 import colors from 'vuetify/es5/util/colors'
 Vue.use(Vuetify, {
-  iconfont: 'fa',
+  icons: {
+    iconfont: 'fa'
+  },
   theme: {
-    primary: colors.orange.darken4,
-    secondary: colors.orange.darken1,
-    accent: colors.orange.accent3
+    dark: false,
+    themes: {
+      light: {
+        primary: colors.orange.darken4,
+        secondary: colors.orange.darken1,
+        accent: colors.orange.accent3
+      }
+    }
   }
 });
+*/
+import vuetify from './plugins/vuetify' // path to vuetify export
 
 import VueClipboard from 'vue-clipboard2'
 VueClipboard.config.autoSetContainer = true; // add this line
@@ -69,6 +80,7 @@ store.dispatch('auth/authenticate')
 .then(() => {
   // eslint-disable-next-line no-new
   new Vue({
+    vuetify,
     router,
     store,
     i18n,

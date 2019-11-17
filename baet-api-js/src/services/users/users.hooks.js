@@ -21,8 +21,8 @@ const { setField } = require('feathers-authentication-hooks');
 const restrict = [
   authenticate('jwt'),
   setField({
-    from: 'params.user.id',
-    as: 'params.query.userId'
+    from: 'params.user._id',
+    as: 'params.query.userid'
   })
 ];
 
@@ -31,11 +31,16 @@ const logger = require('./../../logger');
 module.exports = {
   before: {
     all: [
-      async function(context) {
+      context => {
         logger.info('users before.all', context.data, context.params);
       }
     ],
-    find: [ ...restrict ],
+    find: [
+      context => {
+        logger.info('context users.find', context.data, context.params);
+      },
+      ...restrict
+    ],
     get: [], //[ ...restrict ], // no restriction, because we are using by our react app for user-check
     create: [
       context => {
@@ -103,7 +108,7 @@ module.exports = {
     all: [
       context => {
         logger.info('(users) hook.error: %s', JSON.stringify(context.error));
-        logger.info('(users) path: %s | method: ', context.path, context.method);
+        logger.info('(users) path: %s | method: %s', context.path, context.method);
       }
     ],
     find: [],

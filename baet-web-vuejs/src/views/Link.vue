@@ -23,7 +23,7 @@
 <script>
 
   // @ is an alias to /src
-  import LogoMain from '@/assets/logo_main.png';
+  //import LogoMain from '@/assets/logo_main.png';
 import LinkForm from '@/components/LinkForm'
 
 export default {

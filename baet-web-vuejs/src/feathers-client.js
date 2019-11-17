@@ -17,7 +17,7 @@ if (window.location && isLocalHost(window.location.hostname)) {
   restHost = myConfig.backend.development; // .development // .production
 }
 // NOTE force using only a specific backend as below
-restHost = myConfig.backend.production;
+//restHost = myConfig.backend.production;
 
 if (isDev) {
   console.log(
@@ -41,3 +41,15 @@ const feathersClient = feathers()
     storage: window.localStorage
   }));
 export default feathersClient
+
+// Setting up feathers-vuex
+import feathersVuex from 'feathers-vuex';
+const { makeServicePlugin, makeAuthPlugin, BaseModel, models, FeathersVuex } = feathersVuex(
+    feathersClient,
+    {
+        //serverAlias: 'api', // optional for working with multiple APIs (this is the default value)
+        idField: '_id', // Must match the id field in your database table/collection
+        whitelist: ['$regex', '$options']
+    }
+);
+export { makeAuthPlugin, makeServicePlugin, BaseModel, models, FeathersVuex }

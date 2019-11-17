@@ -40,6 +40,7 @@
   },
   "authentication": {
     "entity": "user",
+    "entityId": "_id",
     "service": "users",
     "secret": "AUTH_SECRET",
     "authStrategies": [
@@ -53,8 +54,7 @@
       "audience": "baet.no",
       "issuer": "baet.no",
       "algorithm": "HS256",
-      "expiresIn": "365d",
-      "ignoreExpiration": true
+      "expiresIn": "365d"
     },
     "local": {
       "usernameField": "userid",
