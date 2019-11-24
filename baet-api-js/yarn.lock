@@ -23,7 +23,7 @@
   resolved "https://registry.yarnpkg.com/@feathers-plus/batch-loader/-/batch-loader-0.3.3.tgz#ccfacc3d3fe4c67dcb9679274bb3211afd1fbe41"
   integrity sha512-1ZQ8wRScn6/Si4k8ARdGNAWiBqM90V22/IZqkSmu0zhqFtfk+h/l9od4hGWKdKCw9R5TtcL+CvPZBOa5AT6JfQ==
 
-"@feathersjs/adapter-commons@^4.3.6":
+"@feathersjs/adapter-commons@^4.3.8":
   version "4.3.11"
   resolved "https://registry.yarnpkg.com/@feathersjs/adapter-commons/-/adapter-commons-4.3.11.tgz#9e4d76f432a8294a5e0f1b7c40b793367382b6ed"
   integrity sha512-Z4oLShwNP/7FTOOUyt1i9auV48sF5Dcom4a2QFPbYwgZ37KhY9Eew0yUhvkthwwMFFJKsADnke27dMgF7Sz8QQ==
@@ -1479,7 +1479,7 @@ cache-base@^1.0.1:
     get-value "^2.0.6"
     has-value "^1.0.0"
     isobject "^3.0.1"
-    set-value "^2.0.0"
+    set-value "^2.0.1"
     to-object-path "^0.3.0"
     union-value "^1.0.0"
     unset-value "^1.0.0"
@@ -2664,12 +2664,12 @@ feathers-mongodb-fuzzy-search@^1.1.1:
     feathers-commons "^0.8.7"
     feathers-errors "^2.9.1"
 
-feathers-mongodb@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/feathers-mongodb/-/feathers-mongodb-6.0.0.tgz#0940ebadebeec3da906a6ea2d827f3792f8d8d93"
-  integrity sha512-gUju/6Ha0rtiB+SrPzm0C2tCz+j9TkrSwwgY+OEXT8z6SV1wwv2GSyZiyeqyTQNUwQdPmN1pn9KclKBtdrnmVg==
+feathers-mongodb@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/feathers-mongodb/-/feathers-mongodb-6.1.0.tgz#56da701194217733a36e146ac77d869f43cbd090"
+  integrity sha512-oeKLccn0y5GjWw5oa/Imb5Ym1kc71m7cYYMun4WuTpGYmQhtZbSFShY0DYPXxEr/JDOoDjZDDAzvsqkS6TzYtw==
   dependencies:
-    "@feathersjs/adapter-commons" "^4.3.6"
+    "@feathersjs/adapter-commons" "^4.3.8"
     "@feathersjs/commons" "^4.3.0"
     "@feathersjs/errors" "^4.3.4"
 
@@ -6573,10 +6573,10 @@ validate-npm-package-name@^3.0.0:
   dependencies:
     builtins "^1.0.3"
 
-validator@^12.0.0:
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-12.0.0.tgz#fb33221f5320abe2422cda2f517dc3838064e813"
-  integrity sha512-r5zA1cQBEOgYlesRmSEwc9LkbfNLTtji+vWyaHzRZUxCTHdsX3bd+sdHfs5tGZ2W6ILGGsxWxCNwT/h3IY/3ng==
+validator@^12.1.0:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-12.1.0.tgz#a3a7315d5238cbc15e46ad8d5e479aafa7119925"
+  integrity sha512-gIC2RBuFRi574Rb9vewGCJ7TCLxHXNx6EKthEgs+Iz0pYa9a9Te1VLG/bGLsAyGWrqR5FfR7tbFUI7FEF2LiGA==
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"
@@ -6651,10 +6651,10 @@ widest-line@^2.0.0:
   dependencies:
     string-width "^2.1.1"
 
-winston-daily-rotate-file@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/winston-daily-rotate-file/-/winston-daily-rotate-file-4.2.1.tgz#bfbafd7d8834d1ce36c8c65b5ec11a7b1bdc3ca9"
-  integrity sha512-ETNkdkMsf05HMg0kgkmTkA9GC6u6fFrat4mUVmx9XLCdgBoQL+iLuzbNUTWQxCVhlJ/w7MzsQfkU7bGf49NDbA==
+winston-daily-rotate-file@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/winston-daily-rotate-file/-/winston-daily-rotate-file-4.3.0.tgz#318bd220e596818127cb158390f902b7c3c2d86b"
+  integrity sha512-YlGYkWuXG91WhWabtX0cXIuwfAv8Zv6eVCMBs+xErtxOLNLNr0HO8XMk3SyKq3ZLc9Gii8UIEWhEWHy4ZyENfA==
   dependencies:
     file-stream-rotator "^0.5.5"
     object-hash "^1.3.0"
