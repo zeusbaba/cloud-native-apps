@@ -38,14 +38,14 @@
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
-    "@feathersjs/authentication": "^4.3.7",
-    "@feathersjs/authentication-local": "^4.3.7",
-    "@feathersjs/authentication-oauth": "^4.3.7",
+    "@feathersjs/authentication": "^4.4.1",
+    "@feathersjs/authentication-local": "^4.4.1",
+    "@feathersjs/authentication-oauth": "^4.4.1",
     "@feathersjs/cli": "^4.2.3",
-    "@feathersjs/configuration": "^4.3.7",
-    "@feathersjs/errors": "^4.3.7",
-    "@feathersjs/express": "^4.3.7",
-    "@feathersjs/feathers": "^4.3.7",
+    "@feathersjs/configuration": "^4.4.1",
+    "@feathersjs/errors": "^4.4.1",
+    "@feathersjs/express": "^4.4.1",
+    "@feathersjs/feathers": "^4.4.1",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
@@ -60,7 +60,7 @@
     "helmet": "^3.21.2",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "mongodb": "^3.3.4",
+    "mongodb": "^3.3.5",
     "node-fetch": "^2.6.0",
     "path": "^0.12.7",
     "random-int": "^2.0.1",
@@ -76,8 +76,8 @@
     "winston-daily-rotate-file": "^4.3.0"
   },
   "devDependencies": {
-    "eslint": "^6.6.0",
+    "eslint": "^6.7.2",
     "mocha": "^6.2.2",
-    "nodemon": "^1.19.4"
+    "nodemon": "^2.0.1"
   }
 }
