@@ -10,7 +10,7 @@ interface CounterState {
     counter: number;
 }
 
-export default class Counter extends ComponentBase<CounterProps, CounterState> {
+export default class CounterDisplay extends ComponentBase<CounterProps, CounterState> {
     protected _buildState() {
         return {
             counter: CounterStore.getCounter(),
@@ -22,12 +22,6 @@ export default class Counter extends ComponentBase<CounterProps, CounterState> {
             <>
                 <div>
                     <h1>{ this.state.counter }</h1>
-                </div>
-
-                <div>
-                    <button onClick={() => CounterStore.increment()}>+</button>
-                    <button onClick={() => CounterStore.decrement()}>-</button>
-                    <button onClick={() => CounterStore.reset()}>Reset</button>
                 </div>
             </>
         );

@@ -21,10 +21,16 @@ const rootElement = document.getElementById("root");
 );*/
 ReactDOM.render(
     <LocalizeProvider store={store}>
-        <App />
+        <App compiler={"TypeScript"} framework={"React"} />
     </LocalizeProvider>,
     rootElement
 );
+/*ReactDOM.render(
+    <LocalizeProvider store={store}>
+        <App />
+    </LocalizeProvider>,
+    rootElement
+);*/
 /*ReactDOM.render(
     <Provider store={store}>
         <App />

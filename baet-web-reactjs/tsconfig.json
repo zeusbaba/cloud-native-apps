@@ -6,11 +6,28 @@
     "declaration": false,
     "noResolve": false,
     "sourceMap": true,
-    "typeRoots": ["node_modules/@types"],
-    "module": "commonjs",
-    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "module": "esnext",
+    "target": "es6",
     "outDir": "./dist/",
-    "jsx": "react"
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
   "include": [
     "./src/**/*"

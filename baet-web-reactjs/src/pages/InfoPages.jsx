@@ -3,24 +3,35 @@ import PropTypes from 'prop-types';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { withStyles } from '@material-ui/core/styles';
 
 import IconInfo from '@material-ui/icons/Info';
 import IconLock from '@material-ui/icons/Lock';
 import IconCode from '@material-ui/icons/Code';
 
 // TODO: create component for each component
+import Counter from '../resub/Counter';
+import CounterDisplay from "../resub/CounterDisplay";
 //import About from './About';
 //import Terms from './Terms';
 //import Developers from './Developers';
 function About() {
-    return (<div>About page</div>);
+    return (
+        <div>
+            About page
+            <Counter />
+        </div>
+    );
 }
 function Terms() {
     return (<div>Terms page</div>);
 }
 function Developers() {
-    return (<div>Developers page</div>);
+    return (
+        <div>
+            Developers page
+            <CounterDisplay />
+        </div>
+    );
 }
 
 /*const styles = {
@@ -52,6 +63,7 @@ class InfoPages extends Component {
     // eslint-disable-next-line
     if (this.props.match && tabValues.indexOf(this.props.match.path) >= 0) {
       this.setState({
+          // eslint-disable-next-line react/prop-types
         tabValue: this.props.match.path,
       });
     }

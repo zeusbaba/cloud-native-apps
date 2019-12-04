@@ -12,7 +12,9 @@ export const isLocalHost = hostname => {
 
 //export const isDev = process.env.NODE_ENV!=='production'? true : false;
 export const isDev =
+    // eslint-disable-next-line no-undef
     process.env.NODE_ENV !== 'production' &&
+    // eslint-disable-next-line no-undef
     isLocalHost(window.location.hostname); // ? true : false;
 
 export const myConfig = {
@@ -97,12 +99,14 @@ export const getUserIdFromToken = (token) => {
 };
 export const isValidToken = (currentToken) => {
     if (!currentToken) {
+        // eslint-disable-next-line no-undef
         currentToken = localStorage.getItem(jwtHeaderName);
     }
 
     if (currentToken) {
         const decodedToken = jwtDecode(currentToken);
         if (isDev) {
+            // eslint-disable-next-line no-undef
             console.log("decodedToken -> " + JSON.stringify(decodedToken));
             /*
             decodedToken -> {

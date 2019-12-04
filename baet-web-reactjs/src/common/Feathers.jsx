@@ -21,7 +21,7 @@ if (window.location && isLocalHost(window.location.hostname)) {
     restHost = myConfig.backend.development; // .development // .production
 }
 // NOTE you can also force using only a specific backend as below
-//restHost = myConfig.backend.production;
+restHost = myConfig.backend.production;
 
 if (isDev) {
     console.log(

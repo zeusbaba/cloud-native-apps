@@ -35,6 +35,10 @@ class CounterStore extends StoreBase {
         this.trigger();
     }
 
+    public getCount(): number {
+        return this._counter;
+    }
+
     /**
      * getCounter
      * @return number
