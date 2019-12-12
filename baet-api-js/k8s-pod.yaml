@@ -4,8 +4,7 @@ metadata:
   name: baet-api-js
   labels:
     app: baet-api-js
-    lang: node-js
-    env: prod
+    type: api-backend
 spec:
   containers:
     - name: baet-api-js

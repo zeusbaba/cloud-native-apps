@@ -1,10 +1,14 @@
 const logger = require('./logger');
-const url = require('url');
+//const url = require('url');
 const MongoClient = require('mongodb').MongoClient;
 
 module.exports = function (app) {
   const dbConfig = app.get('mongodb');
-  const dbName = url.parse(dbConfig).path.substring(1);
+  const dbName = "baet";
+  /*let dbName = url.parse(dbConfig).path.substring(1);
+  if (dbName==='test') {// used when connstr is mongodb atlas
+    dbName = 'baet'
+  }*/
   const promise = MongoClient
     .connect(dbConfig, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(client => {

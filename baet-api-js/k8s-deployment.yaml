@@ -1,17 +1,20 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: baet-api-js
   labels:
     app: baet-api-js
+    type: api-backend
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: baet-api-js
   template:
     metadata:
       labels:
         app: baet-api-js
-        lang: node-js
-        env: prod
+        type: api-backend
     spec:
       containers:
         - name: baet-api-js
@@ -32,14 +35,14 @@ spec:
             httpGet:
               path: /
               port: 4042
-            initialDelaySeconds: 5
-            timeoutSeconds: 5
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
 #          livenessProbe:
 #            httpGet:
 #              path: /
 #              port: 4042
-#            initialDelaySeconds: 5
-#            timeoutSeconds: 5
+#            initialDelaySeconds: 10
+#            timeoutSeconds: 10
       volumes:
         - name: baet-api-secrets
           secret:

@@ -1,11 +1,10 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: baet-api-js
   labels:
     app: baet-api-js
-    lang: node-js
-    env: prod
+    type: api-backend
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
