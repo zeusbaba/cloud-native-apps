@@ -113,7 +113,7 @@ Thus, we must create _k8s-secrets_  to inject our env-vars from this file.
   # create using secrets   
 $ kubectl create secret \
     generic ${appSecrets} \
-    --from-file=${appSecrets}/docker_vars.env
+    --from-env-file=${appSecrets}/docker_vars.env
   
   # validate its creation
 $ kubectl get secrets     

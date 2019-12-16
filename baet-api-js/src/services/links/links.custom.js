@@ -1,7 +1,7 @@
 const logger = require('./../../logger');
 const commonHooks = require('feathers-hooks-common');
 const errors = require('@feathersjs/errors'); // https://www.npmjs.com/package/feathers-errors
-//const Validator = require('validator');
+const Validator = require('validator');
 
 const isDev = process.env.NODE_ENV !== 'production'; // eslint-disable-line
 
@@ -270,7 +270,23 @@ module.exports = function () {
       link_id = link_id.toLowerCase();
 
       if (isDev) {
-        logger.info('hook.before request for', linkRoute, link_id);
+        logger.info('hook.before request for %s | link_id: %s', linkRoute, link_id);
+        logger.info('check if requested link_id is one of the service paths!');
+      }
+      //commonHooks.debug('check if requested link_id is one of the service paths!');
+
+      for (let r of app._router.stack) {
+        //logger.info('r.route.path: %s', r.route.path);
+        if (r.route && r.route.path
+          && Validator.contains(r.route.path, '/'+link_id+'/')
+          ) {
+
+          throw new errors.Conflict(
+            'link_id is one of the service paths!',
+            {link: link_id}
+          );
+
+        }
       }
 
       return app.service('links')

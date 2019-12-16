@@ -1,6 +1,5 @@
 #FROM node:10-alpine
-#FROM bitnami/node:10
-FROM bitnami/node:latest
+FROM bitnami/node:10
 LABEL maintainer="Yilmaz Guleryuz 397125+zeusbaba@users.noreply.github.com"
 
 ENV APP_HOME=/usr/src/app
@@ -12,6 +11,15 @@ ENV PATH=$PATH:$APP_HOME/.npm-global/bin
 RUN mkdir -p $APP_HOME
 #RUN chown -R node.node APP_HOME
 WORKDIR $APP_HOME
+
+ENV ENV_IMPORTER=import-env-vars.sh
+COPY $ENV_IMPORTER .
+RUN chmod +x ./$ENV_IMPORTER
+
+# use a unified script to run the app
+ENV DOCKER_STARTER=docker-starter.sh
+COPY $DOCKER_STARTER .
+RUN chmod +x ./$DOCKER_STARTER
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -36,4 +44,5 @@ COPY .* ./
 
 EXPOSE 4042
 
-CMD ./wait && npm start
+ENTRYPOINT exec ./${DOCKER_STARTER}
+## CMD /wait && npm start

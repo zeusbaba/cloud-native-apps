@@ -1,19 +1,22 @@
 #!/usr/bin/env sh
 
-echo "`go version`"
+#echo "`go version`"
+go version
+
+APPNAME=baet-api
 
 echo "making builds... linux"
-GOOS=linux GOARCH=amd64 go build baet-api.go
-mv baet-api baet-api_linux
+GOOS=linux GOARCH=amd64 go build ${APPNAME}.go
+mv ${APPNAME} ${APPNAME}_linux
 
 echo "making builds... mac"
-GOOS=darwin GOARCH=amd64 go build baet-api.go
-mv baet-api baet-api_mac
+GOOS=darwin GOARCH=amd64 go build ${APPNAME}.go
+mv ${APPNAME} ${APPNAME}_mac
 
 echo "making builds... windows"
-GOOS=windows GOARCH=amd64 go build baet-api.go
-mv baet-api.exe baet-api_win.exe
+GOOS=windows GOARCH=amd64 go build ${APPNAME}.go
+mv ${APPNAME}.exe ${APPNAME}_win.exe
 
 echo "making builds... -> default"
-go build baet-api.go
+go build ${APPNAME}.go
 

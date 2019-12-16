@@ -3,6 +3,11 @@ const uaparser = require('ua-parser-js');
 module.exports = function () { //(options = {}) {
   return function reqExtras(req, res, next) {
 
+    if (req.originalUrl === '/k8s-status') {
+      //logger.info("k8s-status");
+      next();
+    }
+
     logger.info('>> req.headers', req.headers);
 
     req.headers['reqExtras'] = {};

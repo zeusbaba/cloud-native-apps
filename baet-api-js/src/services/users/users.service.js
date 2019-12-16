@@ -28,6 +28,16 @@ module.exports = function (app) {
 
   service.hooks(hooks);
 
+  // custom endpoint for k8s probe
+  app.use('/k8s-status', {
+    find(params) {
+      logger.info('k8s-status', params);
+      return new Promise((resolve, reject) => {
+        return resolve('OK');
+      });
+    }
+  });
+
   // custom endpoint for ReCaptcha!!!
   app.use('/validate_recaptcha', {
     create(data, params) {// eslint-disable-line

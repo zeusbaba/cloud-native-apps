@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: baet-configmap
+data:
+  APPNAME: baet
+  TESTING: etc
+  # TODO: fill in all params

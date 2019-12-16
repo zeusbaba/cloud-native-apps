@@ -1,12 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: baet-api-js
+  name: baet-api-js-deployment
   labels:
-    app: baet-api-js
-    type: api-backend
+    app: baet-api-js-deployment
 spec:
-  replicas: 1
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
   selector:
     matchLabels:
       app: baet-api-js
@@ -16,12 +20,24 @@ spec:
         app: baet-api-js
         type: api-backend
     spec:
+      #serviceAccountName: default
+      #restartPolicy: Never
       containers:
         - name: baet-api-js
           image: zeusbaba/baet-api-js:4.2.0
-          volumeMounts:
-            - name: baet-api-secrets
-              mountPath: /usr/src/app/baet-api-secrets
+          imagePullPolicy: Always
+          #securityContext:
+          #  runAsUser: 1000
+          #  capabilities:
+          #    add: ["SYS_TIME"]
+          #volumeMounts:
+          #  - name: baet-api-secrets
+          #    mountPath: /usr/src/app/baet-api-secrets
+          envFrom:
+            - secretRef:
+                name: baet-api-secrets-env
+            #- configMapRef:
+            #    name: baet-configmap
           resources:
             requests:
               memory: "64Mi"
@@ -33,17 +49,19 @@ spec:
             - containerPort: 4042
           readinessProbe:
             httpGet:
-              path: /
+              path: /k8s-status
               port: 4042
             initialDelaySeconds: 10
             timeoutSeconds: 10
-#          livenessProbe:
-#            httpGet:
-#              path: /
-#              port: 4042
-#            initialDelaySeconds: 10
-#            timeoutSeconds: 10
-      volumes:
-        - name: baet-api-secrets
-          secret:
-            secretName: baet-api-secrets
+            failureThreshold: 4
+          livenessProbe:
+            httpGet:
+              path: /k8s-status
+              port: 4042
+            initialDelaySeconds: 120
+            timeoutSeconds: 10
+            failureThreshold: 4
+      #volumes:
+      #  - name: baet-api-secrets
+      #    secret:
+      #      secretName: baet-api-secrets

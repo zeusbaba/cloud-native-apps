@@ -1,10 +1,7 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: baet-api-js
-  labels:
-    app: baet-api-js
-    type: api-backend
+  name: baet-api-js-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
@@ -14,19 +11,19 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: baet-api-js
+          serviceName: baet-api-js-service
           servicePort: 4042
   - host: api2.baet.no
     http:
       paths:
       - path: /
         backend:
-          serviceName: baet-api-js
+          serviceName: baet-api-js-service
           servicePort: 4042
   - host: api3.baet.no
     http:
       paths:
       - path: /
         backend:
-          serviceName: baet-api-js
+          serviceName: baet-api-js-service
           servicePort: 4042

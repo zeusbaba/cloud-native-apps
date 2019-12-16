@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: baet-api-js
   labels:
-    app: baet-api-js
+    app: baet-api-js-deployment
     lang: node-js
     env: prod
   annotations:

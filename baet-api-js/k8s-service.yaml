@@ -10,3 +10,4 @@ spec:
       nodePort: 30042
   selector:
     app: baet-api-js
+    type: api-backend
