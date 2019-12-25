@@ -21,10 +21,10 @@ spec:
       #    mountPath: /usr/src/app/ulink-api-secrets
       envFrom:
         - secretRef:
-            name: ulink-api-secrets-env
+            name: api-secrets-ulink
         #- configMapRef:
         #    name: baet-config
 #  volumes:
-#    - name: ulink-api-secrets
+#    - name: api-secrets-ulink
 #      secret:
-#        secretName: ulink-api-secrets
+#        secretName: api-secrets-ulink

@@ -1,5 +1,6 @@
 const logger = require('./../logger');
 const uaparser = require('ua-parser-js');
+const isDev = process.env.NODE_ENV !== 'production'; // eslint-disable-line
 module.exports = function () { //(options = {}) {
   return function reqExtras(req, res, next) {
 
@@ -8,7 +9,9 @@ module.exports = function () { //(options = {}) {
       next();
     }
 
-    logger.info('>> req.headers', req.headers);
+    if (isDev) {
+      logger.info('>> req.headers', req.headers);
+    }
 
     req.headers['reqExtras'] = {};
     req.headers['reqExtras'].method = req.method;
@@ -26,10 +29,11 @@ module.exports = function () { //(options = {}) {
     }
     req.headers['reqExtras'].ip = ip;//-req.ip;//? req.ip:req.ips;
 
-
     req.headers['reqExtras'].uaParsed = uaparser(req.headers['reqExtras'].userAgent);
 
-    logger.info('>> reqExtras', req.headers['reqExtras']);
+    if (isDev) {
+      logger.info('>> reqExtras', req.headers['reqExtras']);
+    }
 
     /*
     if (req.cookies) {

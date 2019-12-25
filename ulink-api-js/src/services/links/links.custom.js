@@ -281,11 +281,12 @@ module.exports = function () {
           && Validator.contains(r.route.path, '/'+link_id+'/')
           ) {
 
-          throw new errors.Conflict(
+          /*throw new errors.Conflict(
             'link_id is one of the service paths!',
             {link: link_id}
-          );
-
+          );*/
+          logger.warn('link_id is one of the service paths! | link_id: %s', link_id);
+          return Promise.resolve()
         }
       }
 

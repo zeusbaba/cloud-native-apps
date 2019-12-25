@@ -105,6 +105,15 @@ which contains all env-vars which is required for our app to run!
 To be able to inject this file into k8s cluster, we can either use `secrets` or `configmap`  
 As you've seen `docker_vars.env` file contains sensitive data like `AUTH_SECRET`, therefore it's recommended to use `secrets` in k8s.  
 
+#### k8s namespace
+Having a `namespace` is a good practice for maintainability! 
+```
+$ kubectl create namespace catpet
+
+# or using yaml file  
+$ kubectl apply -f k8s-namespace.yaml
+```
+
 #### k8s secrets  
 Thus, we must create _k8s-secrets_  to inject our env-vars from this file.    
 
@@ -112,12 +121,14 @@ Thus, we must create _k8s-secrets_  to inject our env-vars from this file.
 
   # create using secrets   
 $ kubectl create secret \
-    generic ${appSecrets} \
-    --from-env-file=${appSecrets}/docker_vars.env
+    generic ${appSecrets}-ulink \
+    --from-env-file=${appSecrets}/docker_vars.env \
+    --namespace catpet
   
   # validate its creation
-$ kubectl get secrets     
-$ kubectl get secret ${appSecrets} -o yaml  
+$ kubectl get secrets \ 
+    --namespace catpet      
+$ kubectl get secret ${appSecrets} --namespace catpet -o yaml  
   # if you want to delete  
 $ kubectl delete secret ${appSecrets}
 
@@ -169,11 +180,14 @@ See [k8s-deployment.yaml](config-k8s/k8s-deployment.yaml) and [k8s-service.yaml]
 $ kubectl get services,deployments,pods
 
   # k8s-deployment
-$ kubectl apply -f k8s-deployment.yaml
-$ kubectl get deployments,pods
+$ kubectl apply -f k8s-deployment.yaml \
+    --namespace catpet
+$ kubectl get deployments,pods \
+    --namespace catpet
 
   # k8s-service
-$ kubectl apply -f k8s-service.yaml
+$ kubectl apply -f k8s-service.yaml \
+    --namespace catpet
 $ kubectl get services
 $ kubectl describe service ${appName}
 

@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/component: api-backend
     app.kubernetes.io/part-of: baet-ulink
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -44,14 +44,14 @@ spec:
           #  capabilities:
           #    add: ["SYS_TIME"]
           #volumeMounts:
-          #  - name: api-secrets
+          #  - name: api-secrets-ulink
           #    mountPath: /usr/src/app/api-secrets
           #volumeMounts:
           #  - mountPath: /api-data
           #    name: api-data
           envFrom:
             - secretRef:
-                name: ulink-api-secrets-env
+                name: api-secrets-ulink
             #- configMapRef:
             #    name: baet-configmap
           resources:
