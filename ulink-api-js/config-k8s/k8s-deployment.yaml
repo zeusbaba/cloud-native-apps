@@ -18,40 +18,40 @@ spec:
       maxUnavailable: 25%
   selector:
     matchLabels:
-      app: baet-api-js
-      type: api-backend
+      app: ulink-api-js
+      component: api-backend
     #matchExpressions:
-    #  - {key: app, operator: In, values: ['baet-api-js']}
+    #  - {key: app, operator: In, values: ['ulink-api-js']}
     #  - {key: type, operator: In, values: ['api-backend']}
     #matchExpressions:
     #  - key: app
     #    operator: in
-    #    values: ['baet-api-js']
+    #    values: ['ulink-api-js']
   template:
     metadata:
       labels:
-        app: baet-api-js
-        type: api-backend
+        app: ulink-api-js
+        component: api-backend
     spec:
       #serviceAccountName: default
       #restartPolicy: Never
       containers:
-        - name: baet-api-js
-          image: zeusbaba/baet-api-js:2020_4.2.0
+        - name: ulink-api-js
+          image: zeusbaba/ulink-api-js:2020_4.2.0
           imagePullPolicy: Always
           #securityContext:
           #  runAsUser: 1000
           #  capabilities:
           #    add: ["SYS_TIME"]
           #volumeMounts:
-          #  - name: baet-api-secrets
-          #    mountPath: /usr/src/app/baet-api-secrets
+          #  - name: api-secrets
+          #    mountPath: /usr/src/app/api-secrets
           #volumeMounts:
-          #  - mountPath: /baet-api-data
-          #    name: baet-api-data
+          #  - mountPath: /api-data
+          #    name: api-data
           envFrom:
             - secretRef:
-                name: baet-api-secrets-env
+                name: ulink-api-secrets-env
             #- configMapRef:
             #    name: baet-configmap
           resources:
@@ -80,11 +80,11 @@ spec:
             timeoutSeconds: 10
             failureThreshold: 4
       #volumes:
-      #  - name: baet-api-secrets
+      #  - name: ulink-api-secrets
       #    secret:
-      #      secretName: baet-api-secrets
+      #      secretName: ulink-api-secrets
       #volumes:
-      #  - name: baet-api-data
+      #  - name: ulink-api-data
       #    hostPath:
-      #      path: /baet-api-data
+      #      path: /ulink-api-data
       #      type: Directory

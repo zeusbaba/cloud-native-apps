@@ -1,7 +1,7 @@
-BAET-API-Server-JS
+uLINK-API-Server-JS
 ==================
 
-## BAET.no API Server using node.js and FeathersJS
+## uLINK.no API Server using FeathersJS
 
 ### Prerequisites
 
@@ -21,7 +21,7 @@ In order to build and run this app you need to have a couple of things installed
 ```bash
   # clone this repo  
 $ git clone https://github.com/zeusbaba/cloud-native-apps  
-$ cd baet-api-js  
+$ cd ulink-api-js  
 
   # install dependencies
 $ yarn
@@ -35,7 +35,7 @@ You can either get yourself a free instance via [mLab](https://mlab.com)
 or just follow the instructions in _docker-compose_ related section below.      
 
 To be able to RUN this app, you _must_ prepare env-vars.    
-No worries, this [example-file](baet-api-secrets/docker_vars_env-example) got you covered!            
+No worries, this [example-file](api-secrets/docker_vars_env-example) got you covered!            
 ```bash
 # copy the example template  
 $ cp docker_vars_env-example docker_vars.env  
@@ -62,10 +62,10 @@ Now you can access your API by using this [Postman collection](https://documente
 Building, publishing and running via _Docker_ and _Docker-Compose_:       
 ```bash
 # set env vars for ease-of-use
-# NOTE! please just replace 'zeusbaba' with your user  
+# NOTE! please just replace 'zeusbaba' with your username  
 $ export dockerhubUser=zeusbaba \
-  export appName=baet-api-js \
-  export appSecrets=baet-api-secrets \
+  export appName=ulink-api-js \
+  export appSecrets=ulink-api-secrets \
   export appVersion=2020_4.2.0
 $ export dockerImage=${dockerhubUser}/${appName}:${appVersion}
 
@@ -143,7 +143,7 @@ $ docker build \
 #### k8s Pods 
 Now we can proceed with _k8s deployment_ using [k8s-pod.yaml](config-k8s/k8s-pod.yaml)        
 ```bash
-$ export appName=baet-api-js
+$ export appName=ulink-api-js
 $ kubectl apply -f k8s-pod.yaml  
 $ kubectl get pods  
 $ kubectl describe pod ${appName}
@@ -193,7 +193,7 @@ $ kubectl apply -f k8s-ingress.yaml
   # validate
 $ kubectl get ingresses
   NAME          HOSTS                       ADDRESS   PORTS   AGE
-  baet-api-js   api2.baet.no,api3.baet.no             80      10m
+  ulink-api-js   api2.baet.no,api3.baet.no             80      10m
 
   # if you want to delete 
 $ kubectl delete ingress ${appName}

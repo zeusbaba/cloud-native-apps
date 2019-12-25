@@ -2,29 +2,29 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: baet-api-js-pod
+  name: ulink-api-js-pod
   labels:
-    app: baet-api-js
-    type: api-backend
+    app: ulink-api-js
+    component: api-backend
 spec:
   #securityContext:
   #  runAsUser: 1000
   containers:
-    - name: baet-api-js
-      image: zeusbaba/baet-api-js:2020_4.2.0
+    - name: ulink-api-js
+      image: zeusbaba/ulink-api-js:2020_4.2.0
       #securityContext:
       #  runAsUser: 1000
       #  capabilities:
       #    add: ["SYS_TIME"]
       #volumeMounts:
-      #  - name: baet-api-secrets
-      #    mountPath: /usr/src/app/baet-api-secrets
+      #  - name: ulink-api-secrets
+      #    mountPath: /usr/src/app/ulink-api-secrets
       envFrom:
         - secretRef:
-            name: baet-api-secrets-env
+            name: ulink-api-secrets-env
         #- configMapRef:
         #    name: baet-config
 #  volumes:
-#    - name: baet-api-secrets
+#    - name: ulink-api-secrets
 #      secret:
-#        secretName: baet-api-secrets
+#        secretName: ulink-api-secrets

@@ -7,13 +7,13 @@ networks:
 services:
 
   ## my APP
-  baet-api-js:
+  ulink-api-js:
     build: .
     image: ${dockerImage}
     ports:
       - "4042:4042"
     env_file:
-      - baet-api-secrets/docker_vars.env
+      - api-secrets/docker_vars.env
     environment:
       # override ...URL for using local instance
       - MONGODB_URL=mongodb://mongo-local:27017/baet

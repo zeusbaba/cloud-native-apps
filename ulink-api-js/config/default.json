@@ -51,8 +51,8 @@
       "header": {
         "typ": "access"
       },
-      "audience": "baet.no",
-      "issuer": "baet.no",
+      "audience": "beerstorm",
+      "issuer": "beerstorm",
       "algorithm": "HS256",
       "expiresIn": "365d"
     },

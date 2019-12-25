@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-export FILES_HOME=./baet-api-secrets
+export FILES_HOME=./api-secrets
 if test -d ${FILES_HOME};
 then
   # parse all .env files in the current dir, and export its content as env-var
