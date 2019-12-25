@@ -5,8 +5,9 @@ module.exports = function () { //(options = {}) {
   return function reqExtras(req, res, next) {
 
     if (req.originalUrl === '/k8s-status') {
-      //logger.info("k8s-status");
+      //logger.info("-> k8s-status: %s", req.originalUrl);
       next();
+      return
     }
 
     if (isDev) {

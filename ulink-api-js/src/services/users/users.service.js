@@ -31,7 +31,7 @@ module.exports = function (app) {
   // custom endpoint for k8s probe
   app.use('/k8s-status', {
     find(params) {
-      logger.info('k8s-status', params);
+      //logger.info('k8s-status', params);
       return new Promise((resolve, reject) => {
         return resolve('OK');
       });
