@@ -6,7 +6,7 @@ metadata:
     app: api-js-deployment
     app.kubernetes.io/name: api-js
     app.kubernetes.io/instance: api-js-2020
-    app.kubernetes.io/version: 2020-4.2.0
+    app.kubernetes.io/version: 2020.1.1
     app.kubernetes.io/component: api-backend
     app.kubernetes.io/part-of: baet-ulink
 spec:
@@ -37,7 +37,7 @@ spec:
       #restartPolicy: Never
       containers:
         - name: ulink-api-js
-          image: zeusbaba/ulink-api-js:2020_4.2.0
+          image: zeusbaba/ulink-api-js:2020.1.1
           imagePullPolicy: Always
           #securityContext:
           #  runAsUser: 1000

@@ -65,8 +65,8 @@ Building, publishing and running via _Docker_ and _Docker-Compose_:
 # NOTE! please just replace 'zeusbaba' with your username  
 $ export dockerhubUser=zeusbaba \
   export appName=ulink-api-js \
-  export appSecrets=ulink-api-secrets \
-  export appVersion=2020_4.2.0
+  export appSecrets=api-secrets \
+  export appVersion=2020.1.1
 $ export dockerImage=${dockerhubUser}/${appName}:${appVersion}
 
 ## using Docker!!!       
