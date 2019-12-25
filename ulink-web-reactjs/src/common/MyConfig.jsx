@@ -22,11 +22,11 @@ export const myConfig = {
         path: '/authentication',
         header: 'Authorization',
         service: 'users',
-        cookie: 'baet',
-        storageKey: 'baet-jwt',
+        cookie: 'ulink',
+        storageKey: 'ulink-jwt',
         clientOptions: {
-            storageKey: 'baet-jwt',
-            cookie: 'baet-jwt',
+            storageKey: 'ulink-jwt',
+            cookie: 'ulink-jwt',
             authenticate: {strategy: 'local'},
         },
         restClientOptions: {
@@ -35,15 +35,14 @@ export const myConfig = {
     },
     backend: {
         development: 'http://localhost:4042',
-        production: 'https://api.baet.no',
-        placeholder: 'https://jsonplaceholder.typicode.com',
+        production: 'https://api.ulink.no',
     },
     web: {
         defaultLocale: 'en',
-        baseUrl: 'https://baet.no/',
-        sharerText: 'Shorten & Simplify via BAET.no',
+        baseUrl: 'https://ulink.no/',
+        sharerText: 'Shorten & Simplify via uLINK.no',
         header: {
-            title: 'BAET.no :: Shorten & Simplify Links!',
+            title: 'uLINK.no :: Shorten & Simplify Links!',
             description:
                 'URL shortener service that is fast, open, and easy to use. You can even assign multiple custom names for each link!',
             author: 'BeerStorm.net',
@@ -92,7 +91,7 @@ export const myConfig = {
 
 export const jwtHeaderName = myConfig.authentication.storageKey
     ? myConfig.authentication.storageKey
-    : 'baet-jwt';
+    : 'ulink-jwt';
 export const getUserIdFromToken = (token) => {
     const decodedToken = jwtDecode(token);
     return decodedToken['userId'];
@@ -111,8 +110,8 @@ export const isValidToken = (currentToken) => {
             /*
             decodedToken -> {
             "userId":"e426a2da-0dca-4163-9a08-3d935994e747",
-            "custom":"baet.no yry.no diz.link lfc.link","iat":1505048249,
-            "exp":1536584249,"aud":"baet.no","iss":"baet.no","sub":"baet.no"
+            "custom":"ulink.no yry.no diz.link lfc.link","iat":1505048249,
+            "exp":1536584249,"aud":"ulink.no","iss":"ulink.no","sub":"ulink.no"
             }
             */
         }

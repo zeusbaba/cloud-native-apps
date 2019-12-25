@@ -12,10 +12,7 @@ import IconCopy from '@material-ui/icons/ContentCopy';
 import PropTypes from 'prop-types';
 
 import packageJson from './../../package.json'; // eslint-disable-line
-import { myConfig, isDev } from './../common/MyConfig'; // eslint-disable-line
-const jwtHeaderName = myConfig.authentication.storageKey
-  ? myConfig.authentication.storageKey
-  : 'baet-jwt';
+import { myConfig, jwtHeaderName } from './../common/MyConfig'; // eslint-disable-line
 
 let jwtToken;
 class Developers extends Component {
