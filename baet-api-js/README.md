@@ -141,7 +141,7 @@ $ docker build \
 ```
 
 #### k8s Pods 
-Now we can proceed with _k8s deployment_ using [k8s-pod.yaml](k8s-pod.yaml)        
+Now we can proceed with _k8s deployment_ using [k8s-pod.yaml](k8s-config/k8s-pod.yaml)        
 ```bash
 $ export appName=baet-api-js
 $ kubectl apply -f k8s-pod.yaml  
@@ -161,7 +161,7 @@ $ kubectl delete pod ${appName}
 
 #### k8s Deployments and Services
 More common and advanced version is using Deployments and Services.  
-See [k8s-deployment.yaml](k8s-deployment.yaml) and [k8s-service.yaml](k8s-service.yaml)  
+See [k8s-deployment.yaml](k8s-config/k8s-deployment.yaml) and [k8s-service.yaml](k8s-config/k8s-service.yaml)  
 
 
 ```bash
@@ -184,7 +184,7 @@ $ kubectl delete -f k8s-service.yaml
 
 #### k8s Ingress
 Assuming that you already have configured [Traefik](https://docs.traefik.io) as Ingress Controller of your k8s-cluster.  
-here's how you can deploy  [k8s-ingress](k8s-ingress.yaml) for this App  
+here's how you can deploy  [k8s-ingress](k8s-config/k8s-ingress.yaml) for this App  
 
 ```bash
   # create ingress   

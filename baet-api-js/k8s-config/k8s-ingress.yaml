@@ -9,21 +9,21 @@ spec:
   - host: api.baet.no
     http:
       paths:
-      - path: /
-        backend:
+      #- path: /
+      - backend:
           serviceName: baet-api-js-service
           servicePort: 4042
   - host: api2.baet.no
     http:
       paths:
-      - path: /
-        backend:
+      #- path: /
+      - backend:
           serviceName: baet-api-js-service
           servicePort: 4042
   - host: api3.baet.no
     http:
       paths:
-      - path: /
-        backend:
+      #- path: /
+      - backend:
           serviceName: baet-api-js-service
           servicePort: 4042

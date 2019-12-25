@@ -37,9 +37,9 @@ RUN chmod +x ./wait
 
 # Bundle app source
 #COPY . .
-COPY src ./src
-COPY config ./config
-COPY public ./public
+COPY ../src ./src
+COPY ../config ./config
+COPY ../public ./public
 COPY .* ./
 
 EXPOSE 4042
