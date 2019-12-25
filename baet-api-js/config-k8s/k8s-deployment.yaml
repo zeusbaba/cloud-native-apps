@@ -1,9 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: baet-api-js-deployment
+  name: api-js-deployment
   labels:
-    app: baet-api-js-deployment
+    app: api-js-deployment
+    app.kubernetes.io/name: api-js
+    app.kubernetes.io/instance: api-js-2020
+    app.kubernetes.io/version: 2020-4.2.0
+    app.kubernetes.io/component: api-backend
+    app.kubernetes.io/part-of: baet-ulink
 spec:
   replicas: 2
   strategy:
@@ -14,6 +19,14 @@ spec:
   selector:
     matchLabels:
       app: baet-api-js
+      type: api-backend
+    #matchExpressions:
+    #  - {key: app, operator: In, values: ['baet-api-js']}
+    #  - {key: type, operator: In, values: ['api-backend']}
+    #matchExpressions:
+    #  - key: app
+    #    operator: in
+    #    values: ['baet-api-js']
   template:
     metadata:
       labels:
@@ -24,7 +37,7 @@ spec:
       #restartPolicy: Never
       containers:
         - name: baet-api-js
-          image: zeusbaba/baet-api-js:4.2.0
+          image: zeusbaba/baet-api-js:2020_4.2.0
           imagePullPolicy: Always
           #securityContext:
           #  runAsUser: 1000
@@ -49,18 +62,20 @@ spec:
               memory: "128Mi"
               cpu: "250m"
           ports:
-            - containerPort: 4042
+            - name: app-port
+              containerPort: 4042
+              hostPort: 4042
           readinessProbe:
             httpGet:
               path: /k8s-status
-              port: 4042
+              port: app-port
             initialDelaySeconds: 10
             timeoutSeconds: 10
             failureThreshold: 4
           livenessProbe:
             httpGet:
               path: /k8s-status
-              port: 4042
+              port: app-port
             initialDelaySeconds: 120
             timeoutSeconds: 10
             failureThreshold: 4

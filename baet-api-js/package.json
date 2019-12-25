@@ -1,8 +1,8 @@
 {
   "name": "baet-api-js",
-  "description": "BAET.no API Server using FeathersJS",
-  "version": "4.2.0",
-  "homepage": "https://baet.no",
+  "description": "uLINK.no API Server using FeathersJS",
+  "version": "2020_4.2.0",
+  "homepage": "https://www.ulink.no",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -11,12 +11,13 @@
   "main": "src",
   "keywords": [
     "baet.no",
+    "ulink.no",
     "diz.link",
     "link shortening",
     "beerstorm"
   ],
   "author": {
-    "name": "Yilmaz Guleryuz",
+    "name": "Zeus Baba",
     "email": "397125+zeusbaba@users.noreply.github.com"
   },
   "contributors": [],
@@ -41,7 +42,7 @@
     "@feathersjs/authentication": "^4.4.3",
     "@feathersjs/authentication-local": "^4.4.3",
     "@feathersjs/authentication-oauth": "^4.4.3",
-    "@feathersjs/cli": "^4.2.3",
+    "@feathersjs/cli": "^4.2.4",
     "@feathersjs/configuration": "^4.4.3",
     "@feathersjs/errors": "^4.4.3",
     "@feathersjs/express": "^4.4.3",
@@ -61,7 +62,7 @@
     "helmet": "^3.21.2",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "mongodb": "^3.3.5",
+    "mongodb": "^3.4.1",
     "node-fetch": "^2.6.0",
     "path": "^0.12.7",
     "random-int": "^2.0.1",
@@ -70,15 +71,15 @@
     "serve-favicon": "^2.5.0",
     "shortid": "^2.2.15",
     "string": "^3.3.3",
-    "ua-parser-js": "^0.7.20",
+    "ua-parser-js": "^0.7.21",
     "unique-random": "^2.1.0",
     "validator": "^12.1.0",
     "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^4.3.1"
+    "winston-daily-rotate-file": "^4.4.0"
   },
   "devDependencies": {
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "mocha": "^6.2.2",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.2"
   }
 }

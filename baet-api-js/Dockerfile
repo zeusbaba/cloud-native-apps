@@ -1,7 +1,7 @@
 #FROM node:10-alpine
 #FROM bitnami/node:10
 FROM bitnami/node:latest
-LABEL maintainer="Yilmaz Guleryuz 397125+zeusbaba@users.noreply.github.com"
+LABEL maintainer="Zeus Baba 397125+zeusbaba@users.noreply.github.com"
 
 ENV APP_HOME=/usr/src/app
 
