@@ -1,68 +1,72 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+uLINK-WEB-ReactJS
+==================
 
-## Available Scripts
+## uLINK.no WEB using ReactJS
 
-In the project directory, you can run:
+### Prerequisites
 
-### `yarn start`
+In order to build and run this app you need to have a couple of things installed:  
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Node.js](https://nodejs.org/), [npm](https://www.npmjs.com/), and [Yarn](https://yarnpkg.com) installed, _see [package.json](package.json) for the required versions._
+- Get familiar with [ReactJS](https://www.reactjs.org)._            
+- An IDE for the development, like [Atom](https://atom.io) or IntelliJ/Webstorm      
+- The Docker Toolbox or native Docker, whatever you prefer. See [Docker](https://docs.docker.com) and [Docker-Compose](https://docs.docker.com/compose/)       
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
+### Building the App  
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+#### Clone this repo and install deps    
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+  # clone this repo  
+$ git clone https://github.com/zeusbaba/cloud-native-apps  
+$ cd ulink-web-reactjs  
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+  # install dependencies
+$ yarn
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  # run the App  
+$ yarn start
+```   
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Containerization with Docker  
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Building, publishing and running via _Docker_ and _Docker-Compose_:       
+```bash
+# set env vars for ease-of-use
+# NOTE! please just replace 'zeusbaba' with your username  
+$ export dockerhubUser=zeusbaba \
+  export appName=ulink-web-reactjs \
+  export appSecrets=app-secrets \
+  export appVersion=2020.1.1
+$ export dockerImage=${dockerhubUser}/${appName}:${appVersion}
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## using Docker!!!       
+# build a docker image  
+$ docker build \
+  -t ${dockerImage} \
+  --rm --no-cache .    
+$ docker images  	
+# (optional) publish the image to docker hub  
+$ docker push ${dockerImage}  
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# (optional) run the docker image locally    
+$ docker run \
+	-p 4048:4048 \
+	--env-file ./${appSecrets}/docker_vars.env \
+	-e "NODE_ENV=production" \
+	${dockerImage}  
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## using Docker Compose!!! 
+$ docker-compose up --build 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  # NOTE: in linux-env you might have permission problems with 'docker-data-*' folders      
+  # to fix; stop docker-compose, set permissions as below, then run docker-compose again.    
+$ sudo chown 1001:1001 -R docker-data-*  
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+  # shut it down 
+$ docker-compose down   
+```
