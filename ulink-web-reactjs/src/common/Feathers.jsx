@@ -12,6 +12,8 @@ if (process.env.REACT_APP_API_URL) {
 } else {
     if (process.env.NODE_ENV === 'development') {
         restHost = myConfig.backend.development;
+    } else if (process.env.NODE_ENV === 'prod-k8s') {
+        restHost = myConfig.backend.k8s;
     } else {
         restHost = myConfig.backend.production;
     }
@@ -20,8 +22,9 @@ if (process.env.REACT_APP_API_URL) {
 if (window.location && isLocalHost(window.location.hostname)) {
     restHost = myConfig.backend.development; // .development // .production
 }
-// NOTE to force using only a specific backend uncomment this below
+// FIXME to force using only a specific backend uncomment this below
 restHost = myConfig.backend.production;
+console.log('restHost: ' + restHost);
 
 if (isDev) {
     console.log(

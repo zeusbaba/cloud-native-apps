@@ -36,6 +36,7 @@ export const myConfig = {
     backend: {
         development: 'http://localhost:4042',
         production: 'https://api.ulink.no',
+        k8s: 'ulink-api-js-service', // .catpet.svc.cluster.local
         uuidSourceValue: 'uLINK-2020-yxxx-xxxxxxxxxxxx'
     },
     web: {

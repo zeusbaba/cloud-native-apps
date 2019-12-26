@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-reactjs-deployment
+  labels:
+    app: web-reactjs-deployment
+    app.kubernetes.io/name: web-reactjs
+    app.kubernetes.io/instance: web-reactjs-2020
+    app.kubernetes.io/version: 2020.1.1
+    app.kubernetes.io/component: web-frontend
+    app.kubernetes.io/part-of: baet-ulink
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: ulink-web-reactjs
+      component: web-frontend
+  template:
+    metadata:
+      labels:
+        app: ulink-web-reactjs
+        component: web-frontend
+    spec:
+      #serviceAccountName: default
+      #restartPolicy: Never
+      containers:
+        - name: ulink-web-reactjs
+          image: zeusbaba/ulink-web-reactjs:2020.1.1
+          imagePullPolicy: Always
+          #securityContext:
+          #  runAsUser: 1000
+          #  capabilities:
+          #    add: ["SYS_TIME"]
+          env:
+            - name: NODE_ENV
+              value: prod-k8s
+          #envFrom:
+          #  - secretRef:
+          #      name: app-secrets-ulink
+          #resources:
+          #  requests:
+          #    memory: "128Mi"
+          #    cpu: "125m"
+          #  limits:
+          #    memory: "256Mi"
+          #    cpu: "250m"
+          ports:
+            - name: app-port
+              containerPort: 4048
+              hostPort: 4048
+          #readinessProbe:
+          #  httpGet:
+          #    path: /k8s-status
+          #    port: app-port
+          #  initialDelaySeconds: 10
+          #  timeoutSeconds: 10
+          #  failureThreshold: 4

@@ -33,6 +33,7 @@ spec:
         app: ulink-api-js
         component: api-backend
     spec:
+      #FIXME hostname: ulink-api-js
       #serviceAccountName: default
       #restartPolicy: Never
       containers:

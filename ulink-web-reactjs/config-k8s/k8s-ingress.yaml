@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ulink-web-reactjs-ingress
+  labels:
+    app.kubernetes.io/name: web-reactjs
+    app.kubernetes.io/instance: web-reactjs-2020
+    app.kubernetes.io/version: 2020.1.1
+    app.kubernetes.io/component: web-frontend
+    app.kubernetes.io/part-of: baet-ulink
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: www.ulink.no
+    http:
+      paths:
+      #- path: /
+      - backend:
+          serviceName: ulink-web-reactjs-service
+          servicePort: 4048
+  - host: www.baet.no
+    http:
+      paths:
+      #- path: /
+      - backend:
+          serviceName: ulink-web-reactjs-service
+          servicePort: 4048
