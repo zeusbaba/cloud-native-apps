@@ -11,8 +11,8 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 4042
-      targetPort: 4042
+    - targetPort: 4042
+      port: 4042
       nodePort: 30042
   selector:
     app: ulink-api-js

@@ -5,7 +5,7 @@ export const isLocalHost = hostname => {
     // call like this; isLocalHost(window.location.hostname)
     return !!(
         hostname === 'localhost' ||
-        hostname === '[::1]' ||
+        //hostname === '[::1]' ||
         hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
     );
 };
@@ -36,7 +36,7 @@ export const myConfig = {
     backend: {
         development: 'http://localhost:4042',
         production: 'https://api.ulink.no',
-        k8s: 'ulink-api-js-service', // .catpet.svc.cluster.local
+        //k8s: 'http://ulink-api-js-service', // .catpet.svc.cluster.local
         uuidSourceValue: 'uLINK-2020-yxxx-xxxxxxxxxxxx'
     },
     web: {

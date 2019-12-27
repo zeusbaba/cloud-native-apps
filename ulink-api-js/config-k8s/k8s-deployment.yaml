@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-js-deployment
+  name: api-js
   labels:
-    app: api-js-deployment
+    app: api-js
     app.kubernetes.io/name: api-js
     app.kubernetes.io/instance: api-js-2020
     app.kubernetes.io/version: 2020.1.1
     app.kubernetes.io/component: api-backend
     app.kubernetes.io/part-of: baet-ulink
 spec:
-  replicas: 1
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
+  replicas: 2
+  #strategy:
+  #  type: RollingUpdate
+  #  rollingUpdate:
+  #    maxSurge: 1
+  #    maxUnavailable: 1
   selector:
     matchLabels:
       app: ulink-api-js
@@ -34,8 +34,10 @@ spec:
         component: api-backend
     spec:
       #FIXME hostname: ulink-api-js
-      #serviceAccountName: default
+      #serviceAccountName: catpet
       #restartPolicy: Never
+      #securityContext:
+      #  runAsNonRoot: true
       containers:
         - name: ulink-api-js
           image: zeusbaba/ulink-api-js:2020.1.1
@@ -50,6 +52,9 @@ spec:
           #volumeMounts:
           #  - mountPath: /api-data
           #    name: api-data
+          #env:
+          #  - name: key
+          #    value: val
           envFrom:
             - secretRef:
                 name: api-secrets-ulink
@@ -58,14 +63,14 @@ spec:
           resources:
             requests:
               memory: "64Mi"
-              cpu: "125m"
+              cpu: 0.5 #"125m"
             limits:
               memory: "128Mi"
-              cpu: "250m"
+              cpu: 1.5 # "250m"
           ports:
             - name: app-port
               containerPort: 4042
-              hostPort: 4042
+              #hostPort: 4042
           readinessProbe:
             httpGet:
               path: /k8s-status
@@ -78,6 +83,7 @@ spec:
               path: /k8s-status
               port: app-port
             initialDelaySeconds: 120
+            periodSeconds: 300
             timeoutSeconds: 10
             failureThreshold: 4
       #volumes:

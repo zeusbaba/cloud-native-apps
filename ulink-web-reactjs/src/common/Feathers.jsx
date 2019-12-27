@@ -10,21 +10,20 @@ let restHost;
 if (process.env.REACT_APP_API_URL) {
     restHost = process.env.REACT_APP_API_URL;
 } else {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development'
+        || (window.location && isLocalHost(window.location.hostname))
+        ) {
         restHost = myConfig.backend.development;
-    } else if (process.env.NODE_ENV === 'prod-k8s') {
+    } /*else if (process.env.NODE_ENV === 'prod-k8s') {
         restHost = myConfig.backend.k8s;
-    } else {
+    }*/ else {
         restHost = myConfig.backend.production;
     }
 }
-// NOTE if you want to force use specific endpoint on your local instance, see below
-if (window.location && isLocalHost(window.location.hostname)) {
-    restHost = myConfig.backend.development; // .development // .production
-}
+
 // FIXME to force using only a specific backend uncomment this below
-restHost = myConfig.backend.production;
-console.log('restHost: ' + restHost);
+//restHost = myConfig.backend.production;
+console.log('env: '+JSON.stringify(process.env)+' | restHost: ' + restHost);
 
 if (isDev) {
     console.log(

@@ -11,8 +11,8 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 4048
-      targetPort: 4048
+    - targetPort: 4048
+      port: 4048
       nodePort: 30048
   selector:
     app: ulink-web-reactjs

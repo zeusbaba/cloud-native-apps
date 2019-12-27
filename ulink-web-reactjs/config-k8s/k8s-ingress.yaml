@@ -12,17 +12,28 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: www.ulink.no
+  - host: www2.ulink.no
     http:
       paths:
-      #- path: /
       - backend:
           serviceName: ulink-web-reactjs-service
           servicePort: 4048
-  - host: www.baet.no
+  - host: www2.baet.no
     http:
       paths:
-      #- path: /
-      - backend:
-          serviceName: ulink-web-reactjs-service
-          servicePort: 4048
+        - backend:
+            serviceName: ulink-web-reactjs-service
+            servicePort: 4048
+#  - host: www.ulink.no
+#    http:
+#      paths:
+#        - backend:
+#            serviceName: ulink-web-reactjs-service
+#            servicePort: 4048
+#  - host: www.baet.no
+#    http:
+#      paths:
+#      #- path: /
+#      - backend:
+#          serviceName: ulink-web-reactjs-service
+#          servicePort: 4048

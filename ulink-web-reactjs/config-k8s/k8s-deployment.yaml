@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-reactjs-deployment
+  name: web-reactjs
   labels:
-    app: web-reactjs-deployment
+    app: web-reactjs
     app.kubernetes.io/name: web-reactjs
     app.kubernetes.io/instance: web-reactjs-2020
     app.kubernetes.io/version: 2020.1.1
@@ -14,8 +14,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: ulink-web-reactjs
@@ -38,7 +38,9 @@ spec:
           #    add: ["SYS_TIME"]
           env:
             - name: NODE_ENV
-              value: prod-k8s
+              value: production
+            - name: REACT_APP_API_URL
+              value: "https://api.ulink.no"
           #envFrom:
           #  - secretRef:
           #      name: app-secrets-ulink
@@ -52,7 +54,7 @@ spec:
           ports:
             - name: app-port
               containerPort: 4048
-              hostPort: 4048
+              #hostPort: 4048
           #readinessProbe:
           #  httpGet:
           #    path: /k8s-status
