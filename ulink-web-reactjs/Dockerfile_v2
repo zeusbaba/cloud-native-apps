@@ -22,14 +22,25 @@ COPY package*.json ./
 COPY tsconfig.json ./
 COPY static.json ./
 
-#RUN npm config set strict-ssl false
+RUN npm config set strict-ssl false
 #RUN npm install
 # If you are building your code for production
-#RUN npm install --only=production
+# RUN npm install --only=production
 
+#RUN npm install -g -s --no-progress yarn && \
+#    yarn --production && \
+#    yarn run build && \
+#    yarn run prune && \
+#    yarn cache clean
 RUN npm install -g -s --no-progress yarn
 RUN yarn config set strict-ssl false
 RUN yarn --production
+RUN yarn run build
+RUN yarn cache clean
+
+# 'serve' will run prod build
+#RUN npm install -g serve
+RUN yarn global add serve
 
 ## used to check if service is up
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.4.0/wait ./wait
@@ -45,4 +56,4 @@ COPY .* ./
 EXPOSE $APP_PORT
 
 #CMD ./wait && npm start
-CMD ./wait && yarn start
+CMD ./wait && serve -dir build -port $APP_PORT
