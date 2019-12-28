@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/component: api-backend
     app.kubernetes.io/part-of: baet-ulink
 spec:
-  replicas: 2
+  replicas: 1
   #strategy:
   #  type: RollingUpdate
   #  rollingUpdate:

@@ -36,14 +36,13 @@ spec:
           #  runAsUser: 1000
           #  capabilities:
           #    add: ["SYS_TIME"]
-          env:
-            # custom environment variables beginning with REACT_APP_
+          env: # custom environment variables beginning with REACT_APP_
             - name: REACT_APP_API_URL
               value: "https://api.ulink.no"
             - name: NODE_ENV
               value: production
             - name: NODE_PORT
-              value: 4048
+              value: "4048"
 
           #envFrom:
           #  - secretRef:

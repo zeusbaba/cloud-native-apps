@@ -1,6 +1,5 @@
-#FROM node:10-alpine
-#FROM bitnami/node:10
-FROM bitnami/node:latest
+FROM node:12-alpine
+#FROM bitnami/node:12-prod
 LABEL maintainer="Zeus Baba 397125+zeusbaba@users.noreply.github.com"
 
 ENV APP_HOME=/usr/src/app
@@ -18,14 +17,10 @@ WORKDIR $APP_HOME
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY package*.json ./
+COPY yarn.lock ./
 
 COPY tsconfig.json ./
 COPY static.json ./
-
-#RUN npm config set strict-ssl false
-#RUN npm install
-# If you are building your code for production
-#RUN npm install --only=production
 
 RUN npm install -g -s --no-progress yarn
 RUN yarn config set strict-ssl false

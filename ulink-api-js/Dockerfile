@@ -1,6 +1,5 @@
-#FROM node:10-alpine
-#FROM bitnami/node:10
-FROM bitnami/node:latest
+FROM node:12-alpine
+#FROM bitnami/node:12-prod
 LABEL maintainer="Zeus Baba 397125+zeusbaba@users.noreply.github.com"
 
 ENV APP_HOME=/usr/src/app
@@ -17,11 +16,16 @@ WORKDIR $APP_HOME
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY package*.json ./
+COPY yarn.lock ./
 
-RUN npm config set strict-ssl false
-RUN npm install
+#RUN npm config set strict-ssl false
+#RUN npm install
 # If you are building your code for production
 # RUN npm install --only=production
+
+RUN npm install -g -s --no-progress yarn
+RUN yarn config set strict-ssl false
+RUN yarn --production
 
 ## used to check if DB is up
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.4.0/wait ./wait
@@ -36,4 +40,5 @@ COPY .* ./
 
 EXPOSE 4042
 
-CMD ./wait && npm start
+#CMD ./wait && npm start
+CMD ./wait && yarn start
