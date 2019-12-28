@@ -53,7 +53,7 @@ class Terms extends Component {
                     <mark>
                         This <strong>Privacy/T&C</strong> is an adaptation from{' '}
                         <a
-                            href="http://is.gd/privacy.php"
+                            href="https://is.gd/privacy.php"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
@@ -129,7 +129,7 @@ class Terms extends Component {
                         Please note that all urls/links are checked using{' '}
                         <em>
                             <a
-                                href="http://phishtank.com"
+                                href="https://phishtank.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >

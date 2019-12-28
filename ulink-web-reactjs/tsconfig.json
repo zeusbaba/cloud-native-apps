@@ -29,12 +29,18 @@
     "noEmit": true
   },
   "outDir": "./dist/",
-  "rootDir": "./src/resub",
+  "rootDir": "./src/",
+  "files": [
+    "./src/resub/Counter.tsx",
+    "./src/resub/CounterDisplay.tsx",
+    "./src/resub/CounterStore.tsx"
+  ],
   "include": [
-    "./src/resub/*"
+    "./src/**/*"
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "**/*.spec.ts"
   ]
 }

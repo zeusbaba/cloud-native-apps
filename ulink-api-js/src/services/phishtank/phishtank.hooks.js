@@ -6,10 +6,12 @@ module.exports = {
     find: [],
     get: [],
     create: [
-      commonHooks.setNow('createdAt', 'updatedAt'),
+      commonHooks.setNow('createdAt'),
+      commonHooks.alterItems(rec => rec._id = rec.phish_id)
     ],
     update: [
       commonHooks.setNow('updatedAt'),
+      commonHooks.alterItems(rec => rec._id = rec.phish_id)
     ],
     patch: [
       commonHooks.setNow('updatedAt'),

@@ -24,7 +24,8 @@ COPY static.json ./
 
 RUN npm install -g -s --no-progress yarn
 RUN yarn config set strict-ssl false
-RUN yarn --production
+RUN yarn
+#RUN yarn --production
 
 ## used to check if service is up
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.4.0/wait ./wait

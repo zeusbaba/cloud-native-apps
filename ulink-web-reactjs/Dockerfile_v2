@@ -1,6 +1,5 @@
-#FROM node:10-alpine
-#FROM bitnami/node:10
-FROM bitnami/node:latest
+FROM node:12-alpine
+#FROM bitnami/node:12-prod
 LABEL maintainer="Zeus Baba 397125+zeusbaba@users.noreply.github.com"
 
 ENV APP_HOME=/usr/src/app
@@ -22,11 +21,12 @@ COPY package*.json ./
 COPY tsconfig.json ./
 COPY static.json ./
 
-RUN npm config set strict-ssl false
+#RUN npm config set strict-ssl false
 #RUN npm install
 # If you are building your code for production
 # RUN npm install --only=production
 
+RUN yarn config set strict-ssl false
 #RUN npm install -g -s --no-progress yarn && \
 #    yarn --production && \
 #    yarn run build && \
@@ -34,7 +34,7 @@ RUN npm config set strict-ssl false
 #    yarn cache clean
 RUN npm install -g -s --no-progress yarn
 RUN yarn config set strict-ssl false
-RUN yarn --production
+RUN yarn
 RUN yarn run build
 RUN yarn cache clean
 
