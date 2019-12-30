@@ -89,10 +89,18 @@ spec:
             httpGet:
               path: /k8s-status
               port: app-port
-            initialDelaySeconds: 120
+            initialDelaySeconds: 10
             periodSeconds: 300
             timeoutSeconds: 10
             failureThreshold: 4
+          # Protect slow starting containers with startup probes
+          startupProbe:
+            httpGet:
+              path: /k8s-status
+              port: app-port
+            # 30 * 10 = 300secs
+            failureThreshold: 20
+            periodSeconds: 1
       #volumes:
       #  - name: ulink-api-secrets
       #    secret:

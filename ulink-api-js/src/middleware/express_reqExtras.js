@@ -21,7 +21,9 @@ module.exports = function () { //(options = {}) {
     req.headers['reqExtras'].referer = req.headers['referer']? req.headers['referer'] : '';
     req.headers['reqExtras'].userAgent = req.headers['user-agent']? req.headers['user-agent'] : '';
 
-    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    let ip = req.headers['x-forwarded-for']
+      || req.headers['x-real-ip']
+      || req.connection.remoteAddress;
     if (ip.substr(0, 7) == '::ffff:') {
       ip = ip.substr(7);
     }

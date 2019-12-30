@@ -5,7 +5,6 @@ yarn config set strict-ssl false
 yarn && \
  yarn run build
 
-#appVersion=2020.1.4
 appVersion="$(json=$(<package.json) node -pe "JSON.parse(process.env.json)['version']")"
 echo "appVersion: ${appVersion}"
 
