@@ -6,7 +6,7 @@ metadata:
     app: web-reactjs
     app.kubernetes.io/name: web-reactjs
     app.kubernetes.io/instance: web-reactjs-2020
-    app.kubernetes.io/version: 2020.1.1
+    app.kubernetes.io/version: 2020.1.x
     app.kubernetes.io/component: web-frontend
     app.kubernetes.io/part-of: baet-ulink
 spec:
@@ -27,15 +27,10 @@ spec:
         component: web-frontend
     spec:
       #serviceAccountName: default
-      #restartPolicy: Never
       containers:
         - name: ulink-web-reactjs
-          image: zeusbaba/ulink-web-reactjs:2020.1.1
+          image: zeusbaba/ulink-web-reactjs:2020.1.4
           imagePullPolicy: Always
-          #securityContext:
-          #  runAsUser: 1000
-          #  capabilities:
-          #    add: ["SYS_TIME"]
           env: # custom environment variables beginning with REACT_APP_
             - name: REACT_APP_API_URL
               value: "https://api.ulink.no"
@@ -43,10 +38,27 @@ spec:
               value: production
             - name: NODE_PORT
               value: "4048"
-
           #envFrom:
           #  - secretRef:
           #      name: app-secrets-ulink
+          ports:
+            - name: app-port
+              containerPort: 4048
+          readinessProbe:
+            httpGet:
+              path: /k8s-status
+              port: app-port
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 4
+      # Protect slow starting containers with startup probes
+          startupProbe:
+            httpGet:
+              path: /k8s-status
+              port: app-port
+            # 30 * 10 = 300secs
+            failureThreshold: 20
+            periodSeconds: 1
           #resources:
           #  requests:
           #    memory: "128Mi"
@@ -54,14 +66,3 @@ spec:
           #  limits:
           #    memory: "256Mi"
           #    cpu: "250m"
-          ports:
-            - name: app-port
-              containerPort: 4048
-              #hostPort: 4048
-          #readinessProbe:
-          #  httpGet:
-          #    path: /k8s-status
-          #    port: app-port
-          #  initialDelaySeconds: 10
-          #  timeoutSeconds: 10
-          #  failureThreshold: 4

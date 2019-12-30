@@ -1,7 +1,7 @@
 {
   "name": "ulink-web-reactjs",
   "description": "uLINK.no reactive frontend using React.js, material-ui",
-  "version": "2020.1.1",
+  "version": "2020.1.4",
   "private": true,
   "homepage": "https://www.ulink.no",
   "license": "MIT",
@@ -23,9 +23,9 @@
   "dependencies": {
     "@feathersjs/client": "^4.4.3",
     "@feathersjs/rest-client": "^4.4.3",
-    "@material-ui/core": "^4.8.1",
+    "@material-ui/core": "^4.8.2",
     "@material-ui/icons": "^4.5.1",
-    "@material-ui/styles": "^4.7.1",
+    "@material-ui/styles": "^4.8.2",
     "eslint": "^6.8.0",
     "global": "^4.4.0",
     "history": "^4.10.1",

@@ -4,7 +4,7 @@ import feathers from '@feathersjs/client';
 import {myConfig, isDev, isLocalHost} from './MyConfig'; // eslint-disable-line
 const jwtHeaderName = myConfig.authentication.storageKey
     ? myConfig.authentication.storageKey
-    : 'baet-jwt';
+    : 'ulink-jwt';
 
 let restHost;
 if (process.env.REACT_APP_API_URL) {

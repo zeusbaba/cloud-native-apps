@@ -64,6 +64,9 @@ function AppRouter(props) {
                 <Route key={"login"} exact path="/login">
                     <MyLoginPage/>
                 </Route>
+                <Route key={"k8s-status"} exact path="/k8s-status">
+                    <div>OK</div>
+                </Route>
             </div>
         </Router>
     )

@@ -6,7 +6,7 @@ metadata:
     app: api-js
     app.kubernetes.io/name: api-js
     app.kubernetes.io/instance: api-js-2020
-    app.kubernetes.io/version: 2020.1.1
+    app.kubernetes.io/version: 2020.1.x
     app.kubernetes.io/component: api-backend
     app.kubernetes.io/part-of: baet-ulink
 spec:
@@ -33,14 +33,13 @@ spec:
         app: ulink-api-js
         component: api-backend
     spec:
-      #FIXME hostname: ulink-api-js
       #serviceAccountName: catpet
       #restartPolicy: Never
       #securityContext:
       #  runAsNonRoot: true
       containers:
         - name: ulink-api-js
-          image: zeusbaba/ulink-api-js:2020.1.1
+          image: zeusbaba/ulink-api-js:2020.1.4
           imagePullPolicy: Always
           #securityContext:
           #  runAsUser: 1000
@@ -62,15 +61,23 @@ spec:
             #    name: baet-configmap
           resources:
             requests:
-              memory: "64Mi"
-              cpu: 0.5 #"125m"
+              memory: "96Mi"
+              #cpu: 0.5
             limits:
               memory: "128Mi"
-              cpu: 1.5 # "250m"
+              #cpu: 0.5
           ports:
             - name: app-port
               containerPort: 4042
               #hostPort: 4042
+        # Protect slow starting containers with startup probes
+#          startupProbe:
+#            httpGet:
+#              path: /k8s-status
+#              port: app-port
+          # 3 * 10 = 30secs
+#            failureThreshold: 3
+#            periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /k8s-status

@@ -1,44 +1,24 @@
-FROM node:12-alpine
-#FROM bitnami/node:12-prod
+# the base image for this is an alpine based nginx image
+FROM nginx:alpine
 LABEL maintainer="Zeus Baba 397125+zeusbaba@users.noreply.github.com"
 
 ENV APP_HOME=/usr/src/app
 ENV APP_PORT=4048
 
-# optionally if you want to run npm global bin without specifying path
-ENV NPM_CONFIG_PREFIX=$APP_HOME/.npm-global
-ENV PATH=$PATH:$APP_HOME/.npm-global/bin
-
 RUN mkdir -p $APP_HOME
-#RUN chown -R node.node APP_HOME
 WORKDIR $APP_HOME
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-COPY yarn.lock ./
+# copy the build folder from react to the root of nginx (www)
+COPY build /usr/share/nginx/html
+# --------- only for those using react router ----------
+# if you are using react router
+# you need to overwrite the default nginx configurations
+# remove default nginx configuration file
+RUN rm /etc/nginx/conf.d/default.conf
 
-COPY tsconfig.json ./
-COPY static.json ./
+COPY nginx.conf /etc/nginx/conf.d
+# --------- /only for those using react router ----------
 
-RUN npm install -g -s --no-progress yarn
-RUN yarn config set strict-ssl false
-RUN yarn
-#RUN yarn --production
-
-## used to check if service is up
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.4.0/wait ./wait
-RUN chmod +x ./wait
-
-# Bundle app source
-#COPY . .
-COPY src ./src
-#COPY config ./config
-COPY public ./public
-COPY .* ./
-
-EXPOSE $APP_PORT
-
-#CMD ./wait && npm start
-CMD ./wait && yarn start
+EXPOSE ${APP_PORT}
+# start nginx
+CMD ["nginx", "-g", "daemon off;"]

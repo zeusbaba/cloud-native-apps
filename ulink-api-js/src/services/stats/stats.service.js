@@ -37,8 +37,8 @@ module.exports = function (app) {
   let createStats = '/makestats';
   app.use(createStats, {
     create(data, params) {
-      logger.info(createStats, 'data->', JSON.stringify(data));
-      logger.info(createStats, 'params->', params);
+      logger.info(createStats + ' data-> %s', JSON.stringify(data));
+      logger.info(createStats+' params-> %s', params);
 
       let linkStats = {};
       return new Promise((resolve, reject) => {
@@ -52,7 +52,7 @@ module.exports = function (app) {
             }
           })
           .then(item => {
-            logger.info(createStats+' >> ', item);
+            logger.info(createStats+' >> %s', item);
 
             if (Array.isArray(item.data) && item.data.length>0) {
               //if (item.data && item.data.length>0) {
@@ -90,7 +90,7 @@ module.exports = function (app) {
             if (!linkStats.stats.d_clicks['all']) {
               linkStats.stats.d_clicks['all'] = 0;
             }
-            logger.info(createStats+' pre >> ', JSON.stringify(linkStats));
+            logger.info(createStats+' pre >> %s', JSON.stringify(linkStats));
 
             /*
             info: /makestats data->
@@ -152,7 +152,7 @@ module.exports = function (app) {
               if (data.req_meta_data['ip'] === 'localhost') {
                 logger.info('ignore ipinfodb for... localhost!');
 
-                logger.info(createStats+' post >> ', JSON.stringify(linkStats));
+                logger.info(createStats+' post >> %s', JSON.stringify(linkStats));
                 if (linkStats._id) {
                   app.service('stats').update( linkStats._id, linkStats );
                 }
@@ -169,14 +169,14 @@ module.exports = function (app) {
                 fetch( ipinfodb )
                   .then(res => res.json())
                   .then(json => {
-                    logger.info('>> ipinfodb', JSON.stringify(json));
+                    logger.info('>> ipinfodb: %s', JSON.stringify(json));
                     /*
                     info: >> ipinfodb {"statusCode":"OK","statusMessage":"","ipAddress":"176.11.57.206","countryCode":"NO","countryName":"Norway"}
                     */
                     throw json;
                   })
                   .catch(function(fish) {
-                    logger.info('>> ipinfodb fish', JSON.stringify(fish));
+                    logger.info('>> ipinfodb fish: %s', JSON.stringify(fish));
 
                     if (fish && fish['countryCode']) {
                       if (!linkStats.stats.d_country_codes[fish['countryCode']]) {
@@ -185,7 +185,7 @@ module.exports = function (app) {
                       linkStats.stats.d_country_codes[fish['countryCode']] += 1;
                     }
 
-                    logger.info(createStats+' post >> ', JSON.stringify(linkStats));
+                    logger.info(createStats+' post >> %s', JSON.stringify(linkStats));
                     if (linkStats._id) {
                       app.service('stats').update( linkStats._id, linkStats );
                     }
@@ -198,7 +198,7 @@ module.exports = function (app) {
             }
 
           }).catch(error => {
-            logger.error(createStats+' error>> ', error);
+            logger.error(createStats+' error >> %s', error);
             //return Promise.reject(error);
             reject(error);
           });

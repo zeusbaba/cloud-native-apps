@@ -1,0 +1,19 @@
+{
+  "cleanUrls": false,
+  "headers": [
+    {
+      "source" : "**/*.@(jpg|jpeg|gif|png)",
+      "headers" : [{
+        "key" : "Cache-Control",
+        "value" : "max-age=7200"
+      }]
+    },
+    {
+      "source": "/**",
+      "headers" : [{
+        "key" : "Strict-Transport-Security",
+        "value" : "max-age=7776000"
+      }]
+    }
+    ]
+}

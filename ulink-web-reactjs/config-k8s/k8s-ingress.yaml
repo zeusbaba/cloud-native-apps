@@ -5,13 +5,19 @@ metadata:
   labels:
     app.kubernetes.io/name: web-reactjs
     app.kubernetes.io/instance: web-reactjs-2020
-    app.kubernetes.io/version: 2020.1.1
+    app.kubernetes.io/version: 2020.1.x
     app.kubernetes.io/component: web-frontend
     app.kubernetes.io/part-of: baet-ulink
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
+  - host: www.ulink.no
+    http:
+      paths:
+        - backend:
+            serviceName: web-reactjs-service
+            servicePort: 4048
   - host: www2.ulink.no
     http:
       paths:
@@ -24,12 +30,6 @@ spec:
         - backend:
             serviceName: web-reactjs-service
             servicePort: 4048
-#  - host: www.ulink.no
-#    http:
-#      paths:
-#        - backend:
-#            serviceName: web-reactjs-service
-#            servicePort: 4048
 #  - host: www.baet.no
 #    http:
 #      paths:

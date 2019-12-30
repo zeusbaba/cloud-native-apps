@@ -73,7 +73,7 @@ function AppBrowser(props) {
                         <MyMenu selectedItem={location.pathname}/>
 
                         <Typography variant="h6" className={classes.title}>
-                            BAET.no :: Shorten & Simplify Links!
+                            uLINK.no :: Shorten & Simplify Links!
                         </Typography>
                         <LocaleSwitcher/>
                     </Toolbar>
