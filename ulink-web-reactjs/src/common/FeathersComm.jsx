@@ -1,9 +1,9 @@
 import feathers from '@feathersjs/client';
 //import rest from '@feathersjs/rest-client';
 
-import {myConfig, isDev, isLocalHost} from './MyConfig'; // eslint-disable-line
-const jwtHeaderName = myConfig.authentication.storageKey
-    ? myConfig.authentication.storageKey
+import {appConfig, isDev, isLocalHost} from './AppConfig'; // eslint-disable-line
+const jwtHeaderName = appConfig.authentication.storageKey
+    ? appConfig.authentication.storageKey
     : 'ulink-jwt';
 
 let restHost;
@@ -13,16 +13,16 @@ if (process.env.REACT_APP_API_URL) {
     if (process.env.NODE_ENV === 'development'
         || (window.location && isLocalHost(window.location.hostname))
         ) {
-        restHost = myConfig.backend.development;
+        restHost = appConfig.backend.development;
     } /*else if (process.env.NODE_ENV === 'prod-k8s') {
-        restHost = myConfig.backend.k8s;
+        restHost = appConfig.backend.k8s;
     }*/ else {
-        restHost = myConfig.backend.production;
+        restHost = appConfig.backend.production;
     }
 }
 
 // FIXME to force using only a specific backend uncomment this below
-//restHost = myConfig.backend.production;
+//restHost = appConfig.backend.production;
 console.log('env: '+JSON.stringify(process.env)+' | restHost: ' + restHost);
 
 if (isDev) {

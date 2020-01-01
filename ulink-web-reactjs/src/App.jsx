@@ -2,7 +2,7 @@ import React from 'react';
 
 import BrowserDetection from 'react-browser-detection';
 
-import { isValidToken } from './common/MyConfig';
+import { isValidToken } from './common/AppConfig';
 import AppBrowser from "./AppBrowser";
 import RedirectToLogin from "./common/RedirectToLogin";
 

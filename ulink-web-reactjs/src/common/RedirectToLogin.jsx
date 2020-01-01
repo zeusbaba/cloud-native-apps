@@ -4,7 +4,7 @@ import {
     BrowserRouter as Router,
     Redirect, Route
 } from "react-router-dom";
-import MyLoginPage from "./MyLoginPage";
+import MyLoginPage from "./AppLoginPage";
 //import {createBrowserHistory} from "history";
 //const browserHistory = createBrowserHistory();
 

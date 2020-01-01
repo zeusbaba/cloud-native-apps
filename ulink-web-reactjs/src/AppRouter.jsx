@@ -4,10 +4,10 @@ import {
     Route
 } from 'react-router-dom';
 import {withLocalize } from "react-localize-redux";
-import { isDev } from "./common/MyConfig";
+import { isDev } from "./common/AppConfig";
 //import {createBrowserHistory} from "history";
 //const browserHistory = createBrowserHistory();
-import MyLoginPage from "./common/MyLoginPage";
+import MyLoginPage from "./common/AppLoginPage";
 import InfoPages from "./pages/InfoPages";
 
 // TODO: move each into separate component!

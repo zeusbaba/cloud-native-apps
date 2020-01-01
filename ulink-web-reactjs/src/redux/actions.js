@@ -1,4 +1,4 @@
-import { isDev } from '../common/MyConfig';
+import { isDev } from '../common/AppConfig';
 
 export const CHANGE_LOCALE = 'CHANGE_LOCALE';
 export function changeLocale(locale) {

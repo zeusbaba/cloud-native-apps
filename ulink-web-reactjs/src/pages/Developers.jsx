@@ -12,7 +12,7 @@ import IconCopy from '@material-ui/icons/ContentCopy';
 import PropTypes from 'prop-types';
 
 import packageJson from './../../package.json'; // eslint-disable-line
-import { myConfig, jwtHeaderName } from './../common/MyConfig'; // eslint-disable-line
+import { appConfig, jwtHeaderName } from '../common/AppConfig'; // eslint-disable-line
 
 let jwtToken;
 class Developers extends Component {

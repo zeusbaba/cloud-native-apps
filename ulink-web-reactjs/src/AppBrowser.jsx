@@ -8,12 +8,12 @@ import {renderToStaticMarkup} from "react-dom/server";
 import {withLocalize} from "react-localize-redux";
 import globalTranslations from "./i18n/global.json";
 import {makeStyles} from "@material-ui/core";
-import {myConfig, isDev} from './common/MyConfig';
+import {appConfig, isDev} from './common/AppConfig';
 import {Helmet} from "react-helmet";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import MyMenu from "./common/MyMenu";
+import MyMenu from "./common/AppMenu";
 import Typography from "@material-ui/core/Typography";
 import LocaleSwitcher from "./common/LocaleSwitcher";
 import Container from "@material-ui/core/Container";
@@ -54,14 +54,14 @@ function AppBrowser(props) {
         <div>
             <div>
                 <Helmet>
-                    <title>{myConfig.web.header.title}</title>
-                    <link rel="canonical" href={myConfig.web.baseUrl}/>
+                    <title>{appConfig.web.header.title}</title>
+                    <link rel="canonical" href={appConfig.web.baseUrl}/>
                     <meta
                         name="description"
-                        content={myConfig.web.header.description}
+                        content={appConfig.web.header.description}
                     />
-                    <meta name="author" content={myConfig.web.header.author}/>
-                    <meta name="keywords" content={myConfig.web.header.keywords}/>
+                    <meta name="author" content={appConfig.web.header.author}/>
+                    <meta name="keywords" content={appConfig.web.header.keywords}/>
                 </Helmet>
             </div>
 

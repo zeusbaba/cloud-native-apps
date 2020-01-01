@@ -17,7 +17,7 @@ export const isDev =
     // eslint-disable-next-line no-undef
     isLocalHost(window.location.hostname); // ? true : false;
 
-export const myConfig = {
+export const appConfig = {
     authentication: {
         path: '/authentication',
         header: 'Authorization',
@@ -87,8 +87,8 @@ export const myConfig = {
     },
 };
 
-export const jwtHeaderName = myConfig.authentication.storageKey
-    ? myConfig.authentication.storageKey
+export const jwtHeaderName = appConfig.authentication.storageKey
+    ? appConfig.authentication.storageKey
     : 'ulink-jwt';
 export const getUserIdFromToken = (token) => {
     const decodedToken = jwtDecode(token);

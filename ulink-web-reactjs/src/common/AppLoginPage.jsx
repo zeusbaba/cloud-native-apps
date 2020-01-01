@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import feathersClient from './../common/Feathers';
+import feathersClient from './FeathersComm';
 
 import Spinner from 'react-spinkit';
 import {Container, Row, Col} from 'react-grid-system';
 
 import packageJson from './../../package.json';
-import {myConfig, isDev, jwtHeaderName, isValidToken, getUserIdFromToken} from './../common/MyConfig';
+import {appConfig, isDev, jwtHeaderName, isValidToken, getUserIdFromToken} from './AppConfig';
 
 import {BrowserRouter as Router, Redirect, withRouter} from 'react-router-dom';
 import {createBrowserHistory} from "history";
@@ -24,7 +24,7 @@ const styles = {
 function generateUUID() {
     let d = new Date().getTime();
     // 'uLINK-2020-yxxx-xxxxxxxxxxxx'
-    const uuid = myConfig.backend.uuidSourceValue.replace(/[xy]/g, function (c) {
+    const uuid = appConfig.backend.uuidSourceValue.replace(/[xy]/g, function (c) {
         let r = ((d + Math.random() * 16) % 16) | 0;
         d = Math.floor(d / 16);
         return (c === 'x' ? r : (r & 0x7) | 0x8).toString(16);
@@ -39,7 +39,7 @@ function RedirectToMain() {
         </Router>
     );
 }
-class MyLoginPage extends Component {
+class AppLoginPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -53,7 +53,7 @@ class MyLoginPage extends Component {
     componentDidMount() {
 
         if (!localStorage.getItem('locale')) {
-            localStorage.setItem('locale', myConfig.web.defaultLocale);
+            localStorage.setItem('locale', appConfig.web.defaultLocale);
         }
 
         const currentToken = localStorage.getItem(jwtHeaderName);
@@ -223,4 +223,4 @@ class MyLoginPage extends Component {
     }
 }
 
-export default withRouter(MyLoginPage);
+export default withRouter(AppLoginPage);

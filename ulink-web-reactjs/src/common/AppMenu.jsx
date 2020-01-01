@@ -20,7 +20,7 @@ import {
 import {withLocalize } from "react-localize-redux";
 //import { connect } from 'react-redux';
 
-const MyMenu = withStyles({
+const AppMenu = withStyles({
     paper: {
         border: '1px solid #d3d4d5',
     },
@@ -75,7 +75,7 @@ function CustomizedMenus(props) {
             >
                 <MenuIcon/>
             </Button>
-            <MyMenu
+            <AppMenu
                 id="customized-menu"
                 anchorEl={anchorEl}
                 keepMounted
@@ -114,7 +114,7 @@ function CustomizedMenus(props) {
                         <ListItemText primary="About"/>
                     </NavLink>
                 </StyledMenuItem>
-            </MyMenu>
+            </AppMenu>
         </div>
 
     );
@@ -125,7 +125,7 @@ export default withLocalize(CustomizedMenus);
 /*
 function mapStateToProps(state) {
     const {changeLocale} = state;
-    console.log("MyMenu.mapStateToProps -> " + JSON.stringify(changeLocale));
+    console.log("AppMenu.mapStateToProps -> " + JSON.stringify(changeLocale));
     
     return {
         locale: changeLocale['locale']

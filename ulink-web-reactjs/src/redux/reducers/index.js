@@ -1,4 +1,4 @@
-import { isDev } from '../../common/MyConfig';
+import { isDev } from '../../common/AppConfig';
 import { combineReducers } from "redux";
 import {
     CHANGE_LOCALE

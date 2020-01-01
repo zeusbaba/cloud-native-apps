@@ -7,7 +7,7 @@ import {withLocalize } from "react-localize-redux";
 
 import Fab from '@material-ui/core/Fab';
 import Flag from 'react-world-flags';
-import {myConfig, isDev} from './MyConfig'; // eslint-disable-line
+import {appConfig, isDev} from './AppConfig'; // eslint-disable-line
 
 class LocaleSwitcher extends Component {
 
@@ -23,7 +23,7 @@ class LocaleSwitcher extends Component {
     componentDidMount() {
 
         if (!localStorage.getItem('locale')) {
-            localStorage.setItem('locale', myConfig.web.defaultLocale);
+            localStorage.setItem('locale', appConfig.web.defaultLocale);
         }
         const locale = localStorage.getItem('locale');
         this.setState({locale});

@@ -4,12 +4,12 @@ import {withLocalize } from "react-localize-redux";
 
 import Fab from '@material-ui/core/Fab';
 import Flag from 'react-world-flags';
-import {myConfig} from "./MyConfig";
+import {appConfig} from "./AppConfig";
 
 function LocaleSwitcher(props) {
 
     if (!localStorage.getItem('locale')) {
-        localStorage.setItem('locale', myConfig.web.defaultLocale);
+        localStorage.setItem('locale', appConfig.web.defaultLocale);
     }
     const [locale, setLocale] = useState(localStorage.getItem('locale'));
 

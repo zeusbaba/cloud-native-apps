@@ -13,15 +13,9 @@ RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
 # Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
+# A wildcard is used to ensure both package.json AND package-lock.json are copied where available (npm@5+)
 COPY package*.json ./
 COPY yarn.lock ./
-
-#RUN npm config set strict-ssl false
-#RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
 
 RUN npm install -g -s --no-progress yarn
 RUN yarn config set strict-ssl false
@@ -40,5 +34,4 @@ COPY .* ./
 
 EXPOSE 4042
 
-#CMD ./wait && npm start
 CMD ./wait && yarn start
