@@ -79,7 +79,7 @@ function AppBrowser(props) {
                     </Toolbar>
                 </AppBar>
 
-                <Container maxWidth="sm">
+                <Container maxWidth={"xl"}>
                     <AppRouter/>
                 </Container>
 

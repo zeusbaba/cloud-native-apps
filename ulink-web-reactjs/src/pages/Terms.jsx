@@ -6,17 +6,17 @@ import Typography from '@material-ui/core/Typography';
 
 class Terms extends Component {
   render() {
-    const { translate } = this.context;
+    //const { translate } = this.context;
 
     return (
       <div>
         <Card>
             <CardContent>
                 <Typography gutterBottom variant="headline" component="h2">
-                    {translate('pos.terms.intro.title')}
+                    Terms
                 </Typography>
                 <Typography gutterBottom variant="subheading">
-                    <em>{translate('pos.terms.intro.subtitle')}</em>
+                    <em>Privacy matters!</em>
                 </Typography>
                 <Typography component="div">
                     <dl>
@@ -69,10 +69,10 @@ class Terms extends Component {
 
             <CardContent>
                 <Typography gutterBottom variant="headline" component="h2">
-                    {translate('pos.terms.tc.title')}
+                    Terms & Conditions
                 </Typography>
                 <Typography gutterBottom variant="subheading">
-                    <em>{translate('pos.terms.tc.subtitle')}</em>
+                    <em>of service usage</em>
                 </Typography>
                 <Typography component="div">
                     this service may <strong>NOT</strong> be used creating

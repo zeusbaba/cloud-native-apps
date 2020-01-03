@@ -7,23 +7,23 @@ import PropTypes from 'prop-types';
 
 class About extends Component {
   render() {
-    const { translate } = this.context;
+    //const { translate } = this.context;
 
     return (
       <div>
         <Card>
           <CardContent>
               <Typography gutterBottom variant="headline" component="h2">
-                  {translate('pos.about.title')}
+                  About
               </Typography>
               <Typography gutterBottom variant="subheading">
-                  <em>{translate('pos.about.subtitle')}</em>
+                  <em>what-why-how</em>
               </Typography>
           </CardContent>
 
           <CardContent>
               <Typography component="div">
-                  <strong>BAET</strong> is an easy to use (and free!) service to
+                  <strong>uLINK</strong> is an easy to use (and free!) service to
                   Shorten & Simplify URLs!
                   <br />
                   <div>
@@ -47,7 +47,7 @@ class About extends Component {
                               </a>, recently I've decided to implement a simpler service,
                               and happened to find even a cool domain name...
                               <a href="/">
-                                  <strong>BAET.no</strong>
+                                  <strong>uLINK.no</strong>
                               </a>! :-)
                           </dd>
                           <dd>
@@ -56,7 +56,7 @@ class About extends Component {
                               use-cases of existing providers, and customised according to
                               my specific needs, and also adding some missing features. For
                               example, I always wanted to have 'multiple custom names'
-                              assigned to a single URL, so <em>BAET.no</em> has this feature
+                              assigned to a single URL, so <em>uLINK.no</em> has this feature
                               now! :)
                           </dd>
                           <dd>
@@ -73,10 +73,10 @@ class About extends Component {
         <Card>
             <CardContent>
                 <Typography gutterBottom variant="headline" component="h2">
-                    {translate('pos.faq.title')}
+                    FAQ
                 </Typography>
                 <Typography gutterBottom variant="subheading">
-                    <em>{translate('pos.faq.subtitle')}</em>
+                    <em>what-how</em>
                 </Typography>
             </CardContent>
 
@@ -112,21 +112,21 @@ class About extends Component {
                     <br />is shortened into{' '}
                     <em>
                         <a
-                            href="https://baet.no/gh80mh"
+                            href="https://uLINK.no/gh80mh"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            https://baet.no/gh80mh
+                            https://uLINK.no/gh80mh
                         </a>
                     </em>
                     <br />and simplified into{' '}
                     <em>
                         <a
-                            href="https://baet.no/pythons"
+                            href="https://uLINK.no/pythons"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            https://baet.no/pythons
+                            https://uLINK.no/pythons
                         </a>
                     </em>
                 </Typography>
@@ -142,7 +142,7 @@ class About extends Component {
                     <strong>
                         All you need is to access{' '}
                         <em>
-                            <a href="/">baet.no</a>
+                            <a href="/">uLINK.no</a>
                         </em>{' '}
                         using web-browser with cookies enabled
                     </strong>{' '}
@@ -161,11 +161,11 @@ class About extends Component {
                     How about the usage of stored data?
                 </Typography>
                 <Typography component="p">
-                    All shortened links are private and accessible via BAET
+                    All shortened links are private and accessible via uLINK
                     clients (web, api etc). Sharing with others is completely at
                     your choice.
                     <br />We do not collect any personally identifying information
-                    from users of baet.no service, we respect your privacy! For
+                    from users of uLINK.no service, we respect your privacy! For
                     details, see our{' '}
                     <em>
                         <a href="/terms">Privacy Policy</a>

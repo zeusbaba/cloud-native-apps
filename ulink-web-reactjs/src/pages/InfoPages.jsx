@@ -9,30 +9,30 @@ import IconLock from '@material-ui/icons/Lock';
 import IconCode from '@material-ui/icons/Code';
 
 // TODO: create component for each component
-import Counter from '../resub/Counter';
-import CounterDisplay from "../resub/CounterDisplay";
-//import About from './About';
-//import Terms from './Terms';
-//import Developers from './Developers';
-function About() {
+//import Counter from '../resub/Counter';
+//import CounterDisplay from "../resub/CounterDisplay";
+import About from './About';
+import Terms from './Terms';
+import Developers from './Developers';
+/*function About() {
     return (
         <div>
             About page
             <Counter />
         </div>
     );
-}
-function Terms() {
+}*/
+/*function Terms() {
     return (<div>Terms page</div>);
-}
-function Developers() {
+}*/
+/*function Developers() {
     return (
         <div>
             Developers page
             <CounterDisplay />
         </div>
     );
-}
+}*/
 
 /*const styles = {
     root: {
@@ -86,7 +86,7 @@ class InfoPages extends Component {
             onChange={this.handleTabChange}
             indicatorColor="primary"
             textColor="primary"
-            //fullWidth
+            centered //variant={"fullWidth"}
         >
           <Tab
             value="/about"

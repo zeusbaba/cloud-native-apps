@@ -3,42 +3,36 @@ import React, { Component } from 'react';
 import {Card, CardContent} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
-import CopyToClipboard from 'react-copy-to-clipboard';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { toast } from 'react-toastify';
 
 import Button from '@material-ui/core/Button';
-import IconCopy from '@material-ui/icons/ContentCopy';
+//import IconCopy from '@material-ui/icons/ContentCopy';
+import IconCopy from '@material-ui/icons/FileCopy';
 
 import PropTypes from 'prop-types';
 
-import packageJson from './../../package.json'; // eslint-disable-line
-import { appConfig, jwtHeaderName } from '../common/AppConfig'; // eslint-disable-line
+//import packageJson from './../../package.json'; // eslint-disable-line
+import { jwtHeaderName } from '../common/AppConfig'; // eslint-disable-line
 
 let jwtToken;
 class Developers extends Component {
   componentDidMount() {
     jwtToken = localStorage.getItem(jwtHeaderName);
-    /* if (isDev) {
-      console.log('Developers.componentWillMount');
-      console.log('localStorage.getItem-> ' + jwtToken); //localStorage.getItem(jwtHeaderName));
-      console.log(
-        'packageJson -> ' + packageJson.name + ' ' + packageJson.version,
-      );
-    } */
   }
 
   render() {
-    const { translate } = this.context;
+    //const { translate } = this.context;
 
     return (
       <div>
         <Card>
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
-              {translate('pos.developers.intro.title')}
+              Developers
             </Typography>
             <Typography gutterBottom variant="subheading">
-              <em>{translate('pos.developers.intro.subtitle')}</em>
+              <em>...for coders by coders!</em>
             </Typography>
             <Typography component="div">
               <em>
@@ -77,7 +71,7 @@ class Developers extends Component {
                   <ul>
                     <li>
                       <strong>Authorization=</strong> Bearer{' '}
-                      <em>&lt;yourApptoken&gt;</em>
+                      <em>&lt;yourAppToken&gt;</em>
                     </li>
                   </ul>
                 </dd>
@@ -94,7 +88,7 @@ class Developers extends Component {
                     onCopy={() => {
                       //console.log('Copied! ' + localStorage.getItem(jwtHeaderName));
                       toast.info(
-                        translate('resources.links.buttons.copy.confirm') +
+                          'Copied! -> ' +
                           jwtToken,
                         {
                           position: toast.POSITION.BOTTOM_LEFT,
@@ -106,7 +100,7 @@ class Developers extends Component {
                     }}
                   >
                     <Button variant="raised" size="small">
-                      {translate('resources.links.buttons.copy.name')}
+                      Copy
                       <IconCopy />
                     </Button>
                   </CopyToClipboard>
