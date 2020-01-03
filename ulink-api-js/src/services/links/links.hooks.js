@@ -15,6 +15,13 @@ let appconfig;
 module.exports = {
   before: {
     all: [
+      /*hook => {
+        logger.info('links.hook-all -> '
+          + ' | data: %s' + ' | params: %s' + ' | headers: %s',
+          hook.data, hook.params, hook.params.headers
+        );
+      },*/
+
       authenticate('jwt'), // authHooks.restrictToAuthenticated()
       hook => {
         appconfig = hook.app.get('appconfig');
@@ -363,14 +370,14 @@ module.exports = {
   error: {
     all: [
       hook => {
-        logger.error('links.hook-all -> Error in '+hook.path+' service method '+hook.method, hook.error.stack);
+        logger.error('links.hook-all -> Error in '+hook.path+' service method '+hook.method + ' | %s', hook.error.stack);
       }
     ],
     find: [],
     get: [],
     create: [
       hook => {
-        logger.error('links.hook-create -> Error in '+hook.path+' service method '+hook.method, hook.error.stack);
+        logger.error('links.hook-create -> Error in '+hook.path+' service method '+hook.method + ' | %s', hook.error.stack);
       }
     ],
     update: [],

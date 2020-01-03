@@ -10,12 +10,15 @@ import { isDev } from "./common/AppConfig";
 import MyLoginPage from "./common/AppLoginPage";
 import InfoPages from "./pages/InfoPages";
 
+import LinkForm from "./links/LinkForm";
+
 // TODO: move each into separate component!
 function MainPage(props) {
     if (isDev) {
         console.log("MainPage -> locale: " + props.activeLanguage);
     }
     return (<div>Main page... TODO load component</div>);
+    //return(<LinkForm/>);
 }
 function LinksPage() {
     return (<div>Links page... TODO load component</div>);
@@ -53,7 +56,7 @@ function AppRouter(props) {
         <Router forceRefresh={true} >
             <div>
                 <Route key={"main"} exact path="/">
-                    <MainPage/>
+                    <LinkForm /> 
                 </Route>
                 <Route key={"links"} exact path="/links">
                     <LinksPage/>

@@ -119,8 +119,8 @@ class AppLoginPage extends Component {
                 }
 
                 // FIXME: redirect is not working!
+                //this.context.history.push('/');
                 this.props.history.push('/');
-                //this.props.push('/');
                 //push(location.state ? location.state.nextPathname : '/')
                 //let history = useHistory();
                 //history.pushState("/");

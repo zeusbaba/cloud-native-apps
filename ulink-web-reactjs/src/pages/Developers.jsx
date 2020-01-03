@@ -7,7 +7,6 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { toast } from 'react-toastify';
 
 import Button from '@material-ui/core/Button';
-//import IconCopy from '@material-ui/icons/ContentCopy';
 import IconCopy from '@material-ui/icons/FileCopy';
 
 import PropTypes from 'prop-types';

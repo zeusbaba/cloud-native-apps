@@ -49,7 +49,7 @@ module.exports = function (app) {
         response: userResponse,
         secret: appconfig.recaptcha.secretkey
       };
-      logger.info('googleRequest', JSON.stringify(googleRequest));
+      logger.info('googleRequest: %s', JSON.stringify(googleRequest));
 
       return new Promise((resolve, reject) => {
         rp({
@@ -61,7 +61,7 @@ module.exports = function (app) {
         }).then(function (body) {
           // POST succeeded...
           const googleResponse = JSON.parse(body);
-          logger.info('OK! google response', JSON.stringify(googleResponse));
+          logger.info('OK! google response: %s', JSON.stringify(googleResponse));
           //resolve('OK!');
           if (googleResponse && googleResponse.success) {
             resolve('OK!');
@@ -71,7 +71,7 @@ module.exports = function (app) {
           }
         }).catch(function (err) {
           // POST failed...
-          logger.info('ERR! google response', err);
+          logger.info('ERR! google response: %s', err);
           reject(err);
         });
       });
