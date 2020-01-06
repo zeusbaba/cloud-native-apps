@@ -15,12 +15,12 @@ let appconfig;
 module.exports = {
   before: {
     all: [
-      /*hook => {
+      hook => {
         logger.info('links.hook-all -> '
           + ' | data: %s' + ' | params: %s' + ' | headers: %s',
           hook.data, hook.params, hook.params.headers
         );
-      },*/
+      },
 
       authenticate('jwt'), // authHooks.restrictToAuthenticated()
       hook => {

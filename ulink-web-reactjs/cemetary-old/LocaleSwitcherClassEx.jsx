@@ -7,7 +7,7 @@ import {withLocalize } from "react-localize-redux";
 
 import Fab from '@material-ui/core/Fab';
 import Flag from 'react-world-flags';
-import {appConfig, isDev} from './AppConfig'; // eslint-disable-line
+import {appConfig, isDev} from '../src/common/AppConfig'; // eslint-disable-line
 
 class LocaleSwitcher extends Component {
 

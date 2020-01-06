@@ -14,7 +14,7 @@ function SimpleLinks(props) {
     const simple_links = record.simple_links;
     listItems = simple_links.map(simple_link => (
       <Button size={"small"}
-        key={simple_link.toString()}
+        key={simple_link}
         target="_blank" // rel="noopener noreferrer"
         color={"secondary"}
         href={appConfig.web.baseUrl + simple_link}
@@ -26,7 +26,7 @@ function SimpleLinks(props) {
   }
   listItems.push(
     <Button size={"small"}
-      key={short_link.toString()}
+      key={short_link}
       target="_blank" //rel="noopener noreferrer"
       color={"secondary"}
       href={appConfig.web.baseUrl + short_link}

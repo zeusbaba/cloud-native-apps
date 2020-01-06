@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react'; // https://github.com/zpao/qrcode.react
 import {CopyToClipboard} from 'react-copy-to-clipboard'; // https://github.com/nkbt/react-copy-to-clipboard
 
@@ -28,7 +27,7 @@ import SimpleLinks from './SimpleLinks';
 import SocialShareButtons from './SocialShareButtons';
 
 import { appConfig, isDev } from './../common/AppConfig';
-import { translator, styles } from './LinkAssets';
+import { translator } from './LinkAssets';
 
 const timeAgoFormatter_nor = timeAgoBuildFormatter(norStrings);// eslint-disable-line
 const timeAgoFormatter_eng = timeAgoBuildFormatter(engStrings);
@@ -53,7 +52,7 @@ const styles = {
   },
 };
 
-class DizMeta extends Component {
+class LinkMeta extends Component {
   constructor(props) {
     super(props);
     this.handleOnCopy = this.handleOnCopy.bind(this);
@@ -77,7 +76,7 @@ class DizMeta extends Component {
   }
 
   render() {
-    const { record } = this.props; // eslint-disable-line
+    const { record, isSingleItem } = this.props; // eslint-disable-line
     //const { translate } = this.context;
     return (
       <Card key={record._id} style={styles.card}>
@@ -128,12 +127,12 @@ class DizMeta extends Component {
                       <IconLink style={{ fontSize: 28 }} />
                   </Button>
                   <br />
-                  <TextField
+                  {/* <TextField
                     record={record}
                     label="long_link"
                     source="long_link"
                     sortable={false}
-                  />
+                  /> */}
                 </div>
               </Col>
             </Row>
@@ -167,11 +166,11 @@ class DizMeta extends Component {
                 </CopyToClipboard>
               </Col>
                 <Col xs={4} md={4}>
-                {!this.props.isSingleItem && ( // eslint-disable-line
+                {!isSingleItem && ( // eslint-disable-line
 
                   <Button variant={"contained"}
                     size={"medium"} color={"secondary"}
-                    href={'/links/' + record.short_link + '/show'}
+                    href={'/links/' + record.short_link + '/stats'}
                   >
                       {
                         //translate('resources.links.buttons.stats.name')
@@ -190,28 +189,6 @@ class DizMeta extends Component {
           </Container>
         </CardActions>
       </Card>
-    );
-  }
-}
-DizMeta.contextTypes = {
-  translate: PropTypes.func,
-};
-
-class LinkMeta extends Component {
-  /*constructor(props) {
-    super(props);
-  }*/
-
-  componentWillMount() {
-    // pass all props into state
-    this.setState({ ...this.props });
-  }
-
-  render() {
-    return (
-      <div>
-        <DizMeta {...this.state} />
-      </div>
     );
   }
 }

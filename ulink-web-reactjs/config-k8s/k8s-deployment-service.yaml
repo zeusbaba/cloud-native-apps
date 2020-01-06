@@ -55,6 +55,8 @@ spec:
           env: # custom environment variables beginning with REACT_APP_
             - name: REACT_APP_API_URL
               value: "https://api.ulink.no"
+            - name: REACT_APP_RECAPTCHA_SITEKEY
+              value: 6Lcbxy8UAAAAAOX51bFY7fR4KBaaAXSooFXxksR4
             - name: NODE_ENV
               value: production
             - name: NODE_PORT

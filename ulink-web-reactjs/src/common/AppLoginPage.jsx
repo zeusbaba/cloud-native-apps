@@ -1,25 +1,13 @@
 import React, {Component} from 'react';
-import feathersClient from './FeathersComm';
-
-import Spinner from 'react-spinkit';
-import {Container, Row, Col} from 'react-grid-system';
+import {feathersClient, usersService} from './FeathersComm';
 
 import packageJson from './../../package.json';
 import {appConfig, isDev, jwtHeaderName, isValidToken, getUserIdFromToken} from './AppConfig';
 
 import {BrowserRouter as Router, Redirect, withRouter} from 'react-router-dom';
 import {createBrowserHistory} from "history";
+import Loading from "./Loading";
 const browserHistory = createBrowserHistory();
-
-const styles = {
-    main: {
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-};
 
 function generateUUID() {
     let d = new Date().getTime();
@@ -135,8 +123,7 @@ class AppLoginPage extends Component {
 
         if (!user.extra.existingUserId) {
             // create a new user!
-            feathersClient
-                .service('users')
+            usersService
                 .create({
                     userid: user.userid,
                     password: user.password,
@@ -153,8 +140,7 @@ class AppLoginPage extends Component {
         } else {
             // check for existing user! if not create one!
             console.log("check for existing user! if not create one!");
-            feathersClient
-                .service('users')
+            usersService
                 /* .find({
                   query: { userid: user.userid },
                 }) */
@@ -175,8 +161,7 @@ class AppLoginPage extends Component {
                         this.loginUser();
                     } else {
                         // user not found, create new
-                        feathersClient
-                            .service('users')
+                        usersService
                             .create({
                                 userid: user.userid,
                                 password: user.password,
@@ -193,33 +178,10 @@ class AppLoginPage extends Component {
     }
 
     render() {
-        //if (localStorage.getItem(jwtHeaderName)) {
-        if (isValidToken()) {
-            return (
-                <RedirectToMain />
-            );
-        } else {
-            return (
-                <div style={{...styles.main}}>
-                    <Container>
-                        <Row>
-                            <Col xs={4} md={4}/>
-                            <Col xs={8} md={8}>
-                                Loading...
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={8} md={8}>
-                                <Spinner name="pacman" color="olive"/>
-                            </Col>
-                            <Col xs={4} md={4}>
-                                <Spinner name="ball-triangle-path" color="olive"/>
-                            </Col>
-                        </Row>
-                    </Container>
-                </div>
-            );
-        }
+
+        return(
+            isValidToken()? <RedirectToMain /> : <Loading/>
+        );
     }
 }
 

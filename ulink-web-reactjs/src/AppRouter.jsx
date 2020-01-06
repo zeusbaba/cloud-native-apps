@@ -11,6 +11,8 @@ import MyLoginPage from "./common/AppLoginPage";
 import InfoPages from "./pages/InfoPages";
 
 import LinkForm from "./links/LinkForm";
+import LinkShow from "./links/LinkShow";
+import LinkList from "./links/LinkList";
 
 // TODO: move each into separate component!
 function MainPage(props) {
@@ -20,9 +22,9 @@ function MainPage(props) {
     return (<div>Main page... TODO load component</div>);
     //return(<LinkForm/>);
 }
-function LinksPage() {
+/*function LinksPage() {
     return (<div>Links page... TODO load component</div>);
-}
+}*/
 
 /*
 const routes = [
@@ -56,11 +58,19 @@ function AppRouter(props) {
         <Router forceRefresh={true} >
             <div>
                 <Route key={"main"} exact path="/">
-                    <LinkForm /> 
+                    <LinkForm />
                 </Route>
                 <Route key={"links"} exact path="/links">
-                    <LinksPage/>
+                    <LinkList/>
                 </Route>
+                <Route key={"linkShow"} exact path="/links/:link_id">
+                    <LinkShow/>
+                </Route>
+                {/* TODO display Stats! */}
+                <Route key={"linkStats"} exact path="/links/:link_id/stats">
+                    <LinkShow/>
+                </Route>
+
                 <Route key={"about"} exact path="/about">
                     <InfoPages />
                 </Route>

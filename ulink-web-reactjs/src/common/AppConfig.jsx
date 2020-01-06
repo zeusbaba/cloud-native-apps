@@ -52,7 +52,8 @@ export const appConfig = {
                 'URL shortener, url shortener custom, short link free, shorten web address, make short url, shorten url for twitter, shorten diz link, liverpool supporters link shortener',
         },
         recaptcha: {
-            sitekey: process.env.REACT_APP_RECAPTCHA_SITEKEY
+            //FIXME sitekey: process.env.REACT_APP_RECAPTCHA_SITEKEY
+            sitekey: '6LeJK8wUAAAAAInbyy_bQ7CLkIPtdN6u7uqhCdrF'
         },
     },
     diz: {

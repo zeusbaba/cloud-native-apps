@@ -98,7 +98,7 @@ class Developers extends Component {
                       );
                     }}
                   >
-                    <Button variant="raised" size="small">
+                    <Button variant="contained" size="small">
                       Copy
                       <IconCopy />
                     </Button>

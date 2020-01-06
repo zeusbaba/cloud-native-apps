@@ -40,7 +40,7 @@ if (isDev) {
 //const restClient = rest(restHost);
 
 // https://docs.feathersjs.com/api/authentication/client.html
-const feathersClient = feathers()
+export const feathersClient = feathers()
 //.configure(feathers.hooks())
     .configure(feathers.rest(restHost).fetch(window.fetch.bind(window)))
     //.configure(restClient.fetch(window.fetch.bind(window)))
@@ -52,5 +52,7 @@ const feathersClient = feathers()
             //storage: crossStorageClient
         }),
     );
+//export default feathersClient;
 
-export default feathersClient;
+export const usersService = feathersClient.service('users');
+export const linksService = feathersClient.service('links');

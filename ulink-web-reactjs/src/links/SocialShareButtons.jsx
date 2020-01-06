@@ -135,7 +135,7 @@ class SocialShareButtons extends React.Component {
 
         return (
             <div>
-                <Button variant="raised"
+                <Button variant="contained"
                         size={"medium"} color={"secondary"}
                     aria-label="More"
                     aria-owns={anchorEl ? 'long-menu' : null}

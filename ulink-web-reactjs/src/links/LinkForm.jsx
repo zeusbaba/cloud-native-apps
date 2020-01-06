@@ -3,7 +3,7 @@ import React from 'react';
 import { translator, styles } from './LinkAssets';
 import {appConfig, isDev, jwtHeaderName} from './../common/AppConfig';
 
-import feathersClient from '../common/FeathersComm';
+import {feathersClient} from '../common/FeathersComm';
 
 import Validator from 'validator';
 import { toast } from 'react-toastify';
