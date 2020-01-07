@@ -4,15 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import {LocalizeProvider, localizeReducer} from "react-localize-redux";
 import {combineReducers, createStore} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 //import { Provider } from "react-redux";
 //import store from "./redux/store";
 
-let store = createStore(combineReducers({
-    localize: localizeReducer
-}), composeWithDevTools());
 
 const rootElement = document.getElementById("root");
 /*ReactDOM.render(
@@ -20,17 +16,9 @@ const rootElement = document.getElementById("root");
     rootElement
 );*/
 ReactDOM.render(
-    <LocalizeProvider store={store}>
-        <App compiler={"TypeScript"} framework={"React"} />
-    </LocalizeProvider>,
+    <App compiler={"TypeScript"} framework={"React"} />,
     rootElement
 );
-/*ReactDOM.render(
-    <LocalizeProvider store={store}>
-        <App />
-    </LocalizeProvider>,
-    rootElement
-);*/
 /*ReactDOM.render(
     <Provider store={store}>
         <App />

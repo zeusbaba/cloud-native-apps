@@ -17,7 +17,6 @@ import {
     NavLink
 } from "react-router-dom";
 
-import {withLocalize } from "react-localize-redux";
 //import { connect } from 'react-redux';
 
 const AppMenu = withStyles({
@@ -120,8 +119,8 @@ function CustomizedMenus(props) {
     );
 }
 
-//export default CustomizedMenus;
-export default withLocalize(CustomizedMenus);
+export default CustomizedMenus;
+//export default withLocalize(CustomizedMenus);
 /*
 function mapStateToProps(state) {
     const {changeLocale} = state;

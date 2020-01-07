@@ -1,12 +1,10 @@
 import React from "react";
 import {
     BrowserRouter as Router,
-    useLocation
+    useLocation, withRouter
 } from "react-router-dom";
 
 import {renderToStaticMarkup} from "react-dom/server";
-import {withLocalize} from "react-localize-redux";
-import globalTranslations from "./i18n/global.json";
 import {makeStyles} from "@material-ui/core";
 import {appConfig, isDev} from './common/AppConfig';
 import {Helmet} from "react-helmet";
@@ -79,9 +77,7 @@ function AppBrowser(props) {
                     </Toolbar>
                 </AppBar>
 
-                <Container maxWidth={"xl"}>
-                    <AppRouter/>
-                </Container>
+                <div><AppRouter /></div>
 
             </React.Fragment>
 
@@ -100,4 +96,4 @@ function AppBrowser(props) {
     );
 }
 
-export default withLocalize(AppBrowser);
+export default AppBrowser;

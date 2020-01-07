@@ -5,8 +5,10 @@ import packageJson from './../../package.json';
 import {appConfig, isDev, jwtHeaderName, isValidToken, getUserIdFromToken} from './AppConfig';
 
 import {BrowserRouter as Router, Redirect, withRouter} from 'react-router-dom';
-import {createBrowserHistory} from "history";
+
+import {RedirectToForm} from "./RedirectToPage";
 import Loading from "./Loading";
+import {createBrowserHistory} from "history";
 const browserHistory = createBrowserHistory();
 
 function generateUUID() {
@@ -20,13 +22,13 @@ function generateUUID() {
     return uuid;
 }
 
-function RedirectToMain() {
+/*function RedirectToMain() {
     return (
         <Router history={browserHistory}>
             <Redirect to="/"/>
         </Router>
     );
-}
+}*/
 class AppLoginPage extends Component {
     constructor(props) {
         super(props);
@@ -36,6 +38,7 @@ class AppLoginPage extends Component {
 
         this.registerUser = this.registerUser.bind(this);
         this.loginUser = this.loginUser.bind(this);
+        this.goToMainPage = this.goToMainPage.bind(this);
     }
 
     componentDidMount() {
@@ -107,15 +110,22 @@ class AppLoginPage extends Component {
                 }
 
                 // FIXME: redirect is not working!
+                //this.props.history.push('/');
+                this.goToMainPage();
+
                 //this.context.history.push('/');
-                this.props.history.push('/');
                 //push(location.state ? location.state.nextPathname : '/')
                 //let history = useHistory();
                 //history.pushState("/");
-
             })
             .catch(e => this.setState({signInError: e}));
     }
+
+    goToMainPage = () => {
+        this.props.history.push('/');
+        //return <Router><Redirect to={"/"} /></Router>
+        //return <RedirectToForm />
+    };
 
     registerUser() {
         const {user} = this.state;
@@ -180,7 +190,8 @@ class AppLoginPage extends Component {
     render() {
 
         return(
-            isValidToken()? <RedirectToMain /> : <Loading/>
+            //isValidToken()? <RedirectToMain /> : <Loading/>
+            isValidToken()? this.props.history.push("/") : <Loading/>
         );
     }
 }

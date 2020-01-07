@@ -5,10 +5,9 @@ import {
     Redirect, Route
 } from "react-router-dom";
 import MyLoginPage from "./AppLoginPage";
-//import {createBrowserHistory} from "history";
-//const browserHistory = createBrowserHistory();
+import LinkForm from "../links/LinkForm";
 
-function RedirectToLogin() {
+export function RedirectToLogin() {
 
     return (
         // Router is already used at App level!
@@ -21,4 +20,18 @@ function RedirectToLogin() {
         </Router>
     );
 }
-export default RedirectToLogin;
+//export default RedirectToPage;
+
+export function RedirectToForm() {
+
+    return (
+        // Router is already used at App level!
+        <Router>
+            <Redirect to="/"/>
+
+            <Route key="main" exact path="/">
+                <LinkForm/>
+            </Route>
+        </Router>
+    );
+}

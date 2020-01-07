@@ -1,12 +1,8 @@
 import React from "react";
 import {
     BrowserRouter as Router,
-    Route
+    Route, Switch, withRouter
 } from 'react-router-dom';
-import {withLocalize } from "react-localize-redux";
-import { isDev } from "./common/AppConfig";
-//import {createBrowserHistory} from "history";
-//const browserHistory = createBrowserHistory();
 import MyLoginPage from "./common/AppLoginPage";
 import InfoPages from "./pages/InfoPages";
 
@@ -14,17 +10,8 @@ import LinkForm from "./links/LinkForm";
 import LinkShow from "./links/LinkShow";
 import LinkList from "./links/LinkList";
 
-// TODO: move each into separate component!
-function MainPage(props) {
-    if (isDev) {
-        console.log("MainPage -> locale: " + props.activeLanguage);
-    }
-    return (<div>Main page... TODO load component</div>);
-    //return(<LinkForm/>);
-}
-/*function LinksPage() {
-    return (<div>Links page... TODO load component</div>);
-}*/
+import {createBrowserHistory} from "history";
+const browserHistory = createBrowserHistory();
 
 /*
 const routes = [
@@ -48,15 +35,11 @@ const routes = [
 
 function AppRouter(props) {
 
-    if (isDev) {
-        console.log("AppRouter -> locale: " + JSON.stringify(props.activeLanguage));
-        console.log("languages: " + JSON.stringify(props.languages));
-    }
-
     return (
 
-        <Router forceRefresh={true} >
+        <Router forceRefresh={true} history={browserHistory}>
             <div>
+            <Switch>
                 <Route key={"main"} exact path="/">
                     <LinkForm />
                 </Route>
@@ -80,10 +63,11 @@ function AppRouter(props) {
                 <Route key={"k8s-status"} exact path="/k8s-status">
                     <div>OK</div>
                 </Route>
+            </Switch>
             </div>
         </Router>
     )
 
 }
-
-export default withLocalize(AppRouter);
+export default AppRouter;
+//export default withRouter(AppRouter);

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import {withLocalize } from "react-localize-redux";
+//import {withLocalize } from "react-localize-redux";
 
 import Fab from '@material-ui/core/Fab';
 import Flag from 'react-world-flags';
@@ -53,8 +53,8 @@ function LocaleSwitcher(props) {
 const mapDispatchToProps = { changeLocaleAction };
 */
 
-//export default LocaleSwitcher;
-export default withLocalize(LocaleSwitcher);
+export default LocaleSwitcher;
+//export default withLocalize(LocaleSwitcher);
 /*export default connect(mapStateToProps,
     { changeLocale: changeLocaleAction } // mapDispatchToProps
 )(LocaleSwitcher);*/

@@ -4,15 +4,11 @@ import BrowserDetection from 'react-browser-detection';
 
 import { isValidToken } from './common/AppConfig';
 import AppBrowser from "./AppBrowser";
-import RedirectToLogin from "./common/RedirectToLogin";
+import {RedirectToLogin} from "./common/RedirectToPage";
 
 import './App.css';
 //import {LocalizeProvider} from "react-localize-redux";
 import {BrowserRouter as Router} from "react-router-dom";
-
-import {withLocalize} from "react-localize-redux";
-import {renderToStaticMarkup} from "react-dom/server";
-import globalTranslations from "./i18n/global.json";
 
 function BadBrowser(props) {
     return (
@@ -27,29 +23,18 @@ function BadBrowser(props) {
 const browserHandler = {
     ie: browser => <BadBrowser browser={browser} />,
     default: () => (
-
-        //<LocalizeProvider>
-            <Router forceRefresh={true}>
-                <AppBrowser />
-            </Router>
-        //</LocalizeProvider>
+        //<AppBrowser />
+        <Router>
+            <AppBrowser />
+        </Router>
         ),
 };
 
-function App(props) {
-
-    /*props.initialize({
-        languages: [
-            {name: "English", code: "en"},
-            {name: "Norwegian", code: "nb"}
-        ],
-        translation: globalTranslations,
-        options: {renderToStaticMarkup}
-    });*/
+function App() {
 
     return !isValidToken()?
             ( <RedirectToLogin /> )
             : ( <BrowserDetection>{browserHandler}</BrowserDetection> )
     ;
 }
-export default withLocalize(App);
+export default App;
