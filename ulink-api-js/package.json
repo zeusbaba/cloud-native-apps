@@ -62,7 +62,7 @@
     "helmet": "^3.21.2",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "mongodb": "^3.4.1",
+    "mongodb": "^3.5.0",
     "node-fetch": "^2.6.0",
     "path": "^0.12.7",
     "random-int": "^2.0.1",

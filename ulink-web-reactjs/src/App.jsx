@@ -9,6 +9,7 @@ import {RedirectToLogin} from "./common/RedirectToPage";
 import './App.css';
 //import {LocalizeProvider} from "react-localize-redux";
 import {BrowserRouter as Router} from "react-router-dom";
+//import {Router} from "react-router-dom";
 
 function BadBrowser(props) {
     return (

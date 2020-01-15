@@ -21,7 +21,6 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
 import { Container, Row, Col } from 'react-grid-system';
-//import { Link, NavLink } from 'react-router-dom';
 
 import SimpleLinks from './SimpleLinks';
 import SocialShareButtons from './SocialShareButtons';
@@ -106,9 +105,10 @@ class LinkMeta extends Component {
             </Row>
             <Row align={'center'}>
               <Col xs={12} md={12}>
-                {(record.simple_links && record.simple_links.length>0) &&
-                  <SimpleLinks record={record} oncopy={this.handleOnCopy} />
-                }
+                <SimpleLinks record={record} />
+                {/* {(record.simple_links && record.simple_links.length>0) &&
+                  <SimpleLinks record={record} />
+                } */}
               </Col>
             </Row>
 

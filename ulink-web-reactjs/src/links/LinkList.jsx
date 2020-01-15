@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
-import {appConfig, isDev, jwtHeaderName} from './../common/AppConfig';
+import {isDev, jwtHeaderName} from './../common/AppConfig';
 import {linksService} from '../common/FeathersComm';
 
 import LinkMeta from "./LinkMeta";

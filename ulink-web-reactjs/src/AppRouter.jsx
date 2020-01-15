@@ -11,7 +11,7 @@ import LinkShow from "./links/LinkShow";
 import LinkList from "./links/LinkList";
 
 import {createBrowserHistory} from "history";
-export const browserHistory = createBrowserHistory();
+export const browserHistory = createBrowserHistory({forceRefresh: true});
 
 function AppRouter() {
 
@@ -23,11 +23,11 @@ function AppRouter() {
                 <Route key={"main"} exact path="/">
                     <LinkForm />
                 </Route>
-                <Route key={"linkShow"} path="/links/:link_id">
-                    <LinkShow/>
-                </Route>
-                {/* TODO display Stats! */}
+
                 <Route key={"linkStats"} path="/links/:link_id/stats">
+                    <LinkShow displayStats={true}/>
+                </Route>
+                <Route key={"linkShow"} path="/links/:link_id">
                     <LinkShow/>
                 </Route>
                 <Route key={"links"} path="/links">

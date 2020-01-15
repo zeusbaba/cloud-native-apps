@@ -56,3 +56,4 @@ export const feathersClient = feathers()
 
 export const usersService = feathersClient.service('users');
 export const linksService = feathersClient.service('links');
+export const statsService = feathersClient.service('stats');

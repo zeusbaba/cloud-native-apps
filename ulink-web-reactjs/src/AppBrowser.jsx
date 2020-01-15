@@ -1,10 +1,8 @@
 import React from "react";
 import {
-    BrowserRouter as Router,
     useLocation, withRouter
 } from "react-router-dom";
 
-import {renderToStaticMarkup} from "react-dom/server";
 import {makeStyles} from "@material-ui/core";
 import {appConfig, isDev} from './common/AppConfig';
 import {Helmet} from "react-helmet";
@@ -87,4 +85,4 @@ function AppBrowser() {
     );
 }
 
-export default AppBrowser;
+export default withRouter(AppBrowser);

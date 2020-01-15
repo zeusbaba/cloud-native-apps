@@ -69,7 +69,7 @@ class LinkForm extends React.Component {
             !Validator.isURL(long_link, appConfig.diz.long_link.validation)
         ) {
             //long_link_error = translate('resources.links.form.errors.long_link', { long_link: long_link });
-            long_link_error = translator.form.errors.long_link + " long_link: "+long_link;
+            long_link_error = translator.form.errors.long_link.replace("%{long_link}", long_link);
         }
 
         if (!Validator.isEmpty(long_link_error)) {
@@ -93,7 +93,7 @@ class LinkForm extends React.Component {
                 'resources.links.form.errors.simple_link.limit',
                 { limit: appConfig.diz.simple_link.limit },
             );*/
-            simple_links_error = translator.form.errors.simple_link.limit + " limit: "+appConfig.diz.simple_link.limit;
+            simple_links_error = translator.form.errors.simple_link.limit.replace("%{limit}", appConfig.diz.simple_link.limit)
         } else if (!Validator.isLength(simple_link, appConfig.diz.simple_link.len)) {
             /*simple_links_error = translate(
                 'resources.links.form.errors.simple_link.len',
@@ -103,7 +103,10 @@ class LinkForm extends React.Component {
                     simple_link: simple_link,
                 },
             );*/
-            simple_links_error = translator.form.errors.simple_link.len;// TODO: "set min+max";
+            simple_links_error = translator.form.errors.simple_link.len;
+            simple_links_error = simple_links_error.replace("%{min}", appConfig.diz.simple_link.len.min);
+            simple_links_error = simple_links_error.replace("%{max}", appConfig.diz.simple_link.len.max);
+            simple_links_error = simple_links_error.replace("%{simple_link}", simple_link);
         } else if (!Validator.isAlphanumeric(simple_link)) {
             if (
                 !Validator.contains(simple_link, '_') &&
@@ -113,7 +116,7 @@ class LinkForm extends React.Component {
                     'resources.links.form.errors.simple_link.alpha',
                     { simple_link: simple_link },
                 );*/
-                simple_links_error = translator.form.errors.simple_link.alpha + " simple_link: "+simple_link;
+                simple_links_error = translator.form.errors.simple_link.alpha.replace("%{simple_link}", simple_link);
             }
         }
         if (!Validator.isEmpty(simple_links_error)) {
@@ -161,7 +164,7 @@ class LinkForm extends React.Component {
             /*errorMessage = translate('resources.links.form.errors.long_link', {
                 long_link: dizform.long_link,
             });*/
-            errorMessage = translator.form.errors.long_link + " long_link: "+dizform.long_link;
+            errorMessage = translator.form.errors.long_link.replace("%{long_link}", dizform.long_link);
         }
 
         if (errorMessage) {

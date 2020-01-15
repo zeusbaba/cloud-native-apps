@@ -4,17 +4,19 @@ import React, {useState} from 'react';
 
 import Fab from '@material-ui/core/Fab';
 import Flag from 'react-world-flags';
-import {appConfig} from "./AppConfig";
+import {appConfig, isLocalHost} from "./AppConfig";
 
-function LocaleSwitcher(props) {
+function LocaleSwitcher() {
 
     if (!localStorage.getItem('locale')) {
         localStorage.setItem('locale', appConfig.web.defaultLocale);
     }
     const [locale, setLocale] = useState(localStorage.getItem('locale'));
 
+    // FIXME: enable this when localization is ready!
     return (
-        <div>
+        isLocalHost?
+            (<div>
             <Fab variant="extended"
                  color={"primary"}
                 //color={(locale !== 'nb')?'secondary':'primary'}
@@ -43,7 +45,8 @@ function LocaleSwitcher(props) {
             >
                 <Flag code="gbr" height={(locale !== 'en') ? '16' : '28'}/>
             </Fab>
-        </div>
+        </div>)
+            : null
     );
 }
 

@@ -21,25 +21,9 @@ import {
 } from 'react-share';
 
 import { appConfig } from './../common/AppConfig';
-import { translator, styles } from './LinkAssets';
+import { translator } from './LinkAssets';
 
 function SocialButton(props) {
-  /*if (props.social === 'twitter') {
-    return (
-      <TwitterShareButton
-          url={props.shareUrl}
-          title={props.title}
-          //via='baet.no'
-          hashtags={['baet', 'shortlink']}
-          className="socialshare_network_share-button"
-          >
-          <TwitterIcon
-            size={32}
-            round />
-        </TwitterShareButton>
-    );
-  }
-  else */
   if (props.social === 'facebook') {
     return (
       <FacebookShareButton
@@ -89,7 +73,7 @@ function SocialButton(props) {
         url={props.shareUrl}
         title={props.title + ' ' + props.description}
         //via='baet.no'
-        hashtags={['baet', 'shortlink']}
+        hashtags={['shortlink', 'uLINK']}
         className="socialshare_network_share-button"
       >
         <TwitterIcon size={32} round />
@@ -182,30 +166,10 @@ class SocialShareButtons extends React.Component {
                         />
                     </MenuItem>
                     <MenuItem
-                        key={"google"} onClick={this.handleClose}
-                    >
-                        <SocialButton
-                            social={"google"}
-                            title={title}
-                            shareUrl={shareUrl}
-                            description={description}
-                        />
-                    </MenuItem>
-                    <MenuItem
                         key={"linkedin"} onClick={this.handleClose}
                     >
                         <SocialButton
                             social={"linkedin"}
-                            title={title}
-                            shareUrl={shareUrl}
-                            description={description}
-                        />
-                    </MenuItem>
-                    <MenuItem
-                        key={"whatsapp"} onClick={this.handleClose}
-                    >
-                        <SocialButton
-                            social={"whatsapp"}
                             title={title}
                             shareUrl={shareUrl}
                             description={description}

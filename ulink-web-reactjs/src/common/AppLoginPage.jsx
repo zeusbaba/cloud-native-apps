@@ -114,7 +114,7 @@ class AppLoginPage extends Component {
             .catch(e => this.setState({signInError: e}));
     }
 
-    goToMainPage = () => {
+    goToMainPage() {
         //let history = useHistory();
         //history.push('/');
         browserHistory.push('/'); //this.props.history.push('/');
