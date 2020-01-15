@@ -24,12 +24,12 @@ function LinkShow() {
         /*if (recordId === null) {
             setRecordId(link_id);
         }*/
-        if (isDev) {
+        /*if (isDev) {
             console.log(
                 "1 - recordId: " + recordId
                 + " | record: " + JSON.stringify(record)
             );
-        }
+        }*/
 
         if (!record._id) {
 
@@ -52,12 +52,12 @@ function LinkShow() {
                         }
                         setRecord({...record, ...fish});
 
-                        if (isDev) {
+                        /*if (isDev) {
                             console.log(
                                 "2 - recordId: " + recordId
                                 + " | record: " + JSON.stringify(record)
                             );
-                        }
+                        }*/
                     } else {
                         console.log("Link doesNOT exist!!");
                         setRecord({});

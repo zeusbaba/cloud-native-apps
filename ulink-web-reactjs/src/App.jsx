@@ -24,7 +24,7 @@ const browserHandler = {
     ie: browser => <BadBrowser browser={browser} />,
     default: () => (
         //<AppBrowser />
-        <Router>
+        <Router forceRefresh={true}>
             <AppBrowser />
         </Router>
         ),

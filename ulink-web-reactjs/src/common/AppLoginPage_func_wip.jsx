@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect } from 'react';
 import {feathersClient, usersService} from './FeathersComm';
 
 import packageJson from './../../package.json';
@@ -7,9 +7,8 @@ import {appConfig, isDev, jwtHeaderName, isValidToken, getUserIdFromToken} from 
 import {withRouter, useHistory} from 'react-router-dom';
 
 import Loading from "./Loading";
-//import {createBrowserHistory} from "history";
-//const browserHistory = createBrowserHistory();
-import {browserHistory} from "../AppRouter";
+import {createBrowserHistory} from "history";
+const browserHistory = createBrowserHistory();
 
 function generateUUID() {
     let d = new Date().getTime();
@@ -22,19 +21,12 @@ function generateUUID() {
     return uuid;
 }
 
-class AppLoginPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: {},
-        };
+function AppLoginPage() {
 
-        this.registerUser = this.registerUser.bind(this);
-        this.loginUser = this.loginUser.bind(this);
-        this.goToMainPage = this.goToMainPage.bind(this);
-    }
+    const [dizUser, setDizUser] = useState({});
+    let history = useHistory();
 
-    componentDidMount() {
+    useEffect(() => {
 
         if (!localStorage.getItem('locale')) {
             localStorage.setItem('locale', appConfig.web.defaultLocale);
@@ -47,7 +39,7 @@ class AppLoginPage extends Component {
                 console.log('NEW user with userId: ' + userId);
             }
 
-            const {user} = this.state;
+            let user = {};
             user['userid'] = userId;
             user['password'] = userId;
             user['extra'] = {
@@ -57,9 +49,10 @@ class AppLoginPage extends Component {
                     //engines: packageJson.engines,
                 },
             };
-            this.setState({user});
+            setDizUser(user);
+            //this.setState({user});
 
-            this.registerUser();
+            registerUser();
         } else {
             if (!isValidToken(currentToken)) {
                 const userId = getUserIdFromToken(currentToken);
@@ -67,7 +60,7 @@ class AppLoginPage extends Component {
                     console.log("token expired, will re-create for the same userId... " + userId);
                 }
 
-                const {user} = this.state;
+                let user = {};//const {user} = this.state;
                 user['userid'] = userId;
                 user['password'] = userId;
                 user['extra'] = {
@@ -78,18 +71,19 @@ class AppLoginPage extends Component {
                         //engines: packageJson.engines,
                     },
                 };
-                this.setState({user});
-                this.registerUser(); //this.loginUser();
+                setDizUser(...user);
+                //this.setState({user});
+                registerUser(); //this.loginUser();
             }
             if (isDev) console.log('-> existing user! ...redirect');
         }
-    }
+    }, [dizUser]);
 
     //loginUser = ({ username, userid }) => {
-    loginUser() {
+    const loginUser = (() => {
 
         //const { push, location} = this.props; // eslint-disable-line
-        const {user} = this.state;
+        let user = dizUser;//const {user} = this.state;
 
         feathersClient
             .authenticate({
@@ -103,30 +97,25 @@ class AppLoginPage extends Component {
                 }
 
                 // FIXME: redirect is not working!
-                //this.props.history.push('/');
-                this.goToMainPage();
+                history.push('/');
+                //this.goToMainPage();
 
                 //this.context.history.push('/');
                 //push(location.state ? location.state.nextPathname : '/')
                 //let history = useHistory();
                 //history.pushState("/");
             })
-            .catch(e => this.setState({signInError: e}));
-    }
+            .catch(e =>
+                setDizUser({signInError: e})
+                //this.setState({signInError: e})
+            );
+    });
 
-    goToMainPage = () => {
-        //let history = useHistory();
-        //history.push('/');
-        browserHistory.push('/'); //this.props.history.push('/');
-        //return <Router><Redirect to={"/"} /></Router>
-        //return <RedirectToForm />
-    };
-
-    registerUser() {
-        const {user} = this.state;
+    const registerUser = (() => {
+        let user = dizUser; //const {user} = this.state;
         //registerUser = ({ username, userid, extra }) => {
 
-        if (!user.extra.existingUserId) {
+        if (user.extra && !user.extra.existingUserId) {
             // create a new user!
             usersService
                 .create({
@@ -139,9 +128,11 @@ class AppLoginPage extends Component {
                         console.log('user created OK... userid: ' + user.userid);
                     }
                     //this.loginUser({username, userid});
-                    this.loginUser();
+                    loginUser();
                 })
-                .catch(e => this.setState({registerError: e}));
+                .catch(e =>
+                    setDizUser({registerError: e})//this.setState({registerError: e})
+                );
         } else {
             // check for existing user! if not create one!
             console.log("check for existing user! if not create one!");
@@ -163,7 +154,7 @@ class AppLoginPage extends Component {
                         if (isDev) {
                             console.log('user already exists, do login...userid: ' + fish.userid);
                         }
-                        this.loginUser();
+                        loginUser();
                     } else {
                         // user not found, create new
                         usersService
@@ -174,21 +165,21 @@ class AppLoginPage extends Component {
                             })
                             .then(() => {
                                 //this.loginUser({username, userid});
-                                this.loginUser();
+                                loginUser();
                             })
-                            .catch(e => this.setState({registerError: e}));
+                            .catch(e =>
+                                setDizUser({registerError: e})//this.setState({registerError: e})
+                            );
                     }
                 });
         }
-    }
+    });
 
-    render() {
-
-        return(
-            //isValidToken()? <RedirectToMain /> : <Loading/>
-            isValidToken()? this.props.history.push("/") : <Loading/>
-        );
-    }
+    return(
+        //isValidToken()? <RedirectToMain /> : <Loading/>
+        //isValidToken()? this.props.history.push("/") : <Loading/>
+        isValidToken()? history.push("/") : <Loading/>
+    );
 }
 
 export default withRouter(AppLoginPage);

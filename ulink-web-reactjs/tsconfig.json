@@ -31,9 +31,9 @@
   "outDir": "./dist/",
   "rootDir": "./src/",
   "files": [
-    "./src/resub/Counter.tsx",
-    "./src/resub/CounterDisplay.tsx",
-    "./src/resub/CounterStore.tsx"
+    "./cemetary-old/resub/Counter.tsx",
+    "./cemetary-old/resub/CounterDisplay.tsx",
+    "./cemetary-old/resub/CounterStore.tsx"
   ],
   "include": [
     "./src/**/*"

@@ -11,7 +11,7 @@ import {Helmet} from "react-helmet";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import MyMenu from "./common/AppMenu";
+import AppMenu from "./common/AppMenu";
 import Typography from "@material-ui/core/Typography";
 import LocaleSwitcher from "./common/LocaleSwitcher";
 import Container from "@material-ui/core/Container";
@@ -32,21 +32,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function AppBrowser(props) {
+function AppBrowser() {
     const classes = useStyles();
     const location = useLocation();
     if (isDev) {
         console.log("location: " + JSON.stringify(location));
     }
-
-    /*props.initialize({
-        languages: [
-            {name: "English", code: "en"},
-            {name: "Norwegian", code: "nb"}
-        ],
-        translation: globalTranslations,
-        options: {renderToStaticMarkup}
-    });*/
 
     return (
         <div>
@@ -68,7 +59,7 @@ function AppBrowser(props) {
 
                 <AppBar position="sticky">
                     <Toolbar>
-                        <MyMenu selectedItem={location.pathname}/>
+                        <AppMenu selectedItem={location.pathname}/>
 
                         <Typography variant="h6" className={classes.title}>
                             uLINK.no :: Shorten & Simplify Links!

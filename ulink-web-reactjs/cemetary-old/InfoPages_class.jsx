@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Tabs from '@material-ui/core/Tabs';
@@ -8,39 +8,55 @@ import IconInfo from '@material-ui/icons/Info';
 import IconLock from '@material-ui/icons/Lock';
 import IconCode from '@material-ui/icons/Code';
 
-import About from './About';
-import Terms from './Terms';
-import Developers from './Developers';
-import {useParams} from "react-router-dom";
+import About from '../src/pages/About';
+import Terms from '../src/pages/Terms';
+import Developers from '../src/pages/Developers';
 
 const tabValues = ['/about', '/terms', '/developers'];
 function TabContainer(props) {
     const { tabValue } = props;
-    if (tabValue.indexOf('terms')>0) {
+    if (tabValue === '/terms') {
         return <Terms/>
     }
-    else if (tabValue.indexOf('developers')>0) {
+    else if (tabValue === '/developers') {
         return <Developers/>
     }
     else {// default
         return <About/>
     }
 }
-function InfoPages() {
-    const [tabValue, setTabValue] = useState(tabValues[0]);
-    const {page_name} = useParams();
+class InfoPages extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tabValue: tabValues[0],
+    };
+  }
+  componentDidMount() {
+    // eslint-disable-next-line
+    if (this.props.match && tabValues.indexOf(this.props.match.path) >= 0) {
+      this.setState({
+          // eslint-disable-next-line react/prop-types
+        tabValue: this.props.match.path,
+      });
+    }
+  }
 
-    useEffect(() => {
-        if (tabValues.indexOf(page_name) >= 0) {
-            setTabValue(page_name);
-        }
-    }, [tabValue]);
+  handleTabChange = (event, value) => {
+    this.setState({
+      tabValue: value,
+    });
+  };
+
+  render() {
+    // TODO const { translate } = this.context;
+    const { tabValue } = this.state;
 
     return (
       <div>
         <Tabs
-            value={tabValue}
-            onChange={(event, value) => setTabValue(value)}
+            value={this.state.tabValue}
+            onChange={this.handleTabChange}
             indicatorColor="primary"
             textColor="primary"
             centered //variant={"fullWidth"}
@@ -66,6 +82,7 @@ function InfoPages() {
         <TabContainer tabValue={tabValue} />
       </div>
     );
+  }
 }
 
 InfoPages.contextTypes = {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { translator, styles } from './LinkAssets';
-import {appConfig, isDev, jwtHeaderName} from './../common/AppConfig';
+import {appConfig, isDev, isLocalHost, jwtHeaderName} from './../common/AppConfig';
 
 import {feathersClient} from '../common/FeathersComm';
 
@@ -21,6 +21,8 @@ import Image from 'material-ui-image';
 import ChipInput from 'material-ui-chip-input';
 import Chip from '@material-ui/core/Chip';
 
+import {browserHistory} from "../AppRouter";
+
 import ReCAPTCHA from 'react-google-recaptcha';
 const toastPosition = toast.POSITION.BOTTOM_RIGHT;
 let reCAPTCHA;
@@ -38,6 +40,7 @@ class LinkForm extends React.Component {
             },
             formError: false,
             recaptcha: false,
+            submitting: false
         };
 
         this.handleLongLink = this.handleLongLink.bind(this);
@@ -47,8 +50,11 @@ class LinkForm extends React.Component {
 
         this.onChangeReCAPTCHA = this.onChangeReCAPTCHA.bind(this);
     }
-    //componentDidMount() {
-    //}
+    componentDidMount() {
+        if (isLocalHost()) {// recaptcha is skipped in local
+            this.setState({recaptcha: true});
+        }
+    }
 
     handleLongLink(event) {
         //const { translate } = this.props; // eslint-disable-line
@@ -169,6 +175,7 @@ class LinkForm extends React.Component {
             return;
         }
 
+        this.setState({submitting: true});
         return (
             feathersClient
                 .service('links')
@@ -179,6 +186,7 @@ class LinkForm extends React.Component {
                     headers: {'Authorization': 'Bearer ' + localStorage.getItem(jwtHeaderName)}
                 })
                 .then(resp => {
+                    this.setState({submitting: false});
                     if (isDev) {
                         console.log('resp' + JSON.stringify(resp));
                     }
@@ -188,18 +196,22 @@ class LinkForm extends React.Component {
                         redirectTo = '/links/' + resp._id + '/show';
                     }
                     if (isDev) {
-                        toast.info(JSON.stringify(resp), {
+                        toast.info(
+                            'redirectTo: '+redirectTo + ' | ' + JSON.stringify(resp),
+                            {
                             position: toastPosition, //toast.POSITION.BOTTOM_LEFT,
                             className: 'dark-toast',
                             progressClassName: 'transparent-progress',
                             autoClose: 5000,
                         });
                     }
-                    this.context.history.push(redirectTo);
+                    browserHistory.push(redirectTo);
+                    //this.props.history.push(redirectTo);
                     //push(location.state ? location.state.nextPathname : redirectTo);
                 })
                 //.catch(e => this.setState({ formError: e }));
                 .catch(error => {
+                    this.setState({submitting: false});
                     /*
                   {name: "BadRequest", message: "simple_link already exists!!!", code: 400, className: "bad-request",…}
                     className:"bad-request"
@@ -242,16 +254,7 @@ class LinkForm extends React.Component {
     }
 
     render() {
-        const { submitting } = this.props; // eslint-disable-line
-        //const muiTheme = createMuiTheme(myTheme); //(theme);
-        /* const muiTheme = createMuiTheme({
-             palette: {
-                 type: 'dark', // Switching the dark mode on is a single property value change.
-             },
-         }); */
-        //const { primary1Color } = getColorsFromTheme(muiTheme);
-        //const { dizform } = this.state;
-        //-let DateTimeFormat = global.Intl.DateTimeFormat;
+        const { submitting } = this.state; // eslint-disable-line
 
         return (
 

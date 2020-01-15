@@ -5,30 +5,25 @@ import {linksService} from '../common/FeathersComm';
 
 import LinkMeta from "./LinkMeta";
 import Loading from "../common/Loading";
-import Flag from "react-world-flags";
 import Fab from "@material-ui/core/Fab";
+import {NavLink} from "react-router-dom";
 
-/*function ReloadLinks(props) {
-    return (
-       <div>
-           <Fab variant="extended"
-                color={"primary"}
-                style={{marginRight: 4}}
-                size={'medium'}
-                onClick={() => this.loadLinksFromApi }
-           >
-               RELOAD
-           </Fab>
-       </div>
-    );
-}*/
 function DisplayLinksList(props) {
 
     const {records} = props;
     return (
-        <div>
-            {records.data.map((record, key) =>
-                <LinkMeta key={key} record={record} />)
+        <div align={"center"}>
+            {(records.data.length===0) ?
+                (
+                    <div>
+                        No links to display yet...
+                        <NavLink to="/">&gt;&gt; shorten a link now!</NavLink>
+                    </div>
+                )
+                : (
+                    records.data.map((record, key) =>
+                        <LinkMeta key={key} record={record} />)
+                )
             }
         </div>
     );
@@ -80,8 +75,8 @@ class LinkList extends React.Component {
         return (
             this.state.records.total===null ? <Loading/>
             //    : <div>{ JSON.stringify(this.state.records) }</div>
-                : <div>
-                    <div>
+                : (<div><br/>
+                    <div align={"right"}>
                         <Fab variant="extended"
                              color={"primary"}
                              style={{marginRight: 4}}
@@ -93,10 +88,7 @@ class LinkList extends React.Component {
                     </div>
                     <br/>
                     <DisplayLinksList records={this.state.records}/>
-                </div>
-            /*: <div>
-                    {this.state.records.data.map((record, key) => <LinkMeta key={record._id} record={record} />)}
-                </div>*/
+                </div>)
         );
     }
 }

@@ -11,14 +11,15 @@ import {composeWithDevTools} from "redux-devtools-extension";
 
 
 const rootElement = document.getElementById("root");
-/*ReactDOM.render(
+ReactDOM.render(
     <App />,
     rootElement
-);*/
-ReactDOM.render(
+);
+/*ReactDOM.render(
     <App compiler={"TypeScript"} framework={"React"} />,
     rootElement
-);
+);*/
+
 /*ReactDOM.render(
     <Provider store={store}>
         <App />

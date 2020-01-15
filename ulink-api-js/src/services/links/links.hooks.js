@@ -4,9 +4,11 @@ const authHooks = require('feathers-authentication-hooks');
 const logger = require('./../../logger');
 const errors = require('@feathersjs/errors'); // https://www.npmjs.com/package/feathers-errors
 const Validator = require('validator'); // https://github.com/chriso/validator.js
-var string = require('string'); // https://www.npmjs.com/package/string
+const string = require('string'); // https://www.npmjs.com/package/string
 
-var shortid = require('shortid'); // https://github.com/dylang/shortid
+const _ = require("lodash");
+
+const shortid = require('shortid'); // https://github.com/dylang/shortid
 //shortid.characters('0123456789abcdefghijklmnopqrstuvwxyz');
 shortid.seed(2480);
 
@@ -58,7 +60,8 @@ module.exports = {
           );
         }
 
-        let simple_links = commonHooks.getByDot(hook.data, 'simple_links');
+        //let simple_links = commonHooks.getByDot(hook.data, 'simple_links');
+        let simple_links = _.get(hook.data, 'simple_links');
 
         if (!simple_links) {
           simple_links = [];
@@ -72,7 +75,8 @@ module.exports = {
           simple_links[index] = simple_links[index].toString().toLowerCase();
         }
 
-        commonHooks.setByDot(hook.data, 'simple_links', simple_links);
+        //commonHooks.setByDot(hook.data, 'simple_links', simple_links);
+        _.set(hook.data, 'simple_links', simple_links);
         /*if(simple_links.length===0) {
           commonHooks.deleteByDot(hook.data, 'simple_links');
         }
@@ -80,12 +84,13 @@ module.exports = {
           commonHooks.setByDot(hook.data, 'simple_links', simple_links);
         }*/
 
-        logger.info(JSON.stringify(hook.data));
+        //logger.info(JSON.stringify(hook.data));
       },
 
       hook => {
         if(hook.data.simple_links.length===0) {
-          commonHooks.deleteByDot(hook.data, 'simple_links');
+          //commonHooks.deleteByDot(hook.data, 'simple_links');
+          _.omit(hook.data, 'simple_links');
         }
       },
 
@@ -119,7 +124,7 @@ module.exports = {
 
           // validate simple_links
           for (let simple_link of hook.data.simple_links) {
-            logger.info('simple_link', simple_link);
+            //logger.info('simple_link', simple_link);
             //if (!Validator.isLength(simple_link, {min:5, max:22})) {
             if (!Validator.isLength(simple_link, appconfig.diz.simple_link.len)) {
               return Promise.reject(
@@ -165,7 +170,7 @@ module.exports = {
             if (item.data && item.data.length>0) {
               item = item.data[0];
             }
-            logger.info('>>check phishtank', item);
+            //logger.info('>>check phishtank', item);
             if (item && item._id) {
               //return Promise.reject(
               throw new errors.BadRequest(
@@ -235,7 +240,7 @@ module.exports = {
       },
 
       hook => {
-        if(!hook.data.simple_links) return;
+        if(!hook.data.simple_links || hook.data.simple_links.length===0) return;
 
         commonHooks.debug('check if requested simple_link already exists in simple_links');
 
@@ -243,7 +248,7 @@ module.exports = {
         for (let simple_link of hook.data.simple_links) {
           theOr.push( { simple_links: simple_link } );
         }
-        logger.info('theOr', JSON.stringify(theOr));
+        //logger.info('simple_links.theOr', theOr);
         return hook.app.service('links')
           .find({
             /*query: { simple_links: hook.data.simple_links }*/
@@ -262,7 +267,7 @@ module.exports = {
             if (item.data && Array.isArray(item.data) && item.data.length>0) {
               item = item.data[0];
             }
-            logger.info('>>check simple_links', item);
+            //logger.info('>>check simple_links', item);
             if (item && item.simple_links) {
               throw new errors.BadRequest(
                 'simple_link already exists!!!',

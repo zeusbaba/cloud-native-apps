@@ -3,6 +3,9 @@ import moment from "moment";
 
 export const isLocalHost = hostname => {
     // call like this; isLocalHost(window.location.hostname)
+    if (!hostname) {
+        hostname = window.location.hostname
+    }
     return !!(
         hostname === 'localhost' ||
         //hostname === '[::1]' ||

@@ -24,7 +24,7 @@ function LocaleSwitcher(props) {
                  onClick={() => {
                      setLocale('nb');
                      localStorage.setItem('locale', 'nb');
-                     props.setActiveLanguage('nb');
+                     //props.setActiveLanguage('nb');
                  } }
             >
                 <Flag code="nor" height={(locale !== 'nb') ? '16' : '28'}/>
@@ -38,7 +38,7 @@ function LocaleSwitcher(props) {
                  onClick={() => {
                      setLocale('en');
                      localStorage.setItem('locale', 'en');
-                     props.setActiveLanguage('en');
+                     //props.setActiveLanguage('en');
                  } }
             >
                 <Flag code="gbr" height={(locale !== 'en') ? '16' : '28'}/>

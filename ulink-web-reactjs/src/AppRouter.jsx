@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router,
     Route, Switch, withRouter
 } from 'react-router-dom';
-import MyLoginPage from "./common/AppLoginPage";
+import AppLoginPage from "./common/AppLoginPage";
 import InfoPages from "./pages/InfoPages";
 
 import LinkForm from "./links/LinkForm";
@@ -11,29 +11,9 @@ import LinkShow from "./links/LinkShow";
 import LinkList from "./links/LinkList";
 
 import {createBrowserHistory} from "history";
-const browserHistory = createBrowserHistory();
+export const browserHistory = createBrowserHistory();
 
-/*
-const routes = [
-    {
-        path: "/",
-        component: MainPage
-    },
-    {
-        path: "/links",
-        component: LinksPage
-    },
-    {
-        path: "/about",
-        component: AboutPage
-    },
-    {
-        path: "/login",
-        component: MyLoginPage
-    },
-];*/
-
-function AppRouter(props) {
+function AppRouter() {
 
     return (
 
@@ -43,24 +23,24 @@ function AppRouter(props) {
                 <Route key={"main"} exact path="/">
                     <LinkForm />
                 </Route>
-                <Route key={"links"} exact path="/links">
-                    <LinkList/>
-                </Route>
-                <Route key={"linkShow"} exact path="/links/:link_id">
+                <Route key={"linkShow"} path="/links/:link_id">
                     <LinkShow/>
                 </Route>
                 {/* TODO display Stats! */}
-                <Route key={"linkStats"} exact path="/links/:link_id/stats">
+                <Route key={"linkStats"} path="/links/:link_id/stats">
                     <LinkShow/>
                 </Route>
+                <Route key={"links"} path="/links">
+                    <LinkList/>
+                </Route>
 
-                <Route key={"about"} exact path="/about">
+                <Route key={"about"} path="/about">
                     <InfoPages />
                 </Route>
-                <Route key={"login"} exact path="/login">
-                    <MyLoginPage/>
+                <Route key={"login"} path="/login">
+                    <AppLoginPage/>
                 </Route>
-                <Route key={"k8s-status"} exact path="/k8s-status">
+                <Route key={"k8s-status"} path="/k8s-status">
                     <div>OK</div>
                 </Route>
             </Switch>

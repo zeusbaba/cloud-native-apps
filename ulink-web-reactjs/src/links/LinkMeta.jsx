@@ -75,9 +75,24 @@ class LinkMeta extends Component {
     });
   }
 
+  normalizeRecord(record) {
+    if (isDev) {
+      console.log('record01-> ' + JSON.stringify(record));
+    }
+    if (record.simple_links && record.simple_links.length===0) {
+      let simple_links = [];
+      simple_links.push(record.short_link);
+      record.simple_links = simple_links;
+    }
+    if (isDev) {
+      console.log('record02-> ' + JSON.stringify(record));
+    }
+  }
+
   render() {
     const { record, isSingleItem } = this.props; // eslint-disable-line
-    //const { translate } = this.context;
+    //this.normalizeRecord(record);
+
     return (
       <Card key={record._id} style={styles.card}>
         <CardContent>
@@ -91,7 +106,9 @@ class LinkMeta extends Component {
             </Row>
             <Row align={'center'}>
               <Col xs={12} md={12}>
-                <SimpleLinks record={record} oncopy={this.handleOnCopy} />
+                {(record.simple_links && record.simple_links.length>0) &&
+                  <SimpleLinks record={record} oncopy={this.handleOnCopy} />
+                }
               </Col>
             </Row>
 
@@ -127,12 +144,6 @@ class LinkMeta extends Component {
                       <IconLink style={{ fontSize: 28 }} />
                   </Button>
                   <br />
-                  {/* <TextField
-                    record={record}
-                    label="long_link"
-                    source="long_link"
-                    sortable={false}
-                  /> */}
                 </div>
               </Col>
             </Row>
