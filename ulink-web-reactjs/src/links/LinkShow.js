@@ -31,7 +31,7 @@ function LinkShow(props) {
 
             // load item from API
             linksService
-                .get(recordId, {
+                .get(link_id, {
                     headers: {'Authorization': 'Bearer ' + localStorage.getItem(jwtHeaderName)}
                 })
                 .then(result => {
@@ -58,10 +58,10 @@ function LinkShow(props) {
 
     useEffect(() => {
 
-        if (displayStats){// && !recordStats['stats']) {
+        if (displayStats && !recordStats['stats']) {
             // load stats from API
             statsService
-                .get(recordId, {
+                .get(link_id, {
                     headers: {'Authorization': 'Bearer ' + localStorage.getItem(jwtHeaderName)}
                 })
                 .then(result => {
@@ -78,12 +78,15 @@ function LinkShow(props) {
                         }
                         setRecordStats({...recordStats, ...fish});
                     } else {
-                        console.log("LinkStats doesNOT exist!!");
+                        if (isDev) {
+                            console.log("LinkStats doesNOT exist!!");
+                        }
                         setRecordStats({});
                     }
                 });
         }
     }, [recordStats]);
+
 
     return (
         record.long_link===null ?

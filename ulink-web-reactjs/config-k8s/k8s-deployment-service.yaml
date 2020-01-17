@@ -50,7 +50,7 @@ spec:
       #serviceAccountName: default
       containers:
         - name: ulink-web-reactjs
-          image: zeusbaba/ulink-web-reactjs:2020.1.6
+          image: zeusbaba/ulink-web-reactjs:2020.1.18
           imagePullPolicy: Always
           env: # custom environment variables beginning with REACT_APP_
             - name: REACT_APP_API_URL

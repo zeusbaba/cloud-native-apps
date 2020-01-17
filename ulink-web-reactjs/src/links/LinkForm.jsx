@@ -14,7 +14,6 @@ import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import IconTransform from '@material-ui/icons/Transform';
 import Image from 'material-ui-image';
 
@@ -24,6 +23,8 @@ import Chip from '@material-ui/core/Chip';
 import {browserHistory} from "../AppRouter";
 
 import ReCAPTCHA from 'react-google-recaptcha';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Fab from "@material-ui/core/Fab";
 const toastPosition = toast.POSITION.BOTTOM_RIGHT;
 let reCAPTCHA;
 
@@ -191,9 +192,13 @@ class LinkForm extends React.Component {
                 .then(resp => {
                     this.setState({submitting: false});
                     if (isDev) {
-                        console.log('resp' + JSON.stringify(resp));
+                        console.log('resp: ' + JSON.stringify(resp));
+                        // resp{"_id":"18vv57","simple_links":["duckduck"],"long_link":"http://duckduckgo.com","createdAt":"2017-09-09T20:44:21.893Z","short_link":"18vv57"}
+                        /* NB! mongodb v3.5.0 uses _id as object!!!
+                        resp: {"_id":{"s":"xirfymw","orig":"xirfymw","length":7},"simple_links":[],"long_link":"https://www.google.com","createdAt":"2020-01-17T20:20:11.462Z","short_link":{"s":"xirfymw","orig":"xirfymw","length":7}}
+                         */
                     }
-                    // resp{"_id":"18vv57","simple_links":["duckduck"],"long_link":"http://duckduckgo.com","createdAt":"2017-09-09T20:44:21.893Z","short_link":"18vv57"}
+
                     let redirectTo = '/';
                     if (resp._id) {
                         redirectTo = '/links/' + resp._id + '/show';
@@ -209,8 +214,6 @@ class LinkForm extends React.Component {
                         });
                     }
                     browserHistory.push(redirectTo);
-                    //this.props.history.push(redirectTo);
-                    //push(location.state ? location.state.nextPathname : redirectTo);
                 })
                 //.catch(e => this.setState({ formError: e }));
                 .catch(error => {
@@ -282,17 +285,7 @@ class LinkForm extends React.Component {
                         }}
                     >
                         <CardContent>
-                            {/* FIXME for long_link
-                  InputLabelProps={{
-                  }}
-                  floatingLabelStyle={styles.form.inputField.floatingLabelStyle}
-                  floatingLabelFocusStyle={
-                    styles.form.inputField.floatingLabelFocusStyle
-                  }
-                  hintStyle={styles.form.inputField.hintStyle}
-                  errorStyle={styles.form.inputField.errorStyle}
-                  underlineStyle={styles.form.inputField.underlineStyle}
-                */}
+
                             <TextField
                                 id="long_link"
                                 onChange={this.handleLongLink}
@@ -311,20 +304,6 @@ class LinkForm extends React.Component {
 
                         <CardContent>
 
-                            {/* FIXME for simple_links
-                  chipContainerStyle={{
-                    overflow: 'auto',
-                    maxHeight: '144px',
-                    textAlign: 'left',
-                  }}
-                  floatingLabelStyle={styles.form.inputField.floatingLabelStyle}
-                  floatingLabelFocusStyle={
-                    styles.form.inputField.floatingLabelFocusStyle
-                  }
-                  hintStyle={styles.form.inputField.hintStyle}
-                  errorStyle={styles.form.inputField.errorStyle}
-                  underlineStyle={styles.form.inputField.underlineStyle}
-                  */}
                             <ChipInput
                                 id="simple_links-chipinput"
                                 allowDuplicates={false}
@@ -375,11 +354,16 @@ class LinkForm extends React.Component {
                                     reCAPTCHA = el;
                                 }}
                             />
-                            <Button variant="contained" color="primary" size="medium"
-                                    type="submit"
-                                    disabled={submitting}
-                                //-icon={submitting && <CircularProgress size={25} thickness={2} />}
+
+                            <Fab variant="extended" color="secondary" size="large"
+                                 type="submit"
+                                 disabled={submitting}
                             >
+                                {submitting ?
+                                    <CircularProgress fontSize="large" />
+                                    : <IconTransform fontSize="large"/>
+                                }
+
                                 <Typography gutterBottom
                                             variant="h5"
                                             align="left"
@@ -391,9 +375,7 @@ class LinkForm extends React.Component {
                                         translator.form.submit
                                     }
                                 </Typography>
-                                <IconTransform fontSize="large"/>
-
-                            </Button>
+                            </Fab>
                         </CardActions>
                     </form>
 

@@ -30,7 +30,7 @@ spec:
         run: api-js
     spec:
       containers:
-      - image: zeusbaba/ulink-web-reactjs:2020.1.1
+      - image: zeusbaba/ulink-web-reactjs:2020.1.24
         name: api-js
         ports:
         - name: app-port

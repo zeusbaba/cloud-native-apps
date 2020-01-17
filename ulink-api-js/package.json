@@ -1,7 +1,7 @@
 {
   "name": "ulink-api-js",
   "description": "uLINK.no API Server using FeathersJS",
-  "version": "2020.1.4",
+  "version": "2020.1.18",
   "homepage": "https://www.ulink.no",
   "license": "MIT",
   "repository": {
@@ -62,7 +62,7 @@
     "helmet": "^3.21.2",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "mongodb": "^3.5.0",
+    "mongodb": "^3.4.1",
     "node-fetch": "^2.6.0",
     "path": "^0.12.7",
     "random-int": "^2.0.1",

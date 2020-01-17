@@ -172,7 +172,7 @@ $ kubectl delete pod ${appName}
 
 #### k8s Deployments and Services
 More common and advanced version is using Deployments and Services.  
-See [k8s-deployment.yaml](config-k8s/k8s-deployment.yaml) and [k8s-service.yaml](config-k8s/k8s-service.yaml)  
+See [k8s-deployment.yaml](config-k8s/k8s-deployment-service.yaml) and [k8s-service.yaml](config-k8s/k8s-service.yaml)  
 
 
 ```bash

@@ -12,7 +12,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import AppMenu from "./common/AppMenu";
 import Typography from "@material-ui/core/Typography";
 import LocaleSwitcher from "./common/LocaleSwitcher";
-import Container from "@material-ui/core/Container";
 import AppRouter from "./AppRouter";
 
 import {ToastContainer} from "react-toastify";

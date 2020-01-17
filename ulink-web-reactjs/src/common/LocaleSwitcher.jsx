@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 
 import Fab from '@material-ui/core/Fab';
 import Flag from 'react-world-flags';
-import {appConfig, isLocalHost} from "./AppConfig";
+import {appConfig, isDev} from "./AppConfig";
 
 function LocaleSwitcher() {
 
@@ -15,7 +15,7 @@ function LocaleSwitcher() {
 
     // FIXME: enable this when localization is ready!
     return (
-        isLocalHost?
+        isDev?
             (<div>
             <Fab variant="extended"
                  color={"primary"}

@@ -11,7 +11,7 @@ spec:
   #  runAsUser: 1000
   containers:
     - name: ulink-api-js
-      image: zeusbaba/ulink-api-js:2020.1.1
+      image: zeusbaba/ulink-api-js:2020.1.24
       #securityContext:
       #  runAsUser: 1000
       #  capabilities:

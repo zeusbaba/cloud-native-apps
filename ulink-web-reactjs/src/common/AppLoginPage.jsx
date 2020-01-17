@@ -4,11 +4,9 @@ import {feathersClient, usersService} from './FeathersComm';
 import packageJson from './../../package.json';
 import {appConfig, isDev, jwtHeaderName, isValidToken, getUserIdFromToken} from './AppConfig';
 
-import {withRouter, useHistory} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 import Loading from "./Loading";
-//import {createBrowserHistory} from "history";
-//const browserHistory = createBrowserHistory();
 import {browserHistory} from "../AppRouter";
 
 function generateUUID() {

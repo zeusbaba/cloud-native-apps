@@ -26,7 +26,7 @@ function SimpleLinks(props) {
   }
   listItems.push(
     <Button size={"small"}
-      key={short_link}
+      key={short_link+"-01"}
       target="_blank" //rel="noopener noreferrer"
       color={"secondary"}
       href={appConfig.web.baseUrl + short_link}
