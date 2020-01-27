@@ -26,14 +26,18 @@ function TabContainer(props) {
         return <About/>
     }
 }
-function InfoPages() {
+function InfoPages(props) {
     const [tabValue, setTabValue] = useState(tabValues[0]);
-    const {page_name} = useParams();
 
+    const {page_name} = useParams();
     useEffect(() => {
-        if (tabValues.indexOf(page_name) >= 0) {
+        if (tabValues.indexOf('/'+page_name)>=0) {
             setTabValue(page_name);
         }
+
+        /*if (props.page_name && tabValues.indexOf('/'+props.page_name)>=0) {
+            setTabValue('/'+props.page_name);
+        }*/
     }, [tabValue]);
 
     return (

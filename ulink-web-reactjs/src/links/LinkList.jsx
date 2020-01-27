@@ -43,6 +43,11 @@ class LinkList extends React.Component {
         linksService
             .find({
                 headers: {'Authorization': 'Bearer ' + localStorage.getItem(jwtHeaderName)}
+                /*query: {
+                    $sort: {
+                        createdAt: -1
+                    }
+                }*/
             })
             .then(result => {
                 throw result;

@@ -1,7 +1,7 @@
 {
   "name": "ulink-web-reactjs",
   "description": "uLINK.no reactive frontend using React.js, material-ui",
-  "version": "2020.1.18",
+  "version": "2020.1.20",
   "private": true,
   "homepage": "https://www.ulink.no",
   "license": "MIT",

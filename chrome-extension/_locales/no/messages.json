@@ -1,22 +1,22 @@
 {
 	"extension_name": {
-		"message": "BAET.no :: Forkorte & Forenkle Linker!",
+		"message": "uLINK.no :: Forkorte & Forenkle Linker!",
 		"description": "The name of the extension"
 	},
 	"extension_short_name": {
-		"message": "BAET.no",
+		"message": "uLINK.no",
 		"description": "The short_name of the extension"
 	},
 	"extension_description": {
-		"message": "En enkel å bruke utvidelse som lar deg å forkorte URL nettsiden av din nåværende faner.",
+		"message": "En enkel tjeneste som kan brukes til å forkorte linker direkte fra aktiv tab i nettleser.",
 		"description": "The description of the extension"
 	},
 	"extension_default_title": {
-		"message": "BAET.no :: Forkorte & Forenkle linker!",
+		"message": "uLINK.no :: Forkorte & Forenkle linker!",
 		"description": "The default title of the extension"
 	},
 	"headline": {
-		"message": "BAET.no :: Forkorte & Forenkle linker!",
+		"message": "uLINK.no :: Forkorte & Forenkle linker!",
 		"description": "The first headline of the extension"
 	},
 	"tabs": {
@@ -28,7 +28,7 @@
 		"description": ""
 	},
 	"url_example": {
-		"message": "Forkorte diz link!",
+		"message": "Forkorte linken!",
 		"description": ""
 	},
 	"shorten": {
@@ -36,7 +36,7 @@
 		"description": ""
 	},
 	"short_url": {
-		"message": "Short URL",
+		"message": "Kort URL",
 		"description": ""
 	},
 	"short_url_width": {

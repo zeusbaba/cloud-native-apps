@@ -37,6 +37,16 @@ function AppRouter() {
                 <Route key={"about"} path="/about">
                     <InfoPages />
                 </Route>
+                <Route key={"terms"} path="/about">
+                    <InfoPages page_name={"terms"}/>
+                </Route>
+                <Route key={"developers"} path="/about">
+                    <InfoPages page_name={"developers"}/>
+                </Route>
+                <Route key={"faq"} path="/about">
+                    <InfoPages />
+                </Route>
+
                 <Route key={"login"} path="/login">
                     <AppLoginPage/>
                 </Route>

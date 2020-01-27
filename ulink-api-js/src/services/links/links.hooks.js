@@ -35,6 +35,16 @@ module.exports = {
         from: 'params.user.userid',
         as: 'params.query.userid'
       }),
+      hook => {
+        const { query = {} } = hook.params;
+        if (!query.$sort) {
+          query.$sort = {
+            createdAt: -1
+          };
+        }
+
+        hook.params.query = query;
+      }
     ],
     get: [],
     create: [
@@ -296,9 +306,11 @@ module.exports = {
           hook.data._id = string(hook.data._id).replaceAll('-', '');
           hook.data._id = string(hook.data._id).replaceAll('_', '');
           hook.data._id = hook.data._id.toLowerCase();
+          //logger.info("before: " + hook.data._id);
           if (string(hook.data._id).length > appconfig.diz.short_link.len) {
-            hook.data._id = string(hook.data._id).left(appconfig.diz.short_link.len).s;
+            hook.data._id = string(hook.data._id).left(appconfig.diz.short_link.len).toString();
           }
+          //logger.info("after: " + hook.data._id);
           /* hook.data._id = anyid()
             .time('ms')
             .seq().resetByTime()
@@ -320,7 +332,19 @@ module.exports = {
         }
       },
 
-      commonHooks.setNow('createdAt', 'updatedAt')
+      commonHooks.setNow('createdAt', 'updatedAt'),
+
+      hook => {
+        //logger.info("(before) links.create data: %s", JSON.stringify(hook.data));
+
+        // FIXME: strangely _id becomes jsonObj, this fix is a workaround
+        // f.eks. "_id":{"s":"kakliv","orig":"kakliv","length":6}
+        if (hook.data._id['s']) {
+          hook.data._id = hook.data._id['s'];
+        }
+
+        //logger.info("(after) links.create data: %s", JSON.stringify(hook.data));
+      }
     ],
     update: [
       commonHooks.setNow('updatedAt')

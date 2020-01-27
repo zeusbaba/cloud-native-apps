@@ -60,7 +60,7 @@ spec:
       #  runAsNonRoot: true
       containers:
         - name: ulink-api-js
-          image: zeusbaba/ulink-api-js:2020.1.18
+          image: zeusbaba/ulink-api-js:2020.1.20
           imagePullPolicy: Always
           #securityContext:
           #  runAsUser: 1000

@@ -8,7 +8,18 @@ shortid.seed(2480);
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
-    find: [],
+    find: [
+      hook => {
+        const { query = {} } = hook.params;
+        if (!query.$sort) {
+          query.$sort = {
+            createdAt: -1
+          };
+        }
+
+        hook.params.query = query;
+      }
+    ],
     get: [],
     create: [
       commonHooks.discard('meta_data'),

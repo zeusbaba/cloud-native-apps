@@ -29,6 +29,8 @@ module.exports = function (app) {
 
   mongoClient.then(db => {
     service.Model = db.collection(dbOptions.name);
+    // (optional, default false) - This will disable the objectify of the id field if you want to use normal strings
+    service.disableObjectify = true;
   });
 
   service.hooks(hooks);
