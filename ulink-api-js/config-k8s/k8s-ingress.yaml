@@ -29,7 +29,12 @@ spec:
   - host: api.baet.no
     http:
       paths:
-      #- path: /
       - backend:
           serviceName: api-js-service
           servicePort: 4042
+  - host: api.diz.link
+    http:
+      paths:
+        - backend:
+            serviceName: api-js-service
+            servicePort: 4042

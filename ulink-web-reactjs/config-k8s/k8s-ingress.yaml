@@ -24,16 +24,16 @@ spec:
       - backend:
           serviceName: web-reactjs-service
           servicePort: 4048
-  - host: www2.baet.no
+
+  - host: www.baet.no
     http:
       paths:
-        - backend:
-            serviceName: web-reactjs-service
-            servicePort: 4048
-#  - host: www.baet.no
-#    http:
-#      paths:
-#      #- path: /
-#      - backend:
-#          serviceName: web-reactjs-service
-#          servicePort: 4048
+      - backend:
+          serviceName: web-reactjs-service
+          servicePort: 4048
+  - host: www.diz.link
+    http:
+      paths:
+      - backend:
+          serviceName: web-reactjs-service
+          servicePort: 4048
