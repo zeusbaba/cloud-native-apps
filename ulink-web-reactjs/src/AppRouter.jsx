@@ -34,6 +34,10 @@ function AppRouter() {
                     <LinkList/>
                 </Route>
 
+                <Route key={"about"} path="/:tab_slug">
+                    <InfoPages />
+                </Route>
+                {/*
                 <Route key={"about"} path="/about">
                     <InfoPages />
                 </Route>
@@ -46,6 +50,7 @@ function AppRouter() {
                 <Route key={"faq"} path="/about">
                     <InfoPages />
                 </Route>
+                */}
 
                 <Route key={"login"} path="/login">
                     <AppLoginPage/>

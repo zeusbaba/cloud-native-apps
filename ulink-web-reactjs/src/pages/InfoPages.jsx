@@ -26,19 +26,15 @@ function TabContainer(props) {
         return <About/>
     }
 }
-function InfoPages(props) {
+function InfoPages() {
     const [tabValue, setTabValue] = useState(tabValues[0]);
 
-    const {page_name} = useParams();
+    const {tab_slug} = useParams();
     useEffect(() => {
-        if (tabValues.indexOf('/'+page_name)>=0) {
-            setTabValue(page_name);
+        if (tabValues.indexOf('/'+tab_slug)>=0) {
+            setTabValue('/'+tab_slug);
         }
-
-        /*if (props.page_name && tabValues.indexOf('/'+props.page_name)>=0) {
-            setTabValue('/'+props.page_name);
-        }*/
-    }, [tabValue]);
+    }, []);// [] makes sure it runs only once!
 
     return (
       <div>

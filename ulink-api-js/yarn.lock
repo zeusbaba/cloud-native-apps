@@ -32,47 +32,47 @@
     "@feathersjs/errors" "^4.3.11"
     "@feathersjs/feathers" "^4.3.11"
 
-"@feathersjs/authentication-local@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@feathersjs/authentication-local/-/authentication-local-4.5.0.tgz#5ca54cc29076c6f1955dd77fc0b1f34b064aca63"
-  integrity sha512-8DIwP7LC6MXkz4ydweD2FvRsMDlhZUin6TKI+6cFL+9bgG8q1MNkOC3sLs9y73o6bBNaLDS8YNi23YAiYdjluw==
+"@feathersjs/authentication-local@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@feathersjs/authentication-local/-/authentication-local-4.5.1.tgz#3da34b69b2fcb456b716f25e1f8a1e8dc206ca99"
+  integrity sha512-OknNC7+jnMJOuuFRlPt9wKMvwQMV6n+GSEyJhGH1fE7R86hXlPTqTApPcp2g6zswuLmsyv6HEgv2eYF7kX5LCQ==
   dependencies:
-    "@feathersjs/authentication" "^4.5.0"
-    "@feathersjs/errors" "^4.5.0"
-    "@feathersjs/feathers" "^4.5.0"
+    "@feathersjs/authentication" "^4.5.1"
+    "@feathersjs/errors" "^4.5.1"
+    "@feathersjs/feathers" "^4.5.1"
     bcryptjs "^2.4.3"
     debug "^4.1.1"
     lodash "^4.17.15"
 
-"@feathersjs/authentication-oauth@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@feathersjs/authentication-oauth/-/authentication-oauth-4.5.0.tgz#aed258afc188130f1a2c81073cafe26b40b33454"
-  integrity sha512-wwq1hNw3/VY927JrFntUrT2kiZ33LszWQRZc1PXnweiIpAObpMj/zs2UvkuFs3NK4/AD6C2fZ1iV7C9YDJl9oQ==
+"@feathersjs/authentication-oauth@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@feathersjs/authentication-oauth/-/authentication-oauth-4.5.1.tgz#906c21a8d1fc018f8ca26e79698d9b9c23f5d833"
+  integrity sha512-mycPWy/c500jNj6Os5FgFgJhiTSdBlGes6gQHoHFbfTmfMUyComW8KkKLjMM9ClEGITOApmombCG8lDU42WYwg==
   dependencies:
-    "@feathersjs/authentication" "^4.5.0"
-    "@feathersjs/errors" "^4.5.0"
-    "@feathersjs/express" "^4.5.0"
-    "@feathersjs/feathers" "^4.5.0"
+    "@feathersjs/authentication" "^4.5.1"
+    "@feathersjs/errors" "^4.5.1"
+    "@feathersjs/express" "^4.5.1"
+    "@feathersjs/feathers" "^4.5.1"
     debug "^4.1.1"
     express-session "^1.17.0"
-    grant "^4.6.5"
-    grant-profile "^0.0.9"
+    grant "^4.6.6"
+    grant-profile "^0.0.10"
     lodash "^4.17.15"
 
-"@feathersjs/authentication@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@feathersjs/authentication/-/authentication-4.5.0.tgz#5c6e2893a7aace80385e791e163aecd10ed970cd"
-  integrity sha512-fUSFrbO5zYUuuatJ8lO7+x4vhN6yeajee8+d/abizSGx3HS8cCpKg/97qJvX+zSF7EVCCJoSTZV2W8JE2p0z/Q==
+"@feathersjs/authentication@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@feathersjs/authentication/-/authentication-4.5.1.tgz#5e3cc7044399f9aa4c5f50c82d2d448278218d49"
+  integrity sha512-Z9YxsMd86lNol/C2zPFtQTfzidvQeT8y0ds/dJagSuswbb5NoRnn7BFoOWlJSa7QiiI+KZ6h7JIOPfLmU+T0DA==
   dependencies:
-    "@feathersjs/errors" "^4.5.0"
-    "@feathersjs/feathers" "^4.5.0"
-    "@feathersjs/transport-commons" "^4.5.0"
-    "@types/jsonwebtoken" "^8.3.6"
+    "@feathersjs/errors" "^4.5.1"
+    "@feathersjs/feathers" "^4.5.1"
+    "@feathersjs/transport-commons" "^4.5.1"
+    "@types/jsonwebtoken" "^8.3.7"
     debug "^4.1.1"
     jsonwebtoken "^8.5.1"
     lodash "^4.17.15"
     long-timeout "^0.1.1"
-    uuid "^3.3.3"
+    uuid "^3.4.0"
 
 "@feathersjs/cli@^4.2.5":
   version "4.2.5"
@@ -102,18 +102,18 @@
   resolved "https://registry.yarnpkg.com/@feathersjs/commons/-/commons-4.4.3.tgz#5c76109128f1c90fb3dad7e961dc3e54667688d8"
   integrity sha512-hPIvq9V3iEYvvml3fz8HN+rP26cWX+REOdf23ZfW8S213SEmH9sYIzx1TvZ7c/t2/mj5nPJkWk+vF3IoHUadng==
 
-"@feathersjs/commons@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@feathersjs/commons/-/commons-4.5.0.tgz#955c3aa234559cf4c9e172c131032b7f8d48830f"
-  integrity sha512-B3wyBath21RozzC9jmUXJjgt4kSdfzmcdNFsKoL+0W6sv6dIBPzOddIb+NI97CEBSRVpJmv4NUjh32OzkPIrGw==
+"@feathersjs/commons@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@feathersjs/commons/-/commons-4.5.1.tgz#cd18cd9c49f9b06994c285629d97bc0dc271b32a"
+  integrity sha512-wSanrV1Tvqf4U8PE4bx+gEdLT0cCuusuoVOvyK4uOlTIOgT85qJMw9MBa99jF7BFF022EzHrpo0CjzwqcMBMIA==
 
-"@feathersjs/configuration@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@feathersjs/configuration/-/configuration-4.5.0.tgz#ab90e985f4dfa2d6f2ee18ed9fcced636384671d"
-  integrity sha512-WXSPvkyWB9A5nvgwjIWLf3fcL3XbpxMpPxSs0PNi5I7e7NH8fHl2zQkNneK/ill/0GkHnzXT/6pSJrWxP89rBg==
+"@feathersjs/configuration@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@feathersjs/configuration/-/configuration-4.5.1.tgz#697001fbdf51aed2fd42187ff59eb28a7caf3e2f"
+  integrity sha512-EfPKiGztnZ+Y31XI5ENZkCz9GDxUT6F9SHaVXDzm7v7e+ZTNZreu7sP7215s5oJ9kWP+uSChPKhT/6WTlljFkg==
   dependencies:
-    "@feathersjs/feathers" "^4.5.0"
-    config "^3.2.4"
+    "@feathersjs/feathers" "^4.5.1"
+    config "^3.2.5"
     debug "^4.1.1"
 
 "@feathersjs/errors@^4.3.11", "@feathersjs/errors@^4.3.3", "@feathersjs/errors@^4.3.4":
@@ -130,20 +130,20 @@
   dependencies:
     debug "^4.1.1"
 
-"@feathersjs/errors@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@feathersjs/errors/-/errors-4.5.0.tgz#215c5d4b3934c71ce17e991af158666028c053b9"
-  integrity sha512-//aFWsTNCn0hThgnsjlD/k544U5qHKJ4DY/pXlCGAZ0NjUdrQUitDSRgYH+aA5FiGibG8Xv8NRjLBz6ToBAf0A==
+"@feathersjs/errors@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@feathersjs/errors/-/errors-4.5.1.tgz#59692b9f3ea2965393d0cf6586b82256195418bc"
+  integrity sha512-ztNL+g7pmZm4xYfmgc9ZtHfuWQl83CpCDtkXk3wZB8h4u4U0j1nUE6/QikmwzLS+/wHOnBDI7qSWV9ZnxzX1ww==
   dependencies:
     debug "^4.1.1"
 
-"@feathersjs/express@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@feathersjs/express/-/express-4.5.0.tgz#565a11341e4c39a0c04f10700c6d9b3908c84ef1"
-  integrity sha512-lDeejhJJTHwprbESfn+gVxNmvFfVk973T2a8mRr+QzJQaYZmv/1/u8BiZTYIniBerWuAWoJP+h9DlIbcz3MlAg==
+"@feathersjs/express@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@feathersjs/express/-/express-4.5.1.tgz#d505836792a17bf7cd1a6019e78a2137c36c8d18"
+  integrity sha512-qpJp7GzW0PKBQy0dUtj+Gf2vj+uAoKTgXl9P3Pc566LhBT5fy5HifUvS3bONdYY6Is5VtL1Gx2lMgpuEI7UVEg==
   dependencies:
-    "@feathersjs/commons" "^4.5.0"
-    "@feathersjs/errors" "^4.5.0"
+    "@feathersjs/commons" "^4.5.1"
+    "@feathersjs/errors" "^4.5.1"
     "@types/express" "^4.17.2"
     debug "^4.1.1"
     express "^4.17.1"
@@ -170,14 +170,14 @@
     events "^3.0.0"
     uberproto "^2.0.4"
 
-"@feathersjs/feathers@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@feathersjs/feathers/-/feathers-4.5.0.tgz#19b7c4b3ea69b84874c4970cd8aa27480ded70ef"
-  integrity sha512-pUfyJjauP7JHY6741fQKz5OAbAJpdG9BcObrOgCL6ZqtN2SataCHyBpJtHsftQJO2SF1XGZMeoz5CeIsjRIVEA==
+"@feathersjs/feathers@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@feathersjs/feathers/-/feathers-4.5.1.tgz#8b1e082606402d4208f400b6efba4c77ec96b80e"
+  integrity sha512-fR+JjdW6HN0LgZzlS0TatyYhtr0Hu7Zh5/uJWbDVQ1+3Eqe3IFeqQzXXIVWipnFUEZ0Pw9d2n7TFvtMCkgHu3Q==
   dependencies:
-    "@feathersjs/commons" "^4.5.0"
+    "@feathersjs/commons" "^4.5.1"
     debug "^4.1.1"
-    events "^3.0.0"
+    events "^3.1.0"
     uberproto "^2.0.4"
 
 "@feathersjs/jscodeshift@^0.5.0":
@@ -212,13 +212,13 @@
     fs-extra "^5.0.0"
     npm-programmatic "0.0.9"
 
-"@feathersjs/transport-commons@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@feathersjs/transport-commons/-/transport-commons-4.5.0.tgz#64d226ce569f41da2ae3bc0d77b8f9098df75702"
-  integrity sha512-GDwVFtlGCtuMRYPtir8QHOdMEpLnDvL1D0Swi774wwPCbVWse7iJKX65zre+eTymh47+kb3ZKoKZJTMTZeEbEw==
+"@feathersjs/transport-commons@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@feathersjs/transport-commons/-/transport-commons-4.5.1.tgz#55bd9bb298fe0d3f9ab612855065be84013827c4"
+  integrity sha512-qgTeluk/+8CsSySrp138RLJbToik/lxLWjrVugpWku1JIYkWc9/IqvevH6B4MZrcNkS9lEwj7WAZq/AYOjiUqw==
   dependencies:
-    "@feathersjs/commons" "^4.5.0"
-    "@feathersjs/errors" "^4.5.0"
+    "@feathersjs/commons" "^4.5.1"
+    "@feathersjs/errors" "^4.5.1"
     debug "^4.1.1"
     lodash "^4.17.15"
     radix-router "^3.0.1"
@@ -299,10 +299,10 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/jsonwebtoken@^8.3.6":
-  version "8.3.6"
-  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.3.6.tgz#e6515e8d857572ac8ed594baabf4e17571a20f0b"
-  integrity sha512-v55iKItGvKw5AD1tMn9/W257GbvNQhUskozvaD4EWPyc61qZ7ri2Fgm4/8ra7OR+pq8EEialVPYkyofX1b8alQ==
+"@types/jsonwebtoken@^8.3.7":
+  version "8.3.7"
+  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.3.7.tgz#ab79ad55b9435834d24cca3112f42c08eedb1a54"
+  integrity sha512-B5SSifLkjB0ns7VXpOOtOUlynE78/hKcY8G8pOAhkLJZinwofIBYqz555nRj2W9iDWZqFhK5R+7NZDaRmKWAoQ==
   dependencies:
     "@types/node" "*"
 
@@ -1844,7 +1844,7 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
 
-config@^3.2.4:
+config@^3.2.5:
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/config/-/config-3.2.5.tgz#ab10ab88b61a873fbf9a5f0c6b4a22750422f243"
   integrity sha512-8itpjyR01lAJanhAlPncBngYRZez/LoRLW8wnGi+6SEcsUyA1wvHvbpIrAJYDJT+W9BScnj4mYoUgbtp9I+0+Q==
@@ -2432,6 +2432,11 @@ events@^3.0.0:
   resolved "https://registry.yarnpkg.com/events/-/events-3.0.0.tgz#9a0a0dfaf62893d92b875b8f2698ca4114973e88"
   integrity sha512-Dc381HFWJzEOhQ+d8pkNon++bk9h6cdAoAj4iE6Q4y6xgTzySWXlKn05/TVNpjnfRqi/X0EpJEJohPjNI3zpVA==
 
+events@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.1.0.tgz#84279af1b34cb75aa88bf5ff291f6d0bd9b31a59"
+  integrity sha512-Rv+u8MLHNOdMjTAFeT3nCjHn2aGlx435FP/sDHNaRhDEMwyI/aB22Kj2qIN8R0cw3z28psEQLYwxVKLsKrMgWg==
+
 execa@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/execa/-/execa-0.7.0.tgz#944becd34cc41ee32a63a9faf27ad5a65fc59777"
@@ -2649,10 +2654,10 @@ feathers-errors@^2.9.1:
   dependencies:
     debug "^3.0.0"
 
-feathers-hooks-common@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/feathers-hooks-common/-/feathers-hooks-common-5.0.1.tgz#91896ef46c7731b119c696e4e98bbc30f85c1796"
-  integrity sha512-Q6HJedORTgfA77vhhRGyY9xFa09ExaJvxPppPkIwGH8yQ4BFGaitlzBe4jKVWcUstBVyaclWS/7k8VKYjqEFpg==
+feathers-hooks-common@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/feathers-hooks-common/-/feathers-hooks-common-5.0.2.tgz#b5b96697f35c6be66ad5ba5815acda9c59063108"
+  integrity sha512-SJGjdJaF7xtkxuU67z7eGT2DtiHA7r8DLGYnO/N0EcZMdE30bRHk26mNVd9Kae4Nw5mWLbUa2yXGruLE0CH6Sw==
   dependencies:
     "@feathers-plus/batch-loader" "^0.3.6"
     "@feathersjs/commons" "^4.4.1"
@@ -2713,10 +2718,10 @@ file-entry-cache@^5.0.1:
   dependencies:
     flat-cache "^2.0.1"
 
-file-stream-rotator@^0.5.5:
-  version "0.5.5"
-  resolved "https://registry.yarnpkg.com/file-stream-rotator/-/file-stream-rotator-0.5.5.tgz#61701413100ec866e302094f794304df535dbacb"
-  integrity sha512-XzvE1ogpxUbARtZPZLICaDRAeWxoQLFMKS3ZwADoCQmurKEwuDD2jEfDVPm/R1HeKYsRYEl9PzVIezjQ3VTTPQ==
+file-stream-rotator@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/file-stream-rotator/-/file-stream-rotator-0.5.7.tgz#868a2e5966f7640a17dd86eda0e4467c089f6286"
+  integrity sha512-VYb3HZ/GiAGUCrfeakO8Mp54YGswNUHvL7P09WQcXAJNSj3iQ5QraYSp3cIn1MUyw6uzfgN/EFOarCNa4JvUHQ==
   dependencies:
     moment "^2.11.2"
 
@@ -3178,19 +3183,19 @@ graceful-fs@^4.1.6:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.3.tgz#4a12ff1b60376ef09862c2093edd908328be8423"
   integrity sha512-a30VEBm4PEdx1dRB7MFK7BejejvCvBronbLjht+sHuGYj8PHs7M/5Z+rt5lw551vZ7yfTCj4Vuyy3mSJytDWRQ==
 
-grant-profile@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/grant-profile/-/grant-profile-0.0.9.tgz#dbcbfd83651cc90ec7ba2dce82cf0f9df8cdff90"
-  integrity sha512-e2hkS7CX8hUsHy56zWQWkLVUTbcdAcZP/ZtvrgDqdt5Dt6NkXJ9lJJ9eR3sP3xetjHLiCCvyy5YC4nsMWtXb3g==
+grant-profile@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/grant-profile/-/grant-profile-0.0.10.tgz#53699c539126adc567e69f1ad8644b86f32f6e01"
+  integrity sha512-97DTfpw/NZhfG/LIz4DXaHOrwvFPycPWfaRwI/byRLZdCt9h5PGqlsws4kMV5pSmRBFZUVyzd0IRtJ2F2Z5cFQ==
   dependencies:
     qs "^6.9.1"
     request-compose "^1.2.1"
     request-oauth "0.0.3"
 
-grant@^4.6.5:
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/grant/-/grant-4.6.6.tgz#da58aa4d99c0515cfd7466d4a1f1e3ac37cad09a"
-  integrity sha512-YpylEOxM0ElPm+HCNEFLvqSA0xL8zo1dOllU0xutAAYbpYxMM4ZDgujYTmWEIIf1z9xn2zWavBgHRpYBtFa+Pw==
+grant@^4.6.6:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/grant/-/grant-4.7.0.tgz#ab879a38ced7860df668db6c66012aa02402f49b"
+  integrity sha512-QGPjCYDrBnb/OIiTRxbK3TnNOE6Ycgfc/GcgPzI4vyNIr+b7yisEexYp7VM74zj6bxr+mDTzfGONRLzzsVPJIA==
   dependencies:
     qs "^6.9.1"
     request-compose "^1.2.1"
@@ -4463,10 +4468,10 @@ mkdirp@0.5.1, mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-mocha@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/mocha/-/mocha-7.0.0.tgz#c60d14bf3de9601f549b3ff5be657eb8381c54bf"
-  integrity sha512-CirsOPbO3jU86YKjjMzFLcXIb5YiGLUrjrXFHoJ3e2z9vWiaZVCZQ2+gtRGMPWF+nFhN6AWwLM/juzAQ6KRkbA==
+mocha@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/mocha/-/mocha-7.0.1.tgz#276186d35a4852f6249808c6dd4a1376cbf6c6ce"
+  integrity sha512-9eWmWTdHLXh72rGrdZjNbG3aa1/3NRPpul1z0D979QpEnFdCG0Q5tv834N+94QEN2cysfV72YocQ3fn87s70fg==
   dependencies:
     ansi-colors "3.2.3"
     browser-stdout "1.3.1"
@@ -4503,10 +4508,10 @@ moment@^2.24.0:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
-mongodb@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.5.1.tgz#0bbed7ba2e2be97a4dd17ab074749eab3617f0d1"
-  integrity sha512-kpxt4/OfGZ3x9Py+c81yWARLFE3L5UDczF6319Xq0c+pp+8rrzqRiJKjhRAY261JorlRqtrpp7ROK2wCAMA4sw==
+mongodb@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.5.2.tgz#83b8bcb3d96b666a10eeca2f9c7ad1db056ae291"
+  integrity sha512-Lxt4th2tK2MxmkDBR5cMik+xEnkvhwg0BC5kGcHm9RBwaNEsrIryvV5istGXOHbnif5KslMpY1FbX6YbGJ/Trg==
   dependencies:
     bl "^2.2.0"
     bson "^1.1.1"
@@ -6474,7 +6479,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@^3.2.1, uuid@^3.3.3:
+uuid@^3.2.1:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
@@ -6483,6 +6488,11 @@ uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
+
+uuid@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
+  integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
 v8-compile-cache@^2.0.3:
   version "2.0.3"
@@ -6504,10 +6514,10 @@ validate-npm-package-name@^3.0.0:
   dependencies:
     builtins "^1.0.3"
 
-validator@^12.1.0:
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-12.1.0.tgz#a3a7315d5238cbc15e46ad8d5e479aafa7119925"
-  integrity sha512-gIC2RBuFRi574Rb9vewGCJ7TCLxHXNx6EKthEgs+Iz0pYa9a9Te1VLG/bGLsAyGWrqR5FfR7tbFUI7FEF2LiGA==
+validator@^12.2.0:
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-12.2.0.tgz#660d47e96267033fd070096c3b1a6f2db4380a0a"
+  integrity sha512-jJfE/DW6tIK1Ek8nCfNFqt8Wb3nzMoAbocBF6/Icgg1ZFSBpObdnwVY2jQj6qUqzhx5jc71fpvBWyLGO7Xl+nQ==
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"
@@ -6589,12 +6599,12 @@ widest-line@^3.1.0:
   dependencies:
     string-width "^4.0.0"
 
-winston-daily-rotate-file@^4.4.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/winston-daily-rotate-file/-/winston-daily-rotate-file-4.4.1.tgz#425044418d0d7c1dc2add94aafa65e1e8b98f40a"
-  integrity sha512-516bL4IDjgX5mPEsTPXNVNzZtJkrUFY2IvPhj8n5xSKyy804xadp4TUlhxEZLL/Jbs8CF+rESfq95QXFLFTzKA==
+winston-daily-rotate-file@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/winston-daily-rotate-file/-/winston-daily-rotate-file-4.4.2.tgz#7a4dd34fc26ab3873bdee8c4f9d5bf1d8fd6d562"
+  integrity sha512-pVOUJKxN+Kn6LnOJZ4tTwdV5+N+fCkiRAb3bVnzcPtOj1ScxGNC3DyUhHuAHssBtMl5s45/aUcSUtApH+69V5A==
   dependencies:
-    file-stream-rotator "^0.5.5"
+    file-stream-rotator "^0.5.7"
     object-hash "^2.0.1"
     triple-beam "^1.3.0"
     winston-transport "^4.2.0"

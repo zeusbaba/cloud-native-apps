@@ -4,6 +4,7 @@ description: uLINK.no Mobile App using Flutter.
 dependencies:
   flutter:
     sdk: flutter
+  flutter_chips_input: ^1.7.0
 
 dev_dependencies:
   flutter_test:
