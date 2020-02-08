@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:ulink_mobile_flutter/tabs/links_create.dart';
 import 'package:ulink_mobile_flutter/tabs/links_display.dart';
 import 'package:ulink_mobile_flutter/tabs/info_about.dart';
+import 'package:package_info/package_info.dart';
 
 void main() {
+  /*PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+    String appName = packageInfo.appName;
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+    print(appName + packageName);
+  });*/
+
   runApp(MaterialApp(
       // Title
       title: "Using Tabs",
@@ -45,7 +54,7 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
         // Title
         title: Text("uLINK.no :: shorten & simplify"),
         // Set the background color of the App Bar
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.orangeAccent,
       ),
       // Set the TabBar view as the body of the Scaffold
       body: TabBarView(
@@ -57,7 +66,7 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
       // Set the bottom navigation bar
       bottomNavigationBar: Material(
         // set the color of the bottom navigation bar
-        color: Colors.blue,
+        color: Colors.orangeAccent,
         // set the tab bar as the child of bottom navigation bar
         child: TabBar(
           tabs: <Tab>[

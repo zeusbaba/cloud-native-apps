@@ -4,21 +4,21 @@ class InfoAbout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange,
+      backgroundColor: Colors.white,
       body: Container(
         child: Center(
           child: Column(
             // center the children
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Icon(
                 Icons.info,
                 size: 160.0,
-                color: Colors.white,
+                color: Colors.orange,
               ),
               Text(
                 "Info About",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.orange),
               )
             ],
           ),
