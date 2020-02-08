@@ -1,0 +1,8 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow: /links
+Disallow: /links/*/
+Disallow: /*/stats
+Disallow: /stats/*/
+Disallow: /stats/*
+Allow: /

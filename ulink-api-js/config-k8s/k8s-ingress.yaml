@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: api-js-ingress
+  labels:
+    app.kubernetes.io/name: api-js
+    app.kubernetes.io/instance: api-js-2020
+    app.kubernetes.io/version: 2020.1.x
+    app.kubernetes.io/component: api-backend
+    app.kubernetes.io/part-of: baet-ulink
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: ulink.no
+    http:
+      paths:
+        #- path: /
+        - backend:
+            serviceName: api-js-service
+            servicePort: 4042
+  - host: api.ulink.no
+    http:
+      paths:
+      #- path: /
+      - backend:
+          serviceName: api-js-service
+          servicePort: 4042
+  - host: api.baet.no
+    http:
+      paths:
+      - backend:
+          serviceName: api-js-service
+          servicePort: 4042
+  - host: api.diz.link
+    http:
+      paths:
+        - backend:
+            serviceName: api-js-service
+            servicePort: 4042

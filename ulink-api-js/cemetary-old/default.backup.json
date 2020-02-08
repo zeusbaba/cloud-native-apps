@@ -1,0 +1,81 @@
+{
+  "host": "localhost",
+  "port": 4042,
+  "public": "../public/",
+  "paginate": {
+    "default": 20,
+    "max": 80
+  },
+  "batcher_limit": 10,
+
+  "mongodb": "MONGODB_URL",
+  "mongodb_dataprefix": "baet_",
+
+  "appconfig": {
+    "isDev": true,
+    "diz": {
+      "long_link": {
+        "len": {
+          "min": 10,
+          "max": 2000
+        }
+      },
+      "simple_link": {
+        "len": {
+          "min": 5,
+          "max": 50
+        }
+      },
+      "short_link": {
+        "len": 7
+      }
+    },
+
+    "ipinfodb": {
+      "api_url": "http://api.ipinfodb.com/v3/ip-country/",
+      "api_params": "?format=json&key=",
+      "api_key": "IPINFODB_APIKEY"
+    },
+    "recaptcha": {
+      "sitekey": "RECAPTCHA_SITEKEY",
+      "secretkey": "RECAPTCHA_SECRETKEY"
+    }
+  },
+
+  "authentication": {
+    "secret": "AUTH_SECRET",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "header": "Authorization",
+    "entity": "user",
+    "service": "users",
+    "cookie": {
+      "enabled": true,
+      "name": "baet",
+      "httpOnly": true,
+      "secure": false
+    },
+    "storageKey": "baet-jwt",
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "baet.no",
+      "subject": "baet.no",
+      "issuer": "baet.no",
+      "algorithm": "HS256",
+      "expiresIn": "365d",
+      "ignoreExpiration": true
+    },
+    "custom": {
+      "jwt_payload": "baet.no yry.no diz.link lfc.link"
+    },
+    "local": {
+      "usernameField": "userid",
+      "passwordField": "password"
+    }
+  }
+}

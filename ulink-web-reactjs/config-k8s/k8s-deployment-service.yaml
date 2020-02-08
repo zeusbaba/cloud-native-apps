@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-reactjs-service
+  labels:
+    app.kubernetes.io/name: web-reactjs
+    app.kubernetes.io/instance: web-reactjs-2020
+    app.kubernetes.io/version: 2020.1.x
+    app.kubernetes.io/component: web-frontend
+    app.kubernetes.io/part-of: baet-ulink
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 4048
+      port: 4048
+      nodePort: 30048
+  selector:
+    app: ulink-web-reactjs
+    component: web-frontend
+---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-reactjs
+  labels:
+    app: web-reactjs
+    app.kubernetes.io/name: web-reactjs
+    app.kubernetes.io/instance: web-reactjs-2020
+    app.kubernetes.io/version: 2020.1.x
+    app.kubernetes.io/component: web-frontend
+    app.kubernetes.io/part-of: baet-ulink
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: ulink-web-reactjs
+      component: web-frontend
+  template:
+    metadata:
+      labels:
+        app: ulink-web-reactjs
+        component: web-frontend
+    spec:
+      #serviceAccountName: default
+      containers:
+        - name: ulink-web-reactjs
+          image: zeusbaba/ulink-web-reactjs:2020.2.8
+          imagePullPolicy: Always
+          env: # custom environment variables beginning with REACT_APP_
+            - name: REACT_APP_API_URL
+              value: "https://api.ulink.no"
+            - name: REACT_APP_RECAPTCHA_SITEKEY
+              value: 6Lcbxy8UAAAAAOX51bFY7fR4KBaaAXSooFXxksR4
+            - name: NODE_ENV
+              value: production
+            - name: NODE_PORT
+              value: "4048"
+          #envFrom:
+          #  - secretRef:
+          #      name: app-secrets-ulink
+          ports:
+            - name: app-port
+              containerPort: 4048
+          readinessProbe:
+            httpGet:
+              path: /k8s-status
+              port: app-port
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 4
+      # Protect slow starting containers with startup probes
+          startupProbe:
+            httpGet:
+              path: /k8s-status
+              port: app-port
+            # 30 * 10 = 300secs
+            failureThreshold: 20
+            periodSeconds: 1
+          #resources:
+          #  requests:
+          #    memory: "128Mi"
+          #    cpu: "125m"
+          #  limits:
+          #    memory: "256Mi"
+          #    cpu: "250m"

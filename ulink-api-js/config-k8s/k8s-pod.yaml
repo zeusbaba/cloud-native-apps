@@ -1,0 +1,30 @@
+# notused - experimental
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ulink-api-js-pod
+  labels:
+    app: ulink-api-js
+    component: api-backend
+spec:
+  #securityContext:
+  #  runAsUser: 1000
+  containers:
+    - name: ulink-api-js
+      image: zeusbaba/ulink-api-js:2020.1.24
+      #securityContext:
+      #  runAsUser: 1000
+      #  capabilities:
+      #    add: ["SYS_TIME"]
+      #volumeMounts:
+      #  - name: ulink-api-secrets
+      #    mountPath: /usr/src/app/ulink-api-secrets
+      envFrom:
+        - secretRef:
+            name: api-secrets-ulink
+        #- configMapRef:
+        #    name: baet-config
+#  volumes:
+#    - name: api-secrets-ulink
+#      secret:
+#        secretName: api-secrets-ulink

@@ -1,0 +1,58 @@
+FROM node:12-alpine
+#FROM bitnami/node:12-prod
+LABEL maintainer="Zeus Baba 397125+zeusbaba@users.noreply.github.com"
+
+ENV APP_HOME=/usr/src/app
+ENV APP_PORT=4048
+
+# optionally if you want to run npm global bin without specifying path
+ENV NPM_CONFIG_PREFIX=$APP_HOME/.npm-global
+ENV PATH=$PATH:$APP_HOME/.npm-global/bin
+
+RUN mkdir -p $APP_HOME
+#RUN chown -R node.node APP_HOME
+WORKDIR $APP_HOME
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+COPY ../tsconfig.json ./
+COPY ../static.json ./
+
+#RUN npm config set strict-ssl false
+#RUN npm install
+# If you are building your code for production
+# RUN npm install --only=production
+
+#RUN npm install -g -s --no-progress yarn && \
+#    yarn --production && \
+#    yarn run build && \
+#    yarn run prune && \
+#    yarn cache clean
+RUN npm install -g -s --no-progress yarn
+RUN yarn config set strict-ssl false
+RUN yarn
+RUN yarn run build
+RUN yarn cache clean
+
+# 'serve' will run prod build
+#RUN npm install -g serve
+RUN yarn global add serve
+
+## used to check if service is up
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.4.0/wait ./wait
+RUN chmod +x ./wait
+
+# Bundle app source
+#COPY . .
+COPY ../src ./src
+#COPY config ./config
+COPY ../public ./public
+COPY .* ./
+
+EXPOSE $APP_PORT
+
+#CMD ./wait && npm start
+CMD ./wait && serve -dir build -port $APP_PORT

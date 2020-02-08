@@ -1,0 +1,9 @@
+# notused - experimental
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ulink-configmap
+data:
+  APPNAME: baet
+  TESTING: etc
+  # TODO: fill in all params

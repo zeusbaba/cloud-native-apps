@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "noImplicitReturns": false,
+    "noImplicitAny": true,
+    "declaration": false,
+    "noResolve": false,
+    "sourceMap": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "module": "esnext",
+    "target": "es6",
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
+  },
+  "outDir": "./dist/",
+  "rootDir": "./src/",
+  "files": [
+    "./cemetary-old/resub/Counter.tsx",
+    "./cemetary-old/resub/CounterDisplay.tsx",
+    "./cemetary-old/resub/CounterStore.tsx"
+  ],
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.spec.ts"
+  ]
+}

@@ -1,0 +1,9 @@
+node_modules
+cemetary-old
+api-secrets
+logs
+*.log
+*.env
+.*
+!.dockerignore
+!.gitignore
