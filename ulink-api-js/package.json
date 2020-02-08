@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/zeusbaba/cloud-native-apps.git"
+    "url": "git://github.com/zeusbaba/cloud-native-url-shortener.git"
   },
   "main": "src",
   "keywords": [

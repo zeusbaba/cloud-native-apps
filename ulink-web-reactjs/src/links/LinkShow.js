@@ -85,16 +85,18 @@ function LinkShow(props) {
                     }
                 });
         }
-    }, [recordStats]);
+    }, []);//[recordStats]);
 
 
     return (
-        record.long_link===null ?
+        (record.long_link===null) ?
             <Loading/>
             : (<div>
-                <LinkMeta record={record} isSingleItem={true} />
-                <br/>
-                {displayStats && <LinkStats record={recordStats} /> }
+                    <LinkMeta record={record} isSingleItem={true} />
+                    <br/>
+                    {displayStats &&
+                        ( !recordStats.stats? <Loading/> : <LinkStats record={recordStats} />)
+                    }
                 </div>)
             //<LinkMeta record={record} isSingleItem={true} />
     );
