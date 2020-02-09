@@ -10,8 +10,9 @@ class LinksCreate extends StatelessWidget {
           child: Column(
             // center the children
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image(image: AssetImage('images/logo_main.png')),
+              Image.asset('images/logo_main.png'),
               LinkForm()
             ],
           ),
@@ -36,7 +37,7 @@ class _LinkFormState extends State<LinkForm> {
     return Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
@@ -46,18 +47,9 @@ class _LinkFormState extends State<LinkForm> {
               if (value.isEmpty) {
                 return 'Please enter some text';
               }
+              // bool _validURL = Uri.parse(value).isAbsolute;
               return null;
             },
-          ),
-          InputChip(
-              avatar: CircleAvatar(
-                backgroundColor: Colors.grey.shade800,
-                child: Icon(Icons.link),
-              ),
-              label: Text('ETC ETC'),
-              onPressed: () {
-                print('chip pressed.');
-              }
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),

@@ -2,20 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:ulink_mobile_flutter/tabs/links_create.dart';
 import 'package:ulink_mobile_flutter/tabs/links_display.dart';
 import 'package:ulink_mobile_flutter/tabs/info_about.dart';
-import 'package:package_info/package_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ulink_mobile_flutter/shared/helpers.dart';
 
 void main() {
-  /*PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-    String appName = packageInfo.appName;
-    String packageName = packageInfo.packageName;
-    String version = packageInfo.version;
-    String buildNumber = packageInfo.buildNumber;
-    print(appName + packageName);
-  });*/
 
   runApp(MaterialApp(
       // Title
-      title: "Using Tabs",
+      title: "uLINK.no URL Shortener",
       // Home
       home: MyHome()));
 }
@@ -36,6 +30,9 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
 
     // Initialize the Tab Controller
     controller = TabController(length: 3, vsync: this);
+
+    dynamic appToken = MyUtils.loadAppToken();
+    print('[initState] appToken: $appToken');
   }
 
   @override
@@ -50,7 +47,7 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
     return Scaffold(
       // Appbar
       appBar: AppBar(
-        leading: Image(image: AssetImage('images/logo_icon.png')),
+        leading: Image.asset('images/logo_icon.png'),
         // Title
         title: Text("uLINK.no :: shorten & simplify"),
         // Set the background color of the App Bar
@@ -88,3 +85,21 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
     );
   }
 }
+
+/* // moved into shared MyUtils
+_loadAppToken() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String appToken = "";
+  String appTokenKey = "app-token";
+
+  if (prefs.containsKey(appTokenKey)) {
+    appToken = prefs.getString(appTokenKey);
+  }
+  else {
+    appToken = "uLINK-appToken";
+    await prefs.setString(appTokenKey, appToken);
+  }
+  MyUtils.print('appToken: $appToken');
+
+  return appToken;
+}*/

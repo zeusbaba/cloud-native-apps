@@ -1,11 +1,17 @@
 name: ulink_mobile_flutter
+version: 2020.2.8+2
 description: uLINK.no Mobile App using Flutter.
 
 dependencies:
   flutter:
     sdk: flutter
-  package_info: ^0.4.0+13
-  flutter_chips_input: ^1.7.0
+  # https://pub.dev/packages/<package_name>
+  shared_preferences: ^0.5.6+1
+  #package_info: ^0.4.0+13
+  #device_info: ^0.4.1+4
+  #flutter_chips_input: ^1.7.0
+  #url_launcher: ^5.4.1
+  #flutter_clipboard_manager: ^0.0.2
 
 dev_dependencies:
   flutter_test:

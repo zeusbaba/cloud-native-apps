@@ -10,6 +10,7 @@ class InfoAbout extends StatelessWidget {
           child: Column(
             // center the children
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Icon(
                 Icons.info,
