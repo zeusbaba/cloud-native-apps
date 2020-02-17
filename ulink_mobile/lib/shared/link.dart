@@ -11,7 +11,7 @@ class MyLink {
     this.createdAt
   });
 
-  aMyLink(String longLink, String shortLink) {
+  doMyLink(String longLink, String shortLink) {
     return MyLink(
       long_link: longLink,
       short_link: shortLink,

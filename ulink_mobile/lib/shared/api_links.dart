@@ -4,11 +4,9 @@ import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:ulink_mobile/shared/link.dart';
-import 'package:ulink_mobile/shared/app_config.dart';
+import 'package:ulink_mobile/shared/common_utils.dart';
 
 class ApiLinks {
-
-  static final AppConfig appConfig = AppConfig.getAppConfig('prod');
 
   // If you call new MyUtils(), you'll always get the same instance.
   //You need to import the file that contains class MyUtils {} everywhere where you want to use it.
@@ -21,8 +19,8 @@ class ApiLinks {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     MyLink myLink;
 
-    if (prefs.containsKey(appConfig.appTokenKey)) {
-      String appToken = prefs.getString(appConfig.appTokenKey);
+    if (prefs.containsKey(CommonUtils.appConfig.appTokenKey)) {
+      String appToken = prefs.getString(CommonUtils.appConfig.appTokenKey);
 
       myLink = await _makeLink(appToken, formInput);
     }
@@ -43,7 +41,7 @@ class ApiLinks {
     //var apiUrl = "http://localhost:4042";
     var apiResponse = await http.post(
         //apiUrl+"/links",
-        appConfig.apiUrl+appConfig.apiEndpoint['links'],
+        CommonUtils.appConfig.apiUrl+CommonUtils.appConfig.apiEndpoint['links'],
         body: json.encode(reqBody),
         headers: {
           HttpHeaders.authorizationHeader: "Bearer $appToken",
@@ -67,8 +65,8 @@ class ApiLinks {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<MyLink> links;
 
-    if (prefs.containsKey(appConfig.appTokenKey)) {
-      String appToken = prefs.getString(appConfig.appTokenKey);
+    if (prefs.containsKey(CommonUtils.appConfig.appTokenKey)) {
+      String appToken = prefs.getString(CommonUtils.appConfig.appTokenKey);
 
       links = await _getLinks(appToken);
     }
@@ -88,7 +86,7 @@ class ApiLinks {
 
     var apiResponse = await http.get(
         //apiUrl+"/links",
-        appConfig.apiUrl+appConfig.apiEndpoint['links'],
+        CommonUtils.appConfig.apiUrl+CommonUtils.appConfig.apiEndpoint['links'],
         headers: {
           HttpHeaders.authorizationHeader: "Bearer $appToken",
           //HttpHeaders.contentTypeHeader: "application/json",

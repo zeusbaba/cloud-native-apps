@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ulink_mobile/shared/api_links.dart';
+import 'package:ulink_mobile/shared/common_utils.dart';
 
 class LinksCreate extends StatelessWidget {
 
@@ -46,14 +47,17 @@ class _LinkFormState extends State<LinkForm> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           TextFormField(
+            //autofocus: true,
             decoration: const InputDecoration(
+              icon: Icon(Icons.http, size: 20.0),
               hintText: 'Paste long link here',
+              helperText: 'E.g. https://www.montypython.com'
             ),
             validator: (value) {
               if (value.isEmpty) {
-                return 'Please enter some text';
+                return 'Please enter some URL';
               }
-              bool _validURL = Uri.parse(value).isAbsolute;
+              bool _validURL = CommonUtils.isValidUrl(value);
               if (!_validURL) {
                 return 'Please enter a proper URL';
               }
@@ -70,7 +74,7 @@ class _LinkFormState extends State<LinkForm> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Icon(Icons.transform, size: 44.0),
+                  Icon(Icons.transform, size: 66.0),
                   Text('Shorten')
                 ]
               ),

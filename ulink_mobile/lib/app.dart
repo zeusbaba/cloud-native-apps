@@ -43,17 +43,21 @@ class LinkShortenerAppHome extends StatelessWidget {
       ),
       body: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
+          backgroundColor: Colors.orangeAccent,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.transform, size: 44.0),//(CupertinoIcons.add),
-              //title: Text('Link'),
+              activeIcon: Icon(Icons.transform, size: 44.0, color: Colors.black),
+              icon: Icon(Icons.transform, size: 33.0, color: Colors.white),
+              //title: Text('Shorten')
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.link, size: 44.0),
+              activeIcon: Icon(Icons.link, size: 44.0, color: Colors.black),
+              icon: Icon(Icons.link, size: 33.0, color: Colors.white),
               //title: Text('Links'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.info, size: 44.0),
+              activeIcon: Icon(Icons.info, size: 44.0, color: Colors.black),
+              icon: Icon(Icons.info, size: 33.0, color: Colors.white),
               //title: Text('Info'),
             ),
           ],

@@ -3,14 +3,10 @@ import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:device_info/device_info.dart';
-import 'package:package_info/package_info.dart';
 import 'package:ulink_mobile/shared/user.dart';
-import 'package:ulink_mobile/shared/app_config.dart';
+import 'package:ulink_mobile/shared/common_utils.dart';
 
 class ApiLogin {
-
-  static final AppConfig appConfig = AppConfig.getAppConfig('prod');
 
   // If you call new MyUtils(), you'll always get the same instance.
   //You need to import the file that contains class MyUtils {} everywhere where you want to use it.
@@ -19,29 +15,6 @@ class ApiLogin {
   factory ApiLogin() => _instance ??= new ApiLogin._();
   ApiLogin._();
 
-  static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-  static Future<String> _getDeviceId(String deviceType) async {
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    if (deviceType.toLowerCase() == "ios") {
-      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.identifierForVendor; // unique ID on iOS
-    } else {
-      AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
-      return androidDeviceInfo.androidId; // unique ID on Android
-    }
-  }
-
-  static Future<Map<String, String>> _getPackageInfo() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    Map<String, String> packageInfoMap = new Map();
-    packageInfoMap['appName'] = packageInfo.appName;
-    packageInfoMap['version'] = packageInfo.version;
-    packageInfoMap['packageName'] = packageInfo.packageName;
-    packageInfoMap['buildNumber'] = packageInfo.buildNumber;
-
-    return packageInfoMap;
-  }
-
   static loadAppToken(String deviceType) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String appToken = "";
@@ -49,24 +22,24 @@ class ApiLogin {
     // FIXME: remove this after validation!
     //prefs.clear();
 
-    if (prefs.containsKey(appConfig.appTokenKey)) {
+    if (prefs.containsKey(CommonUtils.appConfig.appTokenKey)) {
       //appToken = prefs.getString(appTokenKey);
       print('appToken EXISTs in local, move on..!');
     }
     else {
       // implement login+auth via uLINK API!
-      var userId = await _getDeviceId(deviceType);
+      var userId = await CommonUtils.getDeviceId(deviceType);
       userId = "uLINK-mobile-" + userId.toLowerCase();
       var user = User(userid: userId, password: userId, createdAt: '');
       print('appToken doesNOT exist in local, reloading via API! for userId: $userId');
 
-      bool isUserOk = await _createUser(user);
+      bool isUserOk = await _createUser(deviceType, user);
 
       if (isUserOk) {
 
         appToken = await _createUserToken(user);
         if (appToken != '') {
-          await prefs.setString(appConfig.appTokenKey, appToken);
+          await prefs.setString(CommonUtils.appConfig.appTokenKey, appToken);
         }
         else {
           print('ERROR occured when creating userToken! $appToken');
@@ -81,23 +54,26 @@ class ApiLogin {
     return appToken;
   }
 
-  static _createUser(User user) async {
+  static _createUser(String deviceType, User user) async {
     bool isUserOk = false;
 
-    Map<String, String> packageInfoMap = await _getPackageInfo();
-    String appInfo = jsonEncode(packageInfoMap);
-    print('appInfo: $appInfo');
+    Map<String, dynamic> deviceInfoMap = await CommonUtils.getDeviceInfo(deviceType);
+    //String deviceInfo = json.encode(deviceInfoMap);
+    Map<String, String> packageInfoMap = await CommonUtils.getPackageInfo();
+    //String appInfo = json.encode(packageInfoMap);
+    //print('appInfo: $appInfo');
 
     Map<String, dynamic> reqBody = new Map();
     reqBody['userid'] = user.userid;
     reqBody['password'] = user.password;
     reqBody['extra'] = {
-      'appInfo': appInfo
+      'appInfo': packageInfoMap, //appInfo,
+      'deviceInfo': deviceInfoMap //deviceInfo
     };
 
     //var httpClient = http.Client();
     var apiResponse = await http.post(
-        appConfig.apiUrl+appConfig.apiEndpoint['users'],
+        CommonUtils.appConfig.apiUrl+CommonUtils.appConfig.apiEndpoint['users'],
         body: json.encode(reqBody),
         headers: {
           HttpHeaders.contentTypeHeader: "application/json",
@@ -146,7 +122,7 @@ class ApiLogin {
 
     //var httpClient = http.Client();
     var apiResponse = await http.post(
-        appConfig.apiUrl+appConfig.apiEndpoint['token'],
+        CommonUtils.appConfig.apiUrl+CommonUtils.appConfig.apiEndpoint['token'],
         body: json.encode(reqBody),
         headers: {
           HttpHeaders.contentTypeHeader: "application/json",
