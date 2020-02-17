@@ -4,8 +4,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:device_info/device_info.dart';
 import 'package:ulink_mobile_flutter/shared/user.dart';
+import 'package:ulink_mobile_flutter/shared/app_config.dart';
 
 class ApiLogin {
+
+  static final AppConfig appConfig = AppConfig.getAppConfig('prod');
 
   // If you call new MyUtils(), you'll always get the same instance.
   //You need to import the file that contains class MyUtils {} everywhere where you want to use it.
@@ -29,18 +32,18 @@ class ApiLogin {
   static loadAppToken(String deviceType) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String appToken = "";
-    String appTokenKey = "app-token";
 
     // FIXME: remove this after validation!
     //prefs.clear();
 
-    if (prefs.containsKey(appTokenKey)) {
+    if (prefs.containsKey(appConfig.appTokenKey)) {
       //appToken = prefs.getString(appTokenKey);
       print('appToken EXISTs in local, move on..!');
     }
     else {
       // implement login+auth via uLINK API!
       var userId = await _getDeviceId(deviceType);
+      userId = "uLINK-mobile-" + userId.toLowerCase();
       var user = User(userid: userId, password: userId, createdAt: '');
       print('appToken doesNOT exist in local, reloading via API! for userId: $userId');
 
@@ -50,7 +53,7 @@ class ApiLogin {
 
         appToken = await _createUserToken(user);
         if (appToken != '') {
-          await prefs.setString(appTokenKey, appToken);
+          await prefs.setString(appConfig.appTokenKey, appToken);
         }
         else {
           print('ERROR occured when creating userToken! $appToken');
@@ -67,11 +70,11 @@ class ApiLogin {
 
   static _createUser(User user) async {
     bool isUserOk = false;
-    
-    var apiUrl = "http://localhost:4042";
+
     //var httpClient = http.Client();
     var apiResponse = await http.post(
-        apiUrl+"/users",
+        //apiUrl+"/users",
+        appConfig.apiUrl+appConfig.apiEndpoint['users'],
         body: {
           'userid': user.userid,
           'password': user.password
@@ -112,10 +115,11 @@ class ApiLogin {
   static _createUserToken(User user) async {
     String userToken = '';
 
-    var apiUrl = "http://localhost:4042";
+    //var apiUrl = "http://localhost:4042";
     //var httpClient = http.Client();
     var apiResponse = await http.post(
-        apiUrl+"/authentication",
+        //apiUrl+"/authentication",
+        appConfig.apiUrl+appConfig.apiEndpoint['token'],
         body: {
           'strategy': 'local',
           'userid': user.userid,

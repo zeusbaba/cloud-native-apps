@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:ulink_mobile_flutter/shared/api_links.dart';
 
 class LinksCreate extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,13 +34,16 @@ class LinkForm extends StatefulWidget {
 
 class _LinkFormState extends State<LinkForm> {
   final _formKey = GlobalKey<FormState>();
+  Map<String, dynamic> formInput = new Map();
+  Form makeLinkForm;
 
   @override
   Widget build(BuildContext context) {
-    return Form(
+    makeLinkForm = Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
@@ -47,25 +53,58 @@ class _LinkFormState extends State<LinkForm> {
               if (value.isEmpty) {
                 return 'Please enter some text';
               }
-              // bool _validURL = Uri.parse(value).isAbsolute;
+              bool _validURL = Uri.parse(value).isAbsolute;
+              if (!_validURL) {
+                return 'Please enter a proper URL';
+              }
+              setState(() {
+                formInput['long_link'] = value.toString();
+              });
               return null;
             },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: RaisedButton(
+            child: CupertinoButton(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(Icons.transform, size: 44.0),
+                  Text('Shorten')
+                ]
+              ),
               onPressed: () {
                 // Validate will return true if the form is valid, or false if
                 // the form is invalid.
                 if (_formKey.currentState.validate()) {
-                  // Process data.
+
+                  print('${formInput}');
+
+                  Scaffold
+                      .of(context)
+                      .showSnackBar(
+                        SnackBar(
+                            duration: Duration(seconds: 2),
+                            content: Text('Shortening your link')
+                        )
+                      );
+
+                  ApiLinks.makeLink(formInput).then(
+                      (myLink) => {
+                        print('${myLink.toJson()}')
+
+                      }
+                  );
+
                 }
               },
-              child: Text('Shorten'),
             ),
           ),
         ],
       ),
     );
+
+    return makeLinkForm;
   }
 }

@@ -1,0 +1,8 @@
+{
+  "apiUrl": {
+    "dev": "http://localhost:4042",
+    "prod": "https://api.ulink.no"
+  },
+  "apiUrl_prod": "https://api.ulink.no",
+  "apiUrl_dev": "http://localhost:4042"
+}

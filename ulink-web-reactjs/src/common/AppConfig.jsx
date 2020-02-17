@@ -40,7 +40,7 @@ export const appConfig = {
         development: 'http://localhost:4042',
         production: 'https://api.ulink.no',
         //k8s: 'http://ulink-api-js-service', // .catpet.svc.cluster.local
-        uuidSourceValue: 'uLINK-2020-web-yxxx-xxxxxxxxxxxx'
+        uuidSourceValue: 'uLINK-web-yxxx-xxxx-xxxxxxxxxxxx'
     },
     web: {
         defaultLocale: 'en',
