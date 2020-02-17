@@ -1,0 +1,8 @@
+.*
+!.gitignore
+
+android/**/gen/**
+build/
+ios/.generated/
+packages
+pubspec.lock

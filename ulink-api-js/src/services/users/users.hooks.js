@@ -44,7 +44,7 @@ module.exports = {
     get: [], //[ ...restrict ], // no restriction, because we are using by our react app for user-check
     create: [
       context => {
-        logger.info('context users.create', context.data);
+        logger.info('context users.create %s', context.data);
       },
       /*context => { // moved this check to client side
         const dizlinkOldCookie = context.data.extra.dizlinkOldCookie;
