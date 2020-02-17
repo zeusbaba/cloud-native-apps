@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:device_info/device_info.dart';
+import 'package:package_info/package_info.dart';
 import 'package:ulink_mobile_flutter/shared/user.dart';
 import 'package:ulink_mobile_flutter/shared/app_config.dart';
 
@@ -27,6 +29,17 @@ class ApiLogin {
       AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
       return androidDeviceInfo.androidId; // unique ID on Android
     }
+  }
+
+  static Future<Map<String, String>> _getPackageInfo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    Map<String, String> packageInfoMap = new Map();
+    packageInfoMap['appName'] = packageInfo.appName;
+    packageInfoMap['version'] = packageInfo.version;
+    packageInfoMap['packageName'] = packageInfo.packageName;
+    packageInfoMap['buildNumber'] = packageInfo.buildNumber;
+
+    return packageInfoMap;
   }
 
   static loadAppToken(String deviceType) async {
@@ -71,13 +84,24 @@ class ApiLogin {
   static _createUser(User user) async {
     bool isUserOk = false;
 
+    Map<String, String> packageInfoMap = await _getPackageInfo();
+    String appInfo = jsonEncode(packageInfoMap);
+    print('appInfo: ${appInfo}');
+
+    Map<String, dynamic> reqBody = new Map();
+    reqBody['userid'] = user.userid;
+    reqBody['password'] = user.password;
+    reqBody['extra'] = {
+      'appInfo': appInfo
+    };
+
     //var httpClient = http.Client();
     var apiResponse = await http.post(
-        //apiUrl+"/users",
         appConfig.apiUrl+appConfig.apiEndpoint['users'],
-        body: {
-          'userid': user.userid,
-          'password': user.password
+        body: json.encode(reqBody),
+        headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+          HttpHeaders.acceptHeader: "application/json"
         }
     );
 
@@ -115,15 +139,18 @@ class ApiLogin {
   static _createUserToken(User user) async {
     String userToken = '';
 
-    //var apiUrl = "http://localhost:4042";
+    Map<String, dynamic> reqBody = new Map();
+    reqBody['userid'] = user.userid;
+    reqBody['password'] = user.password;
+    reqBody['strategy'] = 'local';
+
     //var httpClient = http.Client();
     var apiResponse = await http.post(
-        //apiUrl+"/authentication",
         appConfig.apiUrl+appConfig.apiEndpoint['token'],
-        body: {
-          'strategy': 'local',
-          'userid': user.userid,
-          'password': user.password
+        body: json.encode(reqBody),
+        headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+          HttpHeaders.acceptHeader: "application/json"
         }
     );
 

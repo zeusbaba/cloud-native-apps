@@ -37,14 +37,19 @@ class ApiLinks {
 
     MyLink myLink = new MyLink();
 
+    Map<String, dynamic> reqBody = new Map();
+    reqBody['long_link'] = formInput['long_link'] as String;
+
     //var apiUrl = "http://localhost:4042";
     var apiResponse = await http.post(
         //apiUrl+"/links",
         appConfig.apiUrl+appConfig.apiEndpoint['links'],
-        body: {
-          'long_link': formInput['long_link'] as String,
-        },
-        headers: {HttpHeaders.authorizationHeader: "Bearer $appToken"}
+        body: json.encode(reqBody),
+        headers: {
+          HttpHeaders.authorizationHeader: "Bearer $appToken",
+          HttpHeaders.contentTypeHeader: "application/json",
+          HttpHeaders.acceptHeader: "application/json"
+        }
     );
 
     if (isResponseOk(apiResponse.statusCode)) {
@@ -84,7 +89,11 @@ class ApiLinks {
     var apiResponse = await http.get(
         //apiUrl+"/links",
         appConfig.apiUrl+appConfig.apiEndpoint['links'],
-        headers: {HttpHeaders.authorizationHeader: "Bearer $appToken"}
+        headers: {
+          HttpHeaders.authorizationHeader: "Bearer $appToken",
+          //HttpHeaders.contentTypeHeader: "application/json",
+          HttpHeaders.acceptHeader: "application/json"
+        }
     );
 
     if (isResponseOk(apiResponse.statusCode)) {
