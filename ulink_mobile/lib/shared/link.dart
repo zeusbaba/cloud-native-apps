@@ -11,7 +11,7 @@ class MyLink {
     this.createdAt
   });
 
-  doMyLink(String longLink, String shortLink) {
+  makeMyLink(String longLink, String shortLink) {
     return MyLink(
       long_link: longLink,
       short_link: shortLink,
@@ -32,7 +32,8 @@ class MyLink {
   Map<String, dynamic> toJson() => {
     'long_link': long_link,
     'short_link': short_link,
-    'simple_links': simple_links
+    'simple_links': simple_links,
+    'createdAt': createdAt
   };
 
 }

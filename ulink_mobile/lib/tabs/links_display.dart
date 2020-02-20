@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ulink_mobile/shared/api_links.dart';
+import 'package:ulink_mobile/shared/common_utils.dart';
 import 'package:ulink_mobile/shared/link.dart';
 import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
 import 'package:share/share.dart';
@@ -101,7 +102,7 @@ class LinksDisplayState extends State<LinksDisplay> {
               itemCount: myLinks.length,
               itemBuilder: (BuildContext context, int index) {
                 final myLink = myLinks[index];
-                final short_link = 'https://ulink.no/'+myLink.short_link;
+                final short_link = CommonUtils.showLink(myLink.short_link);
                 return Card(
                   //child: Text(myLink.toJson().toString())
                   child: Column(
@@ -125,24 +126,22 @@ class LinksDisplayState extends State<LinksDisplay> {
                                   .then((result) {
                                 if(result){
                                   // Write to clipboard success
-                                  //print('Copied to clipboard: ${short_link}');
 
-                                  Scaffold
+                                  /*Scaffold
                                       .of(context)
                                       .showSnackBar(
                                         SnackBar(
                                           duration: Duration(seconds: 2),
                                             content: Text('Copied to clipboard! $short_link')
                                         )
-                                      );
-
-                                  //showDialog(
-                                  //    context: context,
-                                  //  builder: (context) => CupertinoAlertDialog(
-                                  //    title: Text('Copied to clipboard!'),
-                                  //    content: Text('${short_link}'),
-                                  //  )
-                                  // );
+                                      );*/
+                                  showDialog(
+                                      context: context,
+                                    builder: (context) => CupertinoAlertDialog(
+                                      title: Text('Copied to clipboard!'),
+                                      content: Text('${short_link}'),
+                                    )
+                                   );
                                 }
                               });
                             },
@@ -150,7 +149,7 @@ class LinksDisplayState extends State<LinksDisplay> {
                           CupertinoButton(
                             child: const Text('SHARE'),
                             onPressed: () {
-                              String shareText = 'Shorten & Simplify via uLINK.no -> $short_link';
+                              String shareText = 'Shorten & Simplify via uLINK.no -> ${short_link}';
                               print('shareText: $shareText');
                               Share.share(shareText);
                             },

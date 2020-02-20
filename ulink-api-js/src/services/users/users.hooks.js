@@ -46,24 +46,6 @@ module.exports = {
       context => {
         logger.info('context users.create %s', context.data);
       },
-      /*context => { // moved this check to client side
-        const dizlinkOldCookie = context.data.extra.dizlinkOldCookie;
-        if (!Validator.isEmpty(dizlinkOldCookie)) {
-          let cookieItems = dizlinkOldCookie.split('&');
-          //logger.info('cookieItems -> ' + cookieItems);
-          for (let cookieItem of cookieItems) {
-            if (Validator.contains(cookieItem, 'ID=')) {
-              context.data.userid = cookieItem.substring( cookieItem.indexOf('=')+1 );
-            }
-          }
-        }
-      },*/
-      /* context => { // custom action regarding old dizlink users
-        const dizlinkOldUserId = context.data.extra.dizlinkOldUserId;
-        if (!Validator.isEmpty(dizlinkOldUserId)) {
-
-        }
-      }, */
       context => {
         //logger.info('context.data.userid -> ' + context.data.userid);
         if (context.data.userid) {

@@ -6,6 +6,10 @@ class CommonUtils {
 
   static final AppConfig appConfig = AppConfig.getAppConfig('prod');
 
+  static showLink(String short_link) {
+    return appConfig.baseUrl + "/" + short_link;
+  }
+
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   static Future<String> getDeviceId(String deviceType) async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -54,9 +58,32 @@ class CommonUtils {
 
   static isValidUrl(String urlInput) {
 
-    var urlPattern = r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
-    return new RegExp(urlPattern, caseSensitive: false)
-        .hasMatch(urlInput);
-    // return Uri.parse(value).isAbsolute;
+    Map<String, dynamic> response = new Map();
+
+    if (urlInput.isEmpty) {
+      response['isValid'] = false;
+      response['message'] = 'Please enter some URL';
+    }
+    else if (urlInput.length<10 || urlInput.length>2000) {
+      response['isValid'] = false;
+      response['message'] = 'Invalid length ${urlInput.length}. URL can be min 10 chars and max 2000 chars long...';
+    }
+    else {
+      // TODO: revisit this regex
+      var urlPattern = r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
+      bool isValidUrl = new RegExp(urlPattern, caseSensitive: false)
+          .hasMatch(urlInput);
+      // bool isValidUrl = Uri.parse(value).isAbsolute;
+
+      if (!isValidUrl) {
+        response['isValid'] = false;
+        response['message'] = 'Please enter a proper URL. E.g. https://www.montypython.com';
+      }
+      else {
+        response['isValid'] = true;
+      }
+    }
+
+    return response;
   }
 }

@@ -1,0 +1,2 @@
+json_key_file("/Users/zeus/MyMatrix/kubeconfigs/google-play_api-5882061050628049567-964304-7070eba90c2e.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("net.beerstorm.ulinkMobile") # e.g. com.krausefx.app
