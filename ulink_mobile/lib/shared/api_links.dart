@@ -3,14 +3,11 @@ import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:ulink_mobile/shared/link.dart';
+import 'package:ulink_mobile/shared/model_link.dart';
 import 'package:ulink_mobile/shared/common_utils.dart';
 
 class ApiLinks {
 
-  // If you call new MyUtils(), you'll always get the same instance.
-  //You need to import the file that contains class MyUtils {} everywhere where you want to use it.
-  //??= means new MyUtils._() is only executed when _instance is null and if it is executed the result will be assigned to _instance before it is returned to the caller.
   static ApiLinks _instance;
   factory ApiLinks() => _instance ??= new ApiLinks._();
   ApiLinks._();
@@ -22,12 +19,19 @@ class ApiLinks {
     if (prefs.containsKey(CommonUtils.appConfig.appTokenKey)) {
       String appToken = prefs.getString(CommonUtils.appConfig.appTokenKey);
 
-      myLink = await _makeLink(appToken, formInput);
+      try {
+        myLink = await _makeLink(appToken, formInput);
+      }
+      catch(ex) {
+        throw Future.error(ex);
+      }
     }
     else {
       myLink = new MyLink();
       print('ERROR!!! AppToken NOT found in local...');
       // TODO: implement a shared refreshToken mechanism
+
+      throw Future.error('ERROR!!! AppToken NOT found in local...');
     }
     return myLink;
   }
@@ -48,7 +52,10 @@ class ApiLinks {
           HttpHeaders.contentTypeHeader: "application/json",
           HttpHeaders.acceptHeader: "application/json"
         }
-    );
+    ).catchError((error) {
+      print(error);
+      throw Future.error(error.toString());
+    });
 
     if (isResponseOk(apiResponse.statusCode)) {
       Map<String, dynamic> jsonResponse = json.decode(apiResponse.body);
@@ -74,6 +81,8 @@ class ApiLinks {
       links = new List<MyLink>();
       print('ERROR!!! AppToken NOT found in local...');
       // TODO: implement a shared refreshToken mechanism
+
+      throw Future.error('ERROR!!! AppToken NOT found in local...');
     }
     //print('appToken: $appToken');
 

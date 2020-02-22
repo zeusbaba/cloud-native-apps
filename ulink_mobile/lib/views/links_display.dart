@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ulink_mobile/shared/api_links.dart';
 import 'package:ulink_mobile/shared/common_utils.dart';
-import 'package:ulink_mobile/shared/link.dart';
+import 'package:ulink_mobile/views/link_display.dart';
+import 'package:ulink_mobile/shared/model_link.dart';
 import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
 import 'package:share/share.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:jiffy/jiffy.dart';
 
 class LinksDisplay extends StatefulWidget {
   @override
   LinksDisplayState createState() => LinksDisplayState();
 }
-class LinksDisplayState extends State<LinksDisplay> {
+class LinksDisplayState extends State<LinksDisplay> with WidgetsBindingObserver {
 
   // make use of pull_to_refresh module!
   List<MyLink> myLinks = new List();
@@ -51,14 +54,25 @@ class LinksDisplayState extends State<LinksDisplay> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _onRefresh();
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
   void initState() {
     super.initState();
 
+    WidgetsBinding.instance.addObserver(this);
   }
   @override
   void dispose() {
     // Dispose of the ...Controllers
     _refreshController.dispose();
+
+    WidgetsBinding.instance.removeObserver(this);
 
     super.dispose();
   }
@@ -102,39 +116,59 @@ class LinksDisplayState extends State<LinksDisplay> {
               itemCount: myLinks.length,
               itemBuilder: (BuildContext context, int index) {
                 final myLink = myLinks[index];
-                final short_link = CommonUtils.showLink(myLink.short_link);
+                final short_link = CommonUtils.baseUrlLink(myLink.short_link);
                 return Card(
                   //child: Text(myLink.toJson().toString())
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       ListTile(
-                        leading: Icon(Icons.link),
-                        title: Text(short_link),
-                        subtitle: Text(
-                          myLink.long_link,
-                          overflow: TextOverflow.fade,
-                          softWrap: false,
+                        //leading: Icon(Icons.link, size: 28, color: Colors.black12),
+                        leading: Image.asset('images/logo_icon_s.png', scale: 4, ),
+                        title: Text(
+                            short_link,
+                          style: TextStyle(fontSize: 22, color: Colors.deepOrange, fontWeight: FontWeight.bold),
                         ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(' '),
+                            Text(
+                              myLink.long_link,
+                              style: TextStyle(fontSize: 14, color: Colors.deepOrangeAccent, fontStyle: FontStyle.italic),
+                              overflow: TextOverflow.fade,
+                              softWrap: false,
+                            ),
+                            Text(
+                              Jiffy(myLink.createdAt).fromNow(),
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.deepOrangeAccent,
+                                  fontStyle: FontStyle.italic,
+                              ),
+                            )
+                          ],
+                        ),
+                        onTap: () {
+                          //new DisplayLinkDialog(isNew: false, myLink: myLink);
+                          showDialog(
+                              context: context,
+                              builder: (context) => new LinkDisplayDialog(isNew: false, myLink: myLink)
+                          );
+                        },
+                        onLongPress: () {
+
+                        },
                       ),
                       ButtonBar(
                         children: <Widget>[
                           CupertinoButton( //FlatButton(
-                            child: const Text('COPY'),
+                            child: Icon(Icons.content_copy, size: 33, color: Colors.deepOrange), //const Text('COPY'),
                             onPressed: () {
                               FlutterClipboardManager.copyToClipBoard(short_link)
                                   .then((result) {
                                 if(result){
                                   // Write to clipboard success
-
-                                  /*Scaffold
-                                      .of(context)
-                                      .showSnackBar(
-                                        SnackBar(
-                                          duration: Duration(seconds: 2),
-                                            content: Text('Copied to clipboard! $short_link')
-                                        )
-                                      );*/
                                   showDialog(
                                       context: context,
                                     builder: (context) => CupertinoAlertDialog(
@@ -147,7 +181,7 @@ class LinksDisplayState extends State<LinksDisplay> {
                             },
                           ),
                           CupertinoButton(
-                            child: const Text('SHARE'),
+                            child: Icon(Icons.share, size: 33, color: Colors.deepOrange), //const Text('SHARE'),
                             onPressed: () {
                               String shareText = 'Shorten & Simplify via uLINK.no -> ${short_link}';
                               print('shareText: $shareText');

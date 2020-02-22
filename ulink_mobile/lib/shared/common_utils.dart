@@ -1,13 +1,22 @@
 import 'package:device_info/device_info.dart';
 import 'package:package_info/package_info.dart';
 import 'package:ulink_mobile/shared/app_config.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CommonUtils {
 
   static final AppConfig appConfig = AppConfig.getAppConfig('prod');
 
-  static showLink(String short_link) {
+  static baseUrlLink(String short_link) {
     return appConfig.baseUrl + "/" + short_link;
+  }
+
+  static launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();

@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:ulink_mobile/shared/user.dart';
+import 'package:ulink_mobile/shared/model_user.dart';
 import 'package:ulink_mobile/shared/common_utils.dart';
 
 class ApiLogin {
@@ -19,7 +19,7 @@ class ApiLogin {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String appToken = "";
 
-    // FIXME: remove this after validation!
+    // remove this after validation!
     //prefs.clear();
 
     if (prefs.containsKey(CommonUtils.appConfig.appTokenKey)) {
@@ -42,11 +42,14 @@ class ApiLogin {
           await prefs.setString(CommonUtils.appConfig.appTokenKey, appToken);
         }
         else {
+
           print('ERROR occured when creating userToken! $appToken');
+          throw Future.error('ERROR occured when creating userToken!');
         }
       }
       else {
         print('ERROR occured when creating user! $user');
+        throw Future.error('ERROR occured when creating user!');
       }
     }
     //print('appToken: $appToken');

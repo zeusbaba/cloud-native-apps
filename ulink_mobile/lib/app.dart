@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ulink_mobile/tabs/info_about.dart';
-import 'package:ulink_mobile/tabs/links_create.dart';
-import 'package:ulink_mobile/tabs/links_display.dart';
+import 'package:ulink_mobile/views/info_display.dart';
+import 'package:ulink_mobile/views/links_create.dart';
+import 'package:ulink_mobile/views/links_display.dart';
 import 'package:ulink_mobile/shared/api_login.dart';
 import 'package:flutter/services.dart';
 
@@ -25,7 +25,16 @@ class LinkShortenerApp extends StatelessWidget {
   }
 }
 
+final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 class LinkShortenerAppHome extends StatelessWidget {
+  LinkShortenerAppHome({Key key}) : super(key: key);
+
+  _displayInfoDialog(context) {
+    showDialog(
+        context: context,
+      builder: (context) => InfoDisplayDialog()
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,32 +42,41 @@ class LinkShortenerAppHome extends StatelessWidget {
     ApiLogin.loadAppToken(deviceType);
 
     return Scaffold(
+      key: scaffoldKey,
       // Appbar
       appBar: AppBar(
-        leading: Image.asset('images/logo_icon.png'),
+        //leading: Image.asset('images/logo_icon.png'),
         // Title
-        title: Text("uLINK.no :: shorten & simplify"),
+        title: Text("uLINK.no :: Shorten & Simplify URLs"),
+        centerTitle: true,
         // Set the background color of the App Bar
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Colors.deepOrangeAccent,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.info),
+            tooltip: 'About',
+            onPressed: () {
+              /*scaffoldKey.currentState.showSnackBar(SnackBar(
+                  duration: Duration(seconds: 2),
+                  content: Text('display info dialog'))); */
+              _displayInfoDialog(context);
+            },
+          )
+        ],
       ),
       body: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
-          backgroundColor: Colors.orangeAccent,
+          backgroundColor: Colors.transparent,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              activeIcon: Icon(Icons.transform, size: 44.0, color: Colors.black),
-              icon: Icon(Icons.transform, size: 33.0, color: Colors.white),
+              activeIcon: Icon(Icons.transform, size: 48.0, color: Colors.deepOrange),
+              icon: Icon(Icons.transform, size: 33.0, color: Colors.deepOrangeAccent),
               //title: Text('Shorten')
             ),
             BottomNavigationBarItem(
-              activeIcon: Icon(Icons.link, size: 44.0, color: Colors.black),
-              icon: Icon(Icons.link, size: 33.0, color: Colors.white),
+              activeIcon: Icon(Icons.link, size: 48.0, color: Colors.deepOrange),
+              icon: Icon(Icons.link, size: 33.0, color: Colors.deepOrangeAccent),
               //title: Text('Links'),
-            ),
-            BottomNavigationBarItem(
-              activeIcon: Icon(Icons.info, size: 44.0, color: Colors.black),
-              icon: Icon(Icons.info, size: 33.0, color: Colors.white),
-              //title: Text('Info'),
             ),
           ],
         ),
@@ -76,13 +94,6 @@ class LinkShortenerAppHome extends StatelessWidget {
               tabView = CupertinoTabView(builder: (context) {
                 return CupertinoPageScaffold(
                   child: LinksDisplay(),
-                );
-              });
-              break;
-            case 2:
-              tabView = CupertinoTabView(builder: (context) {
-                return CupertinoPageScaffold(
-                  child: InfoAbout(),
                 );
               });
               break;

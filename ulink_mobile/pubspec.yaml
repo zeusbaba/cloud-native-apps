@@ -1,5 +1,5 @@
 name: ulink_mobile
-version: 2020.2.16+4
+version: 2020.2.22+2
 description: uLINK Shorten and Simplify URLs
 homepage: https://www.ulink.no
 repository: https://github.com/zeusbaba/cloud-native-url-shortener
@@ -15,11 +15,12 @@ dependencies:
   flutter_clipboard_manager: ^0.0.2
   pull_to_refresh: ^1.5.8
   cupertino_icons: ^0.1.2
-  intl: ^0.15.7
+  intl: ^0.16.1
+  jiffy: ^2.2.0
   package_info: ^0.4.0+13
-  #url_launcher: ^5.4.1
-  #flutter_chips_input: ^1.7.0
-  #webview_flutter: ^0.3.19+7
+  flutter_chips_input: ^1.7.0
+  url_launcher: ^5.4.2
+  #webview_flutter: ^0.3.19+8
 
 dev_dependencies:
   flutter_test:
