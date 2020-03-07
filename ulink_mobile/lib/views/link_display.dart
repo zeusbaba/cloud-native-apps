@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:ulink_mobile/shared/common_utils.dart';
+import 'package:ulink_mobile/shared/utils_common.dart';
 import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
 import 'package:share/share.dart';
 import 'package:ulink_mobile/shared/model_link.dart';

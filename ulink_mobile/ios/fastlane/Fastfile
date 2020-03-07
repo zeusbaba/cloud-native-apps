@@ -21,4 +21,16 @@ platform :ios do
     build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
     upload_to_testflight
   end
+
+  desc "Take screenshots"
+  lane(:snappy) do |options|
+    snapshot(
+      project: 'Runner.xcodeproj',
+      scheme: 'ulink_mobileUITests',
+      #devices: ['iPhone 8', 'iPhone 11 Pro'],
+      devices: ['iPhone 11 Pro'],
+      output_simulator_logs: true,
+      clear_previous_screenshots: true
+    )
+  end
 end

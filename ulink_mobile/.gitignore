@@ -6,3 +6,5 @@ build/
 ios/.generated/
 packages
 pubspec.lock
+
+*.aab

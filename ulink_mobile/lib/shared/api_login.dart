@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:ulink_mobile/shared/model_user.dart';
-import 'package:ulink_mobile/shared/common_utils.dart';
+import 'package:ulink_mobile/shared/utils_common.dart';
+import 'package:ulink_mobile/shared/utils_sharedpref.dart';
 
 class ApiLogin {
 
@@ -16,30 +16,33 @@ class ApiLogin {
   ApiLogin._();
 
   static loadAppToken(String deviceType) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //SharedPref sharedPref = new SharedPref(await SharedPref.initSharedPreferences());
+    SharedPref sharedPref = new SharedPref();
+    await sharedPref.initSharedPreferences();
+
     String appToken = "";
 
-    // remove this after validation!
-    //prefs.clear();
+    // NB! remove this after validation!
+    //sharedPref.clear();
 
-    if (prefs.containsKey(CommonUtils.appConfig.appTokenKey)) {
-      //appToken = prefs.getString(appTokenKey);
+    if (sharedPref.contains(CommonUtils.appConfig.sharedPrefKeys['appUserKey'])) {
       print('appToken EXISTs in local, move on..!');
     }
     else {
       // implement login+auth via uLINK API!
       var userId = await CommonUtils.getDeviceId(deviceType);
       userId = "uLINK-mobile-" + userId.toLowerCase();
-      var user = User(userid: userId, password: userId, createdAt: '');
+      var appUser = AppUser(userid: userId, password: userId, createdAt: '', appToken: '');
       print('appToken doesNOT exist in local, reloading via API! for userId: $userId');
 
-      bool isUserOk = await _createUser(deviceType, user);
+      bool isUserOk = await _createUser(deviceType, appUser);
 
       if (isUserOk) {
 
-        appToken = await _createUserToken(user);
+        appToken = await _createUserToken(appUser);
         if (appToken != '') {
-          await prefs.setString(CommonUtils.appConfig.appTokenKey, appToken);
+          appUser.appToken = appToken;
+          sharedPref.save(CommonUtils.appConfig.sharedPrefKeys['appUserKey'], appUser);
         }
         else {
 
@@ -48,7 +51,7 @@ class ApiLogin {
         }
       }
       else {
-        print('ERROR occured when creating user! $user');
+        print('ERROR occured when creating user! $appUser');
         throw Future.error('ERROR occured when creating user!');
       }
     }
@@ -57,7 +60,7 @@ class ApiLogin {
     return appToken;
   }
 
-  static _createUser(String deviceType, User user) async {
+  static _createUser(String deviceType, AppUser user) async {
     bool isUserOk = false;
 
     Map<String, dynamic> deviceInfoMap = await CommonUtils.getDeviceInfo(deviceType);
@@ -115,7 +118,7 @@ class ApiLogin {
     return isUserOk;
   }
 
-  static _createUserToken(User user) async {
+  static _createUserToken(AppUser user) async {
     String userToken = '';
 
     Map<String, dynamic> reqBody = new Map();

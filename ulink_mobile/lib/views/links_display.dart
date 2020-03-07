@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ulink_mobile/shared/api_links.dart';
-import 'package:ulink_mobile/shared/common_utils.dart';
+import 'package:ulink_mobile/shared/utils_common.dart';
+import 'package:ulink_mobile/shared/utils_sharedpref.dart';
 import 'package:ulink_mobile/views/link_display.dart';
 import 'package:ulink_mobile/shared/model_link.dart';
 import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
@@ -15,6 +16,8 @@ class LinksDisplay extends StatefulWidget {
   LinksDisplayState createState() => LinksDisplayState();
 }
 class LinksDisplayState extends State<LinksDisplay> with WidgetsBindingObserver {
+
+  SharedPref sharedPref;
 
   // make use of pull_to_refresh module!
   List<MyLink> myLinks = new List();
@@ -64,6 +67,10 @@ class LinksDisplayState extends State<LinksDisplay> with WidgetsBindingObserver 
   @override
   void initState() {
     super.initState();
+
+    //sharedPref = new SharedPref(SharedPref.initSharedPreferences());
+    sharedPref = new SharedPref();
+    sharedPref.initSharedPreferences();
 
     WidgetsBinding.instance.addObserver(this);
   }

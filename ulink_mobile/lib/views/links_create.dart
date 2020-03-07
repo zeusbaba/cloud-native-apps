@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:ulink_mobile/shared/api_links.dart';
-import 'package:ulink_mobile/shared/common_utils.dart';
+import 'package:ulink_mobile/shared/utils_common.dart';
+import 'package:ulink_mobile/shared/model_clipboard.dart';
+import 'package:ulink_mobile/shared/utils_sharedpref.dart';
 import 'package:ulink_mobile/views/link_display.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:flutter_clipboard_manager/flutter_clipboard_manager.dart';
@@ -48,36 +50,59 @@ class _LinkFormState extends State<LinkForm> with WidgetsBindingObserver {
   String initialValue = '';
   TextEditingController _textEditingController = TextEditingController(text: '');
 
-  useFromClipboard() {
+  SharedPref sharedPref;
 
-    FlutterClipboardManager.copyFromClipBoard().then((fromCopy) {
+  useFromClipboard() async {
 
-      if (CommonUtils.isValidUrl(fromCopy)['isValid']
-        && !(fromCopy.contains("https://ulink.no"))
-      ) {
+    //FlutterClipboardManager.copyFromClipBoard().then((linkToCopy) {
+    String linkToCopy = await FlutterClipboardManager.copyFromClipBoard();
+
+    if (CommonUtils.isValidUrl(linkToCopy)['isValid']
+      && !(linkToCopy.contains("ulink.no"))
+      && !(linkToCopy.contains("baet.no"))
+    ) {
+
+      CopyClipboard copyClipboard = new CopyClipboard(
+          linkToCopy: linkToCopy, isDisplayed: true, isPasted: false
+      );
+      if (!copyClipboard.existInSharedPrefs(sharedPref)) {
         showDialog(
             context: context,
             builder: (context) =>
                 CupertinoAlertDialog(
                   title: Text('Paste this URL?'),
-                  content: Text('$fromCopy',
+                  content: Text('$linkToCopy',
                     overflow: TextOverflow.fade,
                     softWrap: false,
                   ),
                   actions: <Widget>[
                     CupertinoDialogAction(
-                      textStyle: TextStyle(fontSize: 22, fontStyle: FontStyle.normal),
-                        child: Icon(Icons.content_paste, size: 28, color: Colors.deepOrange),//const Text('Yes'),
+                      textStyle: TextStyle(
+                          fontSize: 22, fontStyle: FontStyle.normal),
+                      child: Icon(Icons.content_paste, size: 28,
+                          color: Colors.deepOrange), //const Text('Yes'),
                       onPressed: () {
-                        _textEditingController.text = fromCopy;
+                        _textEditingController.clear();
+                        _textEditingController.text = linkToCopy;
+
+                        copyClipboard.isPasted = true;
+                        copyClipboard.saveInSharedPrefs(sharedPref);
+
                         Navigator.pop(context);
                       },
                     ),
                     CupertinoDialogAction(
                       isDefaultAction: true,
-                      textStyle: TextStyle(fontSize: 18, fontStyle: FontStyle.normal),
-                      child: Icon(Icons.cancel, size: 28, color: Colors.deepOrange),//const Text('No'),
+                      textStyle: TextStyle(
+                          fontSize: 18, fontStyle: FontStyle.normal),
+                      child: Icon(
+                          Icons.cancel, size: 28, color: Colors.deepOrange),
+                      //const Text('No'),
                       onPressed: () {
+
+                        copyClipboard.isPasted = false;
+                        copyClipboard.saveInSharedPrefs(sharedPref);
+
                         //_textEditingController.text = '';
                         Navigator.pop(context);
                       },
@@ -86,12 +111,17 @@ class _LinkFormState extends State<LinkForm> with WidgetsBindingObserver {
                 )
         );
       }
-    });
+    }
+    //});
   }
 
   @override
   void initState() {
     super.initState();
+
+    //sharedPref = new SharedPref(SharedPref.initSharedPreferences());
+    sharedPref = new SharedPref();
+    sharedPref.initSharedPreferences();
 
     //if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks) {
 
@@ -136,10 +166,10 @@ class _LinkFormState extends State<LinkForm> with WidgetsBindingObserver {
             decoration: const InputDecoration(
                 icon: Icon(Icons.http, size: 24.0, color: Colors.deepOrangeAccent),
                 hintText: 'Paste a long link (URL)',
-                hintStyle: TextStyle(color: Colors.deepOrangeAccent, fontStyle: FontStyle.italic),
+                hintStyle: TextStyle(color: Colors.deepOrangeAccent, fontStyle: FontStyle.normal),
                 //hasFloatingPlaceholder: true,
                 helperText: 'https://www.montypython.com/pythonland/',
-              helperStyle: TextStyle(color: Colors.deepOrangeAccent, fontStyle: FontStyle.italic),
+              helperStyle: TextStyle(color: Colors.orangeAccent, fontStyle: FontStyle.italic),
               errorStyle: TextStyle(color: Colors.deepOrange, fontStyle: FontStyle.italic),
             ),
             validator: (inputValue) {

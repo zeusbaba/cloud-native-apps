@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ulink_mobile/shared/common_utils.dart';
+import 'package:ulink_mobile/shared/utils_common.dart';
 
 class InfoDisplayDialog extends StatelessWidget {
 

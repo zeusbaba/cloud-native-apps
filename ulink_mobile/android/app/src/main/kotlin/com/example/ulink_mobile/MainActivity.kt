@@ -1,4 +1,4 @@
-package com.example.ulink_mobile
+package net.beerstorm.ulinkMobile
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

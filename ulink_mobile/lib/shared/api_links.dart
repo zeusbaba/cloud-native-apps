@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:ulink_mobile/shared/model_link.dart';
-import 'package:ulink_mobile/shared/common_utils.dart';
+import 'package:ulink_mobile/shared/model_user.dart';
+import 'package:ulink_mobile/shared/utils_common.dart';
+import 'package:ulink_mobile/shared/utils_sharedpref.dart';
 
 class ApiLinks {
 
@@ -13,14 +14,17 @@ class ApiLinks {
   ApiLinks._();
 
   static Future<MyLink> makeLink(Map<String, dynamic> formInput) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //SharedPref sharedPref = new SharedPref(await SharedPref.initSharedPreferences());
+    SharedPref sharedPref = new SharedPref();
+    await sharedPref.initSharedPreferences();
+
     MyLink myLink;
 
-    if (prefs.containsKey(CommonUtils.appConfig.appTokenKey)) {
-      String appToken = prefs.getString(CommonUtils.appConfig.appTokenKey);
+    if (sharedPref.contains(CommonUtils.appConfig.sharedPrefKeys['appUserKey'])) {
+      AppUser appUser = AppUser.fromJson(sharedPref.read(CommonUtils.appConfig.sharedPrefKeys['appUserKey']));
 
       try {
-        myLink = await _makeLink(appToken, formInput);
+        myLink = await _makeLink(appUser.appToken, formInput);
       }
       catch(ex) {
         throw Future.error(ex);
@@ -69,13 +73,16 @@ class ApiLinks {
   }
 
   static Future<List<MyLink>> getLinks() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //SharedPref sharedPref = new SharedPref(await SharedPref.initSharedPreferences());
+    SharedPref sharedPref = new SharedPref();
+    await sharedPref.initSharedPreferences();
+
     List<MyLink> links;
 
-    if (prefs.containsKey(CommonUtils.appConfig.appTokenKey)) {
-      String appToken = prefs.getString(CommonUtils.appConfig.appTokenKey);
+    if (sharedPref.contains(CommonUtils.appConfig.sharedPrefKeys['appUserKey'])) {
+      AppUser appUser = AppUser.fromJson(sharedPref.read(CommonUtils.appConfig.sharedPrefKeys['appUserKey']));
 
-      links = await _getLinks(appToken);
+      links = await _getLinks(appUser.appToken);
     }
     else {
       links = new List<MyLink>();

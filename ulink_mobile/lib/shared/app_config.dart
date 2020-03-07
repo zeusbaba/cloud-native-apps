@@ -9,15 +9,18 @@ class AppConfig { // TODO externalise into env-specific config
     "base": "https://ulink.no"
     };
   Map<String, String> apiEndpoint;
-  String appTokenKey = "app_token";
+  Map<String, String> sharedPrefKeys = {
+    "appUserKey": "app_user",
+    "appTokenKey": "app_token",
+    "copyClipboard": "copy_clipboard",
+  };
 
   AppConfig({
-    this.apiUrl, this.apiEndpoint,  this.appTokenKey, this.baseUrl
+    this.apiUrl, this.apiEndpoint, this.baseUrl,
   });
 
   static getAppConfig(String env) {
     return AppConfig(
-      appTokenKey: "app_token",
       apiEndpoint: {
         "users": "/users",
         "token": "/authentication",
