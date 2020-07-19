@@ -60,7 +60,7 @@
     "global": "^4.4.0",
     "hashmap": "^2.4.0",
     "helmet": "^3.21.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "mongodb": "^3.5.4",
     "node-fetch": "^2.6.0",
