@@ -5,6 +5,8 @@ android/**/gen/**
 build/
 ios/.generated/
 packages
-pubspec.lock
+#pubspec.lock
 
 *.aab
+*.ipa
+*.zip

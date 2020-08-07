@@ -158,8 +158,9 @@ class _LinkFormState extends State<LinkForm> with WidgetsBindingObserver {
         children: <Widget>[
           TextFormField(
             textCapitalization: TextCapitalization.none,
-            //autofocus: true,
+            autofocus: false,
             //initialValue: initialValue,
+            keyboardType: TextInputType.url,
             controller: _textEditingController,
             cursorColor: Colors.deepOrange,
             style: TextStyle(color: Colors.deepOrangeAccent),
