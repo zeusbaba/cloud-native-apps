@@ -13,7 +13,7 @@ See list:
 - [Web/Frontend using React.js](ulink-web-reactjs): crafted with React.js, Docker, docker-compose, k8s  
 - [API Server using Node.js/FeathersJS](ulink-api-js): crafted with FeathersJS, Docker, docker-compose, k8s  
 - [Chrome extension](chrome-extension): crafted as Chrome extension  
-- [Mobile App using Flutter/Dart](ulink-mobile): crafting with Dart lang using Flutter    
+- [Mobile App using Flutter/Dart](ulink_mobile): crafting with Dart lang using Flutter    
 
 
 # How to SHOW & SHARE     
