@@ -8,7 +8,7 @@ then
     do
       echo "processing env-vars from $FILE"
       for line in $(cat ${FILE}); do
-          echo "- exporting `echo ${line} | cut -d '=' -f 1`"
+          echo "- exporting $(echo "${line}" | cut -d '=' -f 1)"
           export ${line}
       done
     done

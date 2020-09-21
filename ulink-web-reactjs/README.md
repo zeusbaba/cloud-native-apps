@@ -35,6 +35,7 @@ $ yarn start
 
 Building, publishing and running via _Docker_ and _Docker-Compose_:       
 ```bash
+### using Docker hub
 # set env vars for ease-of-use
 # NOTE! please just replace 'zeusbaba' with your username  
 $ export dockerhubUser=zeusbaba \
@@ -42,6 +43,18 @@ $ export dockerhubUser=zeusbaba \
   export appSecrets=app-secrets \
   export appVersion=2020.1.1
 $ export dockerImage=${dockerhubUser}/${appName}:${appVersion}
+
+### using Github packages  
+# when using github packages, remember to login to Github using auth_token  
+$ cat ~/GH_TOKEN.txt | docker login docker.pkg.github.com -u ${githubUser} --password-stdin
+
+$ export githubUser=zeusbaba \
+  export githubRepo=cloud-native-url-shortener \
+  export appName=ulink-web-reactjs \
+  export appSecrets=app-secrets \
+  export appVersion=2020.9.21
+$ export dockerImage=docker.pkg.github.com/${githubUser}/${githubRepo}/${appName}:${appVersion}
+
 
 ## using Docker!!!       
 # build a docker image  
