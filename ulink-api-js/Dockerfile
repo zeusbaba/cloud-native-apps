@@ -22,7 +22,7 @@ RUN yarn config set strict-ssl false
 RUN yarn --production
 
 ## used to check if DB is up
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.4.0/wait ./wait
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait ./wait
 RUN chmod +x ./wait
 
 # Bundle app source

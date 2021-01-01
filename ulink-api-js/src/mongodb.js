@@ -4,7 +4,10 @@ const MongoClient = require('mongodb').MongoClient;
 module.exports = function (app) {
   const dbUrl = app.get('mongodb');
   const dbName = "baet";
-  const promise = MongoClient
+
+  //const mongoClient = MongoClient(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true});
+  //await mongoClient.connect();
+  const mongoClient = MongoClient
     .connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(client => {
       // For mongodb <= 2.2
@@ -18,5 +21,6 @@ module.exports = function (app) {
       logger.error('MongoDB conn FAIL! config: %s | err: %s', dbUrl, error)
     );
 
-  app.set('mongoClient', promise);
+
+  app.set('mongoClient', mongoClient);
 };

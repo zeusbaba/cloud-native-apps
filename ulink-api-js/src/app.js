@@ -6,7 +6,7 @@ const cors = require('cors');
 const logger = require('./logger');
 
 const bodyParser = require('body-parser');
-const batcher = require('feathers-batch');
+const { BatchService } = require('feathers-batch');
 
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
@@ -41,9 +41,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.json());
 //app.use(express.urlencoded({ extended: true }));
 
-app.use('/batch', batcher({
+app.use('/batch', new BatchService({
   limit: app.get('batcher_limit')
 }));
+// limit: app.get('batcher_limit')
 
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
